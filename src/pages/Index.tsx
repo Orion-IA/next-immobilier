@@ -1,117 +1,156 @@
-import heroImg from "@/assets/hero-penthouse.jpg";
-import tribeca from "@/assets/property-tribeca.jpg";
-import upperEast from "@/assets/property-upper-east.jpg";
-import brooklyn from "@/assets/property-brooklyn.jpg";
-import soho from "@/assets/property-soho.jpg";
-import { ArrowUpRight, Search } from "lucide-react";
+import logo from "@/assets/next-logo.jpg";
+import heroImg from "@/assets/hero-villa.jpg";
+import appart from "@/assets/property-appart.jpg";
+import villa from "@/assets/property-villa.jpg";
+import duplex from "@/assets/property-duplex.jpg";
+import maison from "@/assets/property-maison.jpg";
+import { ArrowUpRight, Search, Phone, MapPin, Mail, Facebook, Bed, Bath, Maximize, Home, Building2, KeyRound, TrendingUp } from "lucide-react";
 import { useState } from "react";
 
+const PHONE = "+216 22 409 004";
+const PHONE_HREF = "tel:+21622409004";
+const FB = "https://www.facebook.com/profile.php?id=61565400861372";
+const ADDRESS = "202 Résidence El Boustène, El Mourouj, Ben Arous";
+
 const properties = [
-  { id: "01", name: "The Skyline Residence", area: "Tribeca", price: "$ 12 400 000", beds: 4, baths: 5, sqft: "4 200", img: tribeca, tag: "Exclusive" },
-  { id: "02", name: "Maison Park Avenue", area: "Upper East Side", price: "$ 8 900 000", beds: 3, baths: 4, sqft: "3 100", img: upperEast, tag: "New listing" },
-  { id: "03", name: "Brownstone N°47", area: "Brooklyn Heights", price: "$ 6 250 000", beds: 5, baths: 4, sqft: "3 800", img: brooklyn, tag: "Townhouse" },
-  { id: "04", name: "Sky Loft Mercer", area: "SoHo", price: "$ 9 750 000", beds: 3, baths: 3, sqft: "2 950", img: soho, tag: "Penthouse" },
+  { id: "01", name: "Villa contemporaine", area: "El Mourouj 6", price: "850 000 DT", beds: 5, baths: 3, sqft: "420", img: villa, tag: "À vendre" },
+  { id: "02", name: "Appartement S+3 standing", area: "El Mourouj 5", price: "320 000 DT", beds: 3, baths: 2, sqft: "145", img: appart, tag: "Nouveau" },
+  { id: "03", name: "Duplex avec terrasse", area: "Ben Arous", price: "520 000 DT", beds: 4, baths: 3, sqft: "210", img: duplex, tag: "Exclusivité" },
+  { id: "04", name: "Maison familiale", area: "El Mourouj 1", price: "1 200 DT/mois", beds: 4, baths: 2, sqft: "180", img: maison, tag: "À louer" },
 ];
 
-const neighborhoods = ["Tribeca", "SoHo", "West Village", "Upper East Side", "Brooklyn Heights", "Chelsea", "Hamptons", "Hudson Yards"];
+const services = [
+  { icon: Home, title: "Vente", desc: "Villas, appartements, terrains. Une sélection rigoureuse de biens vérifiés." },
+  { icon: KeyRound, title: "Location", desc: "Locations longue durée et meublées, dans tout le grand Tunis." },
+  { icon: Building2, title: "Promotion", desc: "Accompagnement des promoteurs pour la commercialisation de leurs projets." },
+  { icon: TrendingUp, title: "Estimation", desc: "Estimation gratuite et confidentielle de votre bien sous 48h." },
+];
+
+const Logo = ({ light = false }: { light?: boolean }) => (
+  <a href="#" className="flex items-center gap-3 group">
+    <div className="flex items-center gap-1">
+      <span className="block w-5 h-5 rounded-full bg-brand" />
+      <span className="block w-5 h-5 bg-brand chevron-mark" />
+    </div>
+    <div className="leading-none">
+      <div className={`font-display font-bold text-xl tracking-tight ${light ? "text-bone" : "text-ink"}`}>NEXT</div>
+      <div className={`text-[9px] uppercase tracking-[0.32em] mt-1 ${light ? "text-bone/60" : "text-muted-foreground"}`}>Immobilier</div>
+    </div>
+  </a>
+);
 
 const Index = () => {
   const [query, setQuery] = useState("");
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* TOP BAR */}
+      <div className="hidden md:block bg-ink text-bone/80 text-xs">
+        <div className="container-editorial flex items-center justify-between h-9">
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-2"><MapPin className="w-3 h-3 text-brand" /> {ADDRESS}</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <a href={PHONE_HREF} className="flex items-center gap-2 hover:text-brand transition-colors"><Phone className="w-3 h-3" /> {PHONE}</a>
+            <a href={FB} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-brand transition-colors"><Facebook className="w-3 h-3" /> Facebook</a>
+          </div>
+        </div>
+      </div>
+
       {/* NAV */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/40">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-background/90 border-b border-border">
         <div className="container-editorial flex items-center justify-between h-20">
-          <a href="#" className="flex items-center gap-3">
-            <div className="w-8 h-8 border border-ink flex items-center justify-center">
-              <span className="font-serif text-lg italic">M</span>
-            </div>
-            <span className="font-serif text-xl tracking-wide">Maison <span className="italic text-gold">&amp;</span> Co.</span>
-          </a>
-          <nav className="hidden md:flex items-center gap-10 text-sm">
-            <a href="#properties" className="link-underline">Properties</a>
-            <a href="#neighborhoods" className="link-underline">Neighborhoods</a>
-            <a href="#story" className="link-underline">Our Story</a>
-            <a href="#journal" className="link-underline">Journal</a>
+          <Logo />
+          <nav className="hidden md:flex items-center gap-10 text-sm font-medium">
+            <a href="#biens" className="link-underline">Nos biens</a>
+            <a href="#services" className="link-underline">Services</a>
+            <a href="#agence" className="link-underline">L'agence</a>
             <a href="#contact" className="link-underline">Contact</a>
           </nav>
-          <a href="#contact" className="hidden md:inline-flex items-center gap-2 text-sm border border-ink px-5 py-2.5 hover:bg-ink hover:text-bone transition-colors duration-500">
-            Private viewing <ArrowUpRight className="w-4 h-4" />
+          <a href={PHONE_HREF} className="hidden md:inline-flex items-center gap-2 bg-brand text-bone px-5 py-2.5 text-sm font-medium hover:bg-ink transition-colors duration-500">
+            <Phone className="w-4 h-4" /> Appeler
           </a>
         </div>
       </header>
 
       {/* HERO */}
-      <section className="relative h-screen w-full overflow-hidden">
-        <img src={heroImg} alt="Luxury Manhattan penthouse with skyline view" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-ink/40" />
+      <section className="relative h-[88vh] w-full overflow-hidden">
+        <img src={heroImg} alt="Villa de luxe en Tunisie" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-ink/55" />
         <div className="absolute inset-0" style={{ background: "var(--gradient-dark)" }} />
 
-        <div className="relative h-full container-editorial flex flex-col justify-end pb-20 text-bone">
-          <div className="flex items-center gap-4 mb-8 fade-up">
-            <span className="h-px w-12 bg-gold" />
-            <span className="eyebrow text-bone/80">Est. 1998 — New York</span>
+        <div className="relative h-full container-editorial flex flex-col justify-end pb-32 text-bone">
+          <div className="flex items-center gap-4 mb-6 fade-up">
+            <span className="h-px w-12 bg-brand" />
+            <span className="eyebrow text-bone/80">Agence immobilière · El Mourouj</span>
           </div>
-          <h1 className="font-serif text-[12vw] md:text-[8vw] leading-[0.95] max-w-5xl fade-up" style={{ animationDelay: "0.1s" }}>
-            Where the city<br/>
-            <span className="italic text-gold-soft">writes its</span> address.
+          <h1 className="font-display font-bold text-[12vw] md:text-[7vw] leading-[0.95] max-w-5xl fade-up" style={{ animationDelay: "0.1s" }}>
+            Votre prochaine adresse,<br/>
+            <span className="text-brand">trouvée par Next.</span>
           </h1>
-          <div className="mt-12 flex flex-col md:flex-row md:items-end justify-between gap-8 fade-up" style={{ animationDelay: "0.2s" }}>
-            <p className="max-w-md text-bone/80 leading-relaxed">
-              An invitation-only collection of Manhattan's most defining residences, curated by a house that treats real estate as an art.
+          <div className="mt-10 flex flex-col md:flex-row md:items-end justify-between gap-8 fade-up" style={{ animationDelay: "0.2s" }}>
+            <p className="max-w-md text-bone/85 leading-relaxed text-lg">
+              Vente, location, estimation. Une équipe locale au service de vos projets immobiliers à El Mourouj, Ben Arous et le grand Tunis.
             </p>
-            <a href="#properties" className="inline-flex items-center gap-3 group">
-              <span className="text-sm tracking-[0.2em] uppercase">Discover the collection</span>
-              <span className="w-12 h-px bg-bone group-hover:w-20 transition-all duration-500" />
-            </a>
+            <div className="flex items-center gap-4">
+              <a href="#biens" className="bg-brand text-bone px-7 py-4 text-sm font-medium uppercase tracking-[0.2em] hover:bg-bone hover:text-ink transition-colors duration-500 inline-flex items-center gap-3">
+                Voir les biens <ArrowUpRight className="w-4 h-4" />
+              </a>
+              <a href="#contact" className="border border-bone/40 text-bone px-7 py-4 text-sm font-medium uppercase tracking-[0.2em] hover:bg-bone hover:text-ink transition-colors duration-500">
+                Estimation gratuite
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* search bar */}
+        {/* search */}
         <div className="absolute bottom-0 left-0 right-0 translate-y-1/2 container-editorial">
-          <div className="bg-background border border-border shadow-[var(--shadow-elegant)] grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_auto]">
+          <div className="bg-background border border-border shadow-[var(--shadow-elegant)] grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto]">
             <label className="px-6 py-5 border-b md:border-b-0 md:border-r border-border">
-              <span className="eyebrow block mb-1">Neighborhood</span>
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Tribeca, SoHo, Hamptons…" className="w-full bg-transparent outline-none text-ink placeholder:text-muted-foreground" />
-            </label>
-            <div className="hidden md:block" />
-            <label className="px-6 py-5 border-b md:border-b-0 md:border-r border-border">
-              <span className="eyebrow block mb-1">Budget</span>
-              <select className="w-full bg-transparent outline-none text-ink">
-                <option>Up to $ 5M</option>
-                <option>$ 5M — $ 10M</option>
-                <option>$ 10M — $ 25M</option>
-                <option>$ 25M +</option>
+              <span className="eyebrow block mb-1 text-muted-foreground">Type de bien</span>
+              <select className="w-full bg-transparent outline-none text-ink font-medium">
+                <option>Tous types</option><option>Villa</option><option>Appartement</option><option>Duplex</option><option>Terrain</option>
               </select>
             </label>
-            <div className="hidden md:block" />
-            <button className="bg-ink text-bone px-8 py-5 flex items-center justify-center gap-3 hover:bg-gold hover:text-ink transition-colors duration-500">
-              <Search className="w-4 h-4" /> <span className="text-sm tracking-[0.2em] uppercase">Search</span>
+            <label className="px-6 py-5 border-b md:border-b-0 md:border-r border-border">
+              <span className="eyebrow block mb-1 text-muted-foreground">Localisation</span>
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="El Mourouj, Ben Arous…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
+            </label>
+            <label className="px-6 py-5 border-b md:border-b-0 md:border-r border-border">
+              <span className="eyebrow block mb-1 text-muted-foreground">Budget</span>
+              <select className="w-full bg-transparent outline-none text-ink font-medium">
+                <option>Indifférent</option><option>{"< 300 000 DT"}</option><option>300 000 — 600 000 DT</option><option>{"> 600 000 DT"}</option>
+              </select>
+            </label>
+            <button className="bg-brand text-bone px-8 py-5 flex items-center justify-center gap-3 hover:bg-ink transition-colors duration-500">
+              <Search className="w-4 h-4" /> <span className="text-sm tracking-[0.2em] uppercase font-medium">Rechercher</span>
             </button>
           </div>
         </div>
       </section>
 
-      {/* INTRO */}
-      <section id="story" className="pt-48 pb-32 container-editorial">
+      {/* INTRO STATS */}
+      <section id="agence" className="pt-48 pb-24 container-editorial">
         <div className="grid md:grid-cols-12 gap-12">
-          <div className="md:col-span-4">
-            <div className="eyebrow flex items-center gap-3"><span className="h-px w-8 bg-gold" /> A house, not a brokerage</div>
-          </div>
-          <div className="md:col-span-8">
-            <h2 className="font-serif text-4xl md:text-6xl leading-tight">
-              We don't sell <span className="italic">square feet</span>. We compose<br/>chapters of a life lived <span className="italic text-gold">beautifully</span>.
+          <div className="md:col-span-5">
+            <div className="eyebrow flex items-center gap-3 text-brand"><span className="h-px w-8 bg-brand" /> L'agence</div>
+            <h2 className="font-display font-bold text-4xl md:text-5xl leading-tight mt-6">
+              L'immobilier <span className="text-brand">simple, sérieux,</span> et près de chez vous.
             </h2>
+          </div>
+          <div className="md:col-span-7 md:pl-12 md:border-l border-border">
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Implantée au cœur d'El Mourouj, <strong className="text-ink">Next Immobilier</strong> accompagne familles, investisseurs et promoteurs dans toutes leurs opérations immobilières. Notre engagement&nbsp;: la transparence, la réactivité, et une connaissance fine du marché local.
+            </p>
             <div className="mt-12 grid sm:grid-cols-3 gap-8 pt-12 border-t border-border">
               {[
-                { k: "27 yrs", v: "of quiet expertise" },
-                { k: "$ 4.2 B", v: "in transacted residences" },
-                { k: "92 %", v: "off-market mandates" },
+                { k: "200+", v: "biens commercialisés" },
+                { k: "48 h", v: "pour estimer votre bien" },
+                { k: "100 %", v: "de mandats vérifiés" },
               ].map((s) => (
                 <div key={s.k}>
-                  <div className="font-serif text-4xl text-ink">{s.k}</div>
-                  <div className="text-sm text-muted-foreground mt-1">{s.v}</div>
+                  <div className="font-display font-bold text-4xl text-brand">{s.k}</div>
+                  <div className="text-sm text-muted-foreground mt-2">{s.v}</div>
                 </div>
               ))}
             </div>
@@ -119,35 +158,62 @@ const Index = () => {
         </div>
       </section>
 
-      {/* PROPERTIES */}
-      <section id="properties" className="pb-32 container-editorial">
-        <div className="flex items-end justify-between mb-16">
-          <div>
-            <div className="eyebrow mb-4">The Collection — Spring 2026</div>
-            <h2 className="font-serif text-5xl md:text-7xl">Featured residences</h2>
+      {/* SERVICES */}
+      <section id="services" className="py-24 bg-smoke">
+        <div className="container-editorial">
+          <div className="flex items-end justify-between mb-16">
+            <div>
+              <div className="eyebrow text-brand mb-4">Nos services</div>
+              <h2 className="font-display font-bold text-4xl md:text-5xl">Quatre métiers, <span className="text-brand">une seule exigence.</span></h2>
+            </div>
           </div>
-          <a href="#" className="hidden md:inline-flex items-center gap-2 link-underline text-sm">View all 142 listings <ArrowUpRight className="w-4 h-4" /></a>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
+            {services.map((s) => (
+              <div key={s.title} className="bg-background p-10 group hover:bg-ink hover:text-bone transition-colors duration-500">
+                <s.icon className="w-8 h-8 text-brand mb-8" strokeWidth={1.25} />
+                <h3 className="font-display font-bold text-2xl">{s.title}</h3>
+                <p className="text-sm mt-4 text-muted-foreground group-hover:text-bone/70 leading-relaxed">{s.desc}</p>
+                <div className="mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-medium">
+                  En savoir plus <ArrowUpRight className="w-3 h-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PROPERTIES */}
+      <section id="biens" className="py-32 container-editorial">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div>
+            <div className="eyebrow text-brand mb-4">Nos biens — Sélection</div>
+            <h2 className="font-display font-bold text-4xl md:text-6xl">Biens à la une</h2>
+          </div>
+          <a href="#" className="link-underline text-sm font-medium inline-flex items-center gap-2">Voir tout le catalogue <ArrowUpRight className="w-4 h-4" /></a>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-x-10 gap-y-24">
+        <div className="grid md:grid-cols-2 gap-x-10 gap-y-20">
           {properties.map((p, i) => (
-            <article key={p.id} className={`group ${i % 2 === 1 ? "md:mt-32" : ""}`}>
+            <article key={p.id} className={`group ${i % 2 === 1 ? "md:mt-24" : ""}`}>
               <div className="relative overflow-hidden bg-secondary aspect-[4/5]">
                 <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
-                <span className="absolute top-5 left-5 bg-bone/95 text-ink text-[10px] uppercase tracking-[0.25em] px-3 py-1.5">{p.tag}</span>
-                <span className="absolute top-5 right-5 font-serif text-bone text-2xl">— {p.id}</span>
+                <span className="absolute top-5 left-5 bg-brand text-bone text-[10px] uppercase tracking-[0.25em] px-3 py-1.5 font-semibold">{p.tag}</span>
+                <span className="absolute top-5 right-5 font-display font-bold text-bone text-2xl drop-shadow-lg">N°{p.id}</span>
+                <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/20 transition-colors duration-500" />
               </div>
-              <div className="pt-6 flex justify-between items-start">
-                <div>
-                  <div className="eyebrow">{p.area}</div>
-                  <h3 className="font-serif text-3xl mt-2">{p.name}</h3>
-                  <div className="text-sm text-muted-foreground mt-3 flex gap-4">
-                    <span>{p.beds} bed</span><span>·</span><span>{p.baths} bath</span><span>·</span><span>{p.sqft} sq ft</span>
+              <div className="pt-6 flex justify-between items-start gap-6">
+                <div className="flex-1">
+                  <div className="eyebrow text-muted-foreground">{p.area}</div>
+                  <h3 className="font-display font-bold text-2xl mt-2">{p.name}</h3>
+                  <div className="text-sm text-muted-foreground mt-4 flex flex-wrap gap-4">
+                    <span className="inline-flex items-center gap-1.5"><Bed className="w-3.5 h-3.5" /> {p.beds} ch.</span>
+                    <span className="inline-flex items-center gap-1.5"><Bath className="w-3.5 h-3.5" /> {p.baths} sdb</span>
+                    <span className="inline-flex items-center gap-1.5"><Maximize className="w-3.5 h-3.5" /> {p.sqft} m²</span>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-serif text-2xl text-ink">{p.price}</div>
-                  <a href="#" className="text-xs uppercase tracking-[0.2em] mt-2 inline-flex items-center gap-1 text-gold link-underline">Visit <ArrowUpRight className="w-3 h-3" /></a>
+                  <div className="font-display font-bold text-2xl text-brand whitespace-nowrap">{p.price}</div>
+                  <a href={PHONE_HREF} className="text-xs uppercase tracking-[0.2em] mt-3 inline-flex items-center gap-1 link-underline font-medium">Visiter <ArrowUpRight className="w-3 h-3" /></a>
                 </div>
               </div>
             </article>
@@ -155,131 +221,159 @@ const Index = () => {
         </div>
       </section>
 
-      {/* NEIGHBORHOODS marquee */}
-      <section id="neighborhoods" className="bg-ink text-bone py-32 overflow-hidden">
-        <div className="container-editorial">
-          <div className="flex items-center gap-4 mb-12">
-            <span className="h-px w-12 bg-gold" />
-            <span className="eyebrow text-bone/70">Neighborhoods we know by heart</span>
-          </div>
-        </div>
+      {/* MARQUEE */}
+      <section className="bg-ink text-bone py-20 overflow-hidden">
         <div className="flex marquee whitespace-nowrap">
-          {[...neighborhoods, ...neighborhoods].map((n, i) => (
-            <span key={i} className="font-serif text-[10vw] md:text-[7vw] leading-none px-8 italic">
-              {n} <span className="text-gold not-italic mx-4">✦</span>
+          {[...Array(2)].flatMap((_, k) => ["El Mourouj", "Ben Arous", "Mégrine", "Radès", "Hammam Lif", "Ezzahra", "Boumhel", "Mornag"].map((n, i) => (
+            <span key={`${k}-${i}`} className="font-display font-bold text-[7vw] leading-none px-8">
+              {n} <span className="text-brand mx-4">●</span>
             </span>
-          ))}
+          )))}
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section className="py-32 container-editorial">
+        <div className="grid md:grid-cols-12 gap-12">
+          <div className="md:col-span-4">
+            <div className="eyebrow text-brand mb-4">Comment ça marche</div>
+            <h2 className="font-display font-bold text-4xl md:text-5xl leading-tight">Trois étapes, <span className="text-brand">zéro mauvaise surprise.</span></h2>
+          </div>
+          <div className="md:col-span-8 grid gap-px bg-border">
+            {[
+              { n: "01", t: "Échangeons", d: "Un appel ou une visite à l'agence pour comprendre votre projet et votre budget." },
+              { n: "02", t: "Sélection sur-mesure", d: "Nous vous proposons une short-list de biens correspondant à vos critères, avec visites organisées." },
+              { n: "03", t: "Accompagnement complet", d: "De la négociation à la signature notariale, nous restons à vos côtés à chaque étape." },
+            ].map((s) => (
+              <div key={s.n} className="bg-background p-8 grid grid-cols-[auto_1fr] gap-8 items-start">
+                <div className="font-display font-bold text-5xl text-brand">{s.n}</div>
+                <div>
+                  <h3 className="font-display font-bold text-2xl">{s.t}</h3>
+                  <p className="text-muted-foreground mt-2 leading-relaxed">{s.d}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* TESTIMONIAL */}
-      <section className="py-32 container-editorial">
-        <div className="grid md:grid-cols-12 gap-12 items-center">
+      <section className="py-24 bg-smoke">
+        <div className="container-editorial grid md:grid-cols-12 gap-12 items-center">
           <div className="md:col-span-5 aspect-[4/5] overflow-hidden">
-            <img src={upperEast} alt="Maison interior" loading="lazy" className="w-full h-full object-cover" />
+            <img src={appart} alt="Client satisfait" loading="lazy" className="w-full h-full object-cover" />
           </div>
           <div className="md:col-span-7 md:pl-12">
-            <span className="font-serif text-7xl text-gold leading-none">“</span>
-            <p className="font-serif text-3xl md:text-4xl leading-snug -mt-6">
-              They didn't show us a property — they introduced us to the <span className="italic">soul</span> of a building, the <span className="italic">memory</span> of a street, the <span className="italic">future</span> of a family.
+            <span className="font-display font-bold text-8xl text-brand leading-none">«</span>
+            <p className="font-display font-medium text-2xl md:text-3xl leading-snug -mt-4">
+              Une équipe à l'écoute, des biens vérifiés et un accompagnement du début à la fin. Nous avons trouvé notre maison à El Mourouj en moins de trois semaines.
             </p>
             <div className="mt-10 flex items-center gap-4">
               <div className="w-12 h-px bg-ink" />
               <div>
-                <div className="text-sm font-medium">Eleanor & James Whitfield</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-[0.2em] mt-1">Acquired in West Village, 2025</div>
+                <div className="text-sm font-semibold">Famille Ben Slimane</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-[0.2em] mt-1">Acquéreurs · El Mourouj 6, 2025</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* JOURNAL */}
-      <section id="journal" className="py-32 bg-cream">
-        <div className="container-editorial">
-          <div className="flex items-end justify-between mb-16">
-            <div>
-              <div className="eyebrow mb-4">The Journal</div>
-              <h2 className="font-serif text-5xl md:text-6xl">Notes from the city</h2>
-            </div>
-          </div>
-          <div className="grid md:grid-cols-3 gap-10">
-            {[
-              { cat: "Market", title: "Why downtown is rewriting the value of light", date: "April 2026" },
-              { cat: "Architecture", title: "Inside the prewar revival: craftsmanship, returned", date: "March 2026" },
-              { cat: "Living", title: "The new Manhattan terrace: a room of one's sky", date: "March 2026" },
-            ].map((a) => (
-              <a href="#" key={a.title} className="group block border-t border-ink/20 pt-6">
-                <div className="eyebrow text-gold">{a.cat}</div>
-                <h3 className="font-serif text-2xl mt-4 leading-snug group-hover:italic transition-all">{a.title}</h3>
-                <div className="mt-8 flex items-center justify-between text-xs text-muted-foreground uppercase tracking-[0.2em]">
-                  <span>{a.date}</span>
-                  <ArrowUpRight className="w-4 h-4 text-ink group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+      {/* CONTACT */}
+      <section id="contact" className="relative py-32 bg-ink text-bone overflow-hidden">
+        <div className="absolute -top-20 -right-20 w-96 h-96 bg-brand/20 rounded-full blur-3xl" />
+        <div className="container-editorial relative grid md:grid-cols-2 gap-16">
+          <div>
+            <div className="eyebrow text-brand mb-4">Contact</div>
+            <h2 className="font-display font-bold text-5xl md:text-6xl leading-[1.05]">
+              Parlons de <span className="text-brand">votre projet.</span>
+            </h2>
+            <p className="mt-8 text-bone/70 max-w-md leading-relaxed">
+              Notre équipe vous répond personnellement en moins de 24 heures. Un projet d'achat, de vente, de location ou d'estimation&nbsp;? Contactez-nous.
+            </p>
+            <div className="mt-12 space-y-6">
+              <a href={PHONE_HREF} className="flex items-start gap-4 group">
+                <div className="w-10 h-10 border border-bone/30 flex items-center justify-center group-hover:bg-brand group-hover:border-brand transition-colors"><Phone className="w-4 h-4" /></div>
+                <div>
+                  <div className="eyebrow text-bone/50">Téléphone</div>
+                  <div className="font-display font-bold text-xl mt-1">{PHONE}</div>
                 </div>
               </a>
-            ))}
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 border border-bone/30 flex items-center justify-center"><MapPin className="w-4 h-4" /></div>
+                <div>
+                  <div className="eyebrow text-bone/50">Adresse</div>
+                  <div className="font-display font-bold text-xl mt-1">202 Résidence El Boustène</div>
+                  <div className="text-sm text-bone/70">El Mourouj, Ben Arous, Tunisie</div>
+                </div>
+              </div>
+              <a href={FB} target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 group">
+                <div className="w-10 h-10 border border-bone/30 flex items-center justify-center group-hover:bg-brand group-hover:border-brand transition-colors"><Facebook className="w-4 h-4" /></div>
+                <div>
+                  <div className="eyebrow text-bone/50">Suivez-nous</div>
+                  <div className="font-display font-bold text-xl mt-1">Page Facebook</div>
+                </div>
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* CTA */}
-      <section id="contact" className="relative py-40 overflow-hidden">
-        <img src={soho} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-        <div className="absolute inset-0 bg-ink/80" />
-        <div className="relative container-editorial text-bone text-center max-w-3xl mx-auto">
-          <div className="eyebrow text-bone/70 mb-6">By appointment</div>
-          <h2 className="font-serif text-5xl md:text-7xl leading-[1.05]">
-            Begin a <span className="italic text-gold-soft">private</span> conversation.
-          </h2>
-          <p className="mt-8 text-bone/80 max-w-xl mx-auto leading-relaxed">
-            Whether you are searching, selling, or simply curious — our advisors respond personally within twelve hours.
-          </p>
-          <form className="mt-12 flex flex-col sm:flex-row gap-0 max-w-xl mx-auto">
-            <input type="email" placeholder="your@email.com" className="flex-1 bg-transparent border border-bone/40 px-6 py-5 text-bone placeholder:text-bone/50 outline-none focus:border-gold" />
-            <button type="submit" className="bg-gold text-ink px-8 py-5 text-sm uppercase tracking-[0.2em] hover:bg-bone transition-colors duration-500">
-              Request contact
+          <form onSubmit={(e) => e.preventDefault()} className="bg-bone text-ink p-10 space-y-5">
+            <h3 className="font-display font-bold text-2xl">Demande de rappel</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <input required placeholder="Prénom" className="bg-transparent border-b border-ink/30 px-0 py-3 outline-none focus:border-brand placeholder:text-muted-foreground" />
+              <input required placeholder="Nom" className="bg-transparent border-b border-ink/30 px-0 py-3 outline-none focus:border-brand placeholder:text-muted-foreground" />
+            </div>
+            <input required type="tel" placeholder="Téléphone" className="w-full bg-transparent border-b border-ink/30 px-0 py-3 outline-none focus:border-brand placeholder:text-muted-foreground" />
+            <input type="email" placeholder="Email (optionnel)" className="w-full bg-transparent border-b border-ink/30 px-0 py-3 outline-none focus:border-brand placeholder:text-muted-foreground" />
+            <select className="w-full bg-transparent border-b border-ink/30 px-0 py-3 outline-none focus:border-brand">
+              <option>Je souhaite acheter</option>
+              <option>Je souhaite vendre</option>
+              <option>Je souhaite louer</option>
+              <option>Estimation gratuite</option>
+            </select>
+            <textarea rows={3} placeholder="Votre message" className="w-full bg-transparent border-b border-ink/30 px-0 py-3 outline-none focus:border-brand placeholder:text-muted-foreground resize-none" />
+            <button type="submit" className="w-full bg-brand text-bone py-4 text-sm uppercase tracking-[0.2em] font-medium hover:bg-ink transition-colors duration-500 mt-4">
+              Envoyer ma demande
             </button>
           </form>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-ink text-bone/70 pt-20 pb-10">
+      <footer className="bg-ink text-bone/60 pt-20 pb-10 border-t border-bone/10">
         <div className="container-editorial grid md:grid-cols-4 gap-12 pb-16 border-b border-bone/10">
           <div>
-            <div className="font-serif text-2xl text-bone">Maison <span className="italic text-gold">&amp;</span> Co.</div>
-            <p className="text-sm mt-4 leading-relaxed">432 Park Avenue, 41st floor<br/>New York, NY 10022</p>
+            <Logo light />
+            <p className="text-sm mt-6 leading-relaxed">Agence immobilière à El Mourouj, au service du grand Tunis depuis sa création.</p>
           </div>
           <div>
-            <div className="eyebrow text-bone/50 mb-4">Explore</div>
+            <div className="eyebrow text-bone/40 mb-4">Navigation</div>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="link-underline">Properties</a></li>
-              <li><a href="#" className="link-underline">Neighborhoods</a></li>
-              <li><a href="#" className="link-underline">Off-market</a></li>
-              <li><a href="#" className="link-underline">Sell with us</a></li>
+              <li><a href="#biens" className="link-underline">Nos biens</a></li>
+              <li><a href="#services" className="link-underline">Services</a></li>
+              <li><a href="#agence" className="link-underline">L'agence</a></li>
+              <li><a href="#contact" className="link-underline">Contact</a></li>
             </ul>
           </div>
           <div>
-            <div className="eyebrow text-bone/50 mb-4">House</div>
+            <div className="eyebrow text-bone/40 mb-4">Services</div>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="link-underline">Our story</a></li>
-              <li><a href="#" className="link-underline">Advisors</a></li>
-              <li><a href="#" className="link-underline">Journal</a></li>
-              <li><a href="#" className="link-underline">Press</a></li>
+              <li>Vente</li><li>Location</li><li>Estimation</li><li>Promotion</li>
             </ul>
           </div>
           <div>
-            <div className="eyebrow text-bone/50 mb-4">Contact</div>
+            <div className="eyebrow text-bone/40 mb-4">Contact</div>
             <ul className="space-y-2 text-sm">
-              <li>+1 (212) 555 0140</li>
-              <li>private@maisonandco.ny</li>
-              <li className="pt-2"><a href="#" className="link-underline">Instagram</a> · <a href="#" className="link-underline">LinkedIn</a></li>
+              <li><a href={PHONE_HREF} className="hover:text-brand">{PHONE}</a></li>
+              <li>202 Rés. El Boustène</li>
+              <li>El Mourouj, Ben Arous</li>
+              <li className="pt-2"><a href={FB} target="_blank" rel="noopener noreferrer" className="link-underline">Facebook</a></li>
             </ul>
           </div>
         </div>
-        <div className="container-editorial pt-8 flex flex-col md:flex-row justify-between text-xs uppercase tracking-[0.2em] text-bone/40">
-          <span>© 2026 Maison & Co. — Licensed RE Brokerage</span>
-          <span>New York · Hamptons · Palm Beach</span>
+        <div className="container-editorial pt-8 flex flex-col md:flex-row justify-between text-xs uppercase tracking-[0.2em] text-bone/40 gap-4">
+          <span>© 2026 Next Immobilier — Tous droits réservés</span>
+          <span>Tunisie · El Mourouj · Ben Arous</span>
         </div>
       </footer>
     </div>

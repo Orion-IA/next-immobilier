@@ -21,10 +21,10 @@ export default {
         foreground: "hsl(var(--foreground))",
         ink: "hsl(var(--ink))",
         bone: "hsl(var(--bone))",
-        cream: "hsl(var(--cream))",
-        gold: {
-          DEFAULT: "hsl(var(--gold))",
-          soft: "hsl(var(--gold-soft))",
+        smoke: "hsl(var(--smoke))",
+        brand: {
+          DEFAULT: "hsl(var(--brand))",
+          deep: "hsl(var(--brand-deep))",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -71,7 +71,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        serif: ['"Cormorant Garamond"', 'serif'],
+        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       keyframes: {
