@@ -131,17 +131,17 @@ const Index = () => {
       </div>
 
       {/* HERO */}
-      <section className="relative min-h-[88vh] md:min-h-[88vh] w-full overflow-hidden flex flex-col">
+      <section className="relative min-h-[100svh] md:min-h-[88vh] w-full overflow-hidden flex flex-col">
         <img src={heroImg} alt="Villa de luxe en Tunisie" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover animate-ken-burns" style={{ transform: `translateY(${scrolled * 0.3}px) scale(1.05)` }} />
         <div className="absolute inset-0 bg-ink/60 md:bg-ink/55" />
         <div className="absolute inset-0" style={{ background: "var(--gradient-dark)" }} />
 
-        <div className="relative flex-1 container-editorial flex flex-col justify-end pb-32 md:pb-32 pt-28 md:pt-20 text-bone">
+        <div className="relative flex-1 container-editorial flex flex-col justify-end pb-12 md:pb-32 pt-28 md:pt-20 text-bone">
           <div className="flex items-center gap-4 mb-5 md:mb-6 animate-fade-in">
             <span className="h-px w-12 bg-brand" />
             <span className="eyebrow text-bone/80 text-[10px] md:text-[11px]">Agence immobilière · El Mourouj</span>
           </div>
-          <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-[7vw] leading-[0.95] max-w-5xl animate-fade-in" style={{ animationDelay: "0.15s" }}>
+          <h1 className="font-display font-bold text-[2.75rem] sm:text-6xl md:text-[7vw] leading-[0.95] max-w-5xl animate-fade-in" style={{ animationDelay: "0.15s" }}>
             Votre prochaine adresse,<br/>
             <span className="text-brand inline-block animate-fade-in-right" style={{ animationDelay: "0.5s" }}>trouvée par Next.</span>
           </h1>
@@ -166,8 +166,8 @@ const Index = () => {
           <span className="w-px h-12 bg-bone/40" />
         </div>
 
-        {/* search */}
-        <div className="absolute bottom-0 left-0 right-0 translate-y-1/2 container-editorial">
+        {/* search — desktop only floating */}
+        <div className="hidden md:block absolute bottom-0 left-0 right-0 translate-y-1/2 container-editorial">
           <div className="bg-background border border-border shadow-[var(--shadow-elegant)] grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] animate-scale-in" style={{ animationDelay: "0.9s" }}>
             <label className="px-5 md:px-6 py-4 md:py-5 border-b md:border-b-0 md:border-r border-border transition-colors hover:bg-smoke/50">
               <span className="eyebrow block mb-1 text-muted-foreground">Type de bien</span>
