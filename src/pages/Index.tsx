@@ -192,8 +192,33 @@ const Index = () => {
         </div>
       </section>
 
+      {/* SEARCH — mobile in-flow */}
+      <section className="md:hidden bg-ink py-8 px-6">
+        <div className="bg-background border border-border divide-y divide-border">
+          <label className="block px-5 py-4">
+            <span className="eyebrow block mb-1 text-muted-foreground">Type de bien</span>
+            <select className="w-full bg-transparent outline-none text-ink font-medium">
+              <option>Tous types</option><option>Villa</option><option>Appartement</option><option>Duplex</option><option>Terrain</option>
+            </select>
+          </label>
+          <label className="block px-5 py-4">
+            <span className="eyebrow block mb-1 text-muted-foreground">Localisation</span>
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="El Mourouj, Ben Arous…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
+          </label>
+          <label className="block px-5 py-4">
+            <span className="eyebrow block mb-1 text-muted-foreground">Budget</span>
+            <select className="w-full bg-transparent outline-none text-ink font-medium">
+              <option>Indifférent</option><option>{"< 300 000 DT"}</option><option>300 000 — 600 000 DT</option><option>{"> 600 000 DT"}</option>
+            </select>
+          </label>
+          <button className="w-full bg-brand text-bone py-4 flex items-center justify-center gap-3 hover:bg-ink transition-colors">
+            <Search className="w-4 h-4" /> <span className="text-sm tracking-[0.2em] uppercase font-medium">Rechercher</span>
+          </button>
+        </div>
+      </section>
+
       {/* INTRO STATS */}
-      <section id="agence" className="pt-56 md:pt-48 pb-20 md:pb-24 container-editorial">
+      <section id="agence" className="pt-20 md:pt-48 pb-20 md:pb-24 container-editorial">
         <div className="grid md:grid-cols-12 gap-10 md:gap-12">
           <Reveal variant="left" className="md:col-span-5">
             <div className="eyebrow flex items-center gap-3 text-brand"><span className="h-px w-8 bg-brand" /> L'agence</div>
