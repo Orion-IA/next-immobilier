@@ -7,6 +7,7 @@ import maison from "@/assets/property-maison.jpg";
 import { ArrowUpRight, Search, Phone, MapPin, Mail, Bed, Bath, Maximize, Home, Building2, KeyRound, TrendingUp, Menu, X, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
+import { SearchBar } from "@/components/SearchBar";
 
 const PHONES = [
   { label: "+216 71 876 143", href: "tel:+21671876143" },
@@ -172,55 +173,15 @@ const Index = () => {
           <span className="w-px h-12 bg-bone/40" />
         </div>
 
-        {/* search — desktop only floating */}
-        <div className="hidden md:block absolute bottom-0 left-0 right-0 translate-y-1/4 container-editorial">
-          <div className="bg-background border border-border shadow-[var(--shadow-elegant)] grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] animate-scale-in" style={{ animationDelay: "0.9s" }}>
-            <label className="px-5 md:px-6 py-4 md:py-5 border-b md:border-b-0 md:border-r border-border transition-colors hover:bg-smoke/50">
-              <span className="eyebrow block mb-1 text-muted-foreground">Type de bien</span>
-              <select className="w-full bg-transparent outline-none text-ink font-medium cursor-pointer">
-                <option>Tous types</option><option>Villa</option><option>Appartement</option><option>Duplex</option><option>Terrain</option>
-              </select>
-            </label>
-            <label className="px-5 md:px-6 py-4 md:py-5 border-b md:border-b-0 md:border-r border-border transition-colors hover:bg-smoke/50">
-              <span className="eyebrow block mb-1 text-muted-foreground">Localisation</span>
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Ariana, La Gazelle, Menzah…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
-            </label>
-            <label className="px-5 md:px-6 py-4 md:py-5 border-b md:border-b-0 md:border-r border-border transition-colors hover:bg-smoke/50">
-              <span className="eyebrow block mb-1 text-muted-foreground">Budget</span>
-              <select className="w-full bg-transparent outline-none text-ink font-medium cursor-pointer">
-                <option>Indifférent</option><option>{"< 300 000 DT"}</option><option>300 000 — 600 000 DT</option><option>{"> 600 000 DT"}</option>
-              </select>
-            </label>
-            <button className="bg-brand text-bone px-6 md:px-8 py-5 flex items-center justify-center gap-3 hover:bg-ink transition-all duration-500 group">
-              <Search className="w-4 h-4 transition-transform group-hover:rotate-12" /> <span className="text-sm tracking-[0.2em] uppercase font-medium">Rechercher</span>
-            </button>
-          </div>
+        {/* search — desktop floating, raised up */}
+        <div className="hidden md:block absolute bottom-10 left-0 right-0 container-editorial">
+          <SearchBar />
         </div>
       </section>
 
       {/* SEARCH — mobile in-flow */}
       <section className="md:hidden bg-ink py-8 px-6">
-        <div className="bg-background border border-border divide-y divide-border">
-          <label className="block px-5 py-4">
-            <span className="eyebrow block mb-1 text-muted-foreground">Type de bien</span>
-            <select className="w-full bg-transparent outline-none text-ink font-medium">
-              <option>Tous types</option><option>Villa</option><option>Appartement</option><option>Duplex</option><option>Terrain</option>
-            </select>
-          </label>
-          <label className="block px-5 py-4">
-            <span className="eyebrow block mb-1 text-muted-foreground">Localisation</span>
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Ariana, La Gazelle, Menzah…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
-          </label>
-          <label className="block px-5 py-4">
-            <span className="eyebrow block mb-1 text-muted-foreground">Budget</span>
-            <select className="w-full bg-transparent outline-none text-ink font-medium">
-              <option>Indifférent</option><option>{"< 300 000 DT"}</option><option>300 000 — 600 000 DT</option><option>{"> 600 000 DT"}</option>
-            </select>
-          </label>
-          <button className="w-full bg-brand text-bone py-4 flex items-center justify-center gap-3 hover:bg-ink transition-colors">
-            <Search className="w-4 h-4" /> <span className="text-sm tracking-[0.2em] uppercase font-medium">Rechercher</span>
-          </button>
-        </div>
+        <SearchBar variant="mobile" />
       </section>
 
       {/* INTRO STATS */}
