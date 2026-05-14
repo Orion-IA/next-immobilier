@@ -258,7 +258,7 @@ const Index = () => {
         <div className="container-editorial">
           <Reveal className="mb-12 md:mb-16">
             <div className="eyebrow text-brand mb-4">Nos services</div>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl">Quatre métiers, <span className="text-brand">une seule exigence.</span></h2>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl">Trois métiers, <span className="text-brand">une seule exigence.</span></h2>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
             {services.map((s, i) => (
