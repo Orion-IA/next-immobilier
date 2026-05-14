@@ -20,10 +20,14 @@ const EMAIL_HREF = "mailto:contact@bestimmo.tn";
 const ADDRESS = "22 Avenue Habib Bourguiba, Cité La Gazelle, Ariana";
 
 const properties = [
-  { id: "01", name: "Villa contemporaine", area: "Cité La Gazelle, Ariana", price: "850 000 DT", beds: 5, baths: 3, sqft: "420", img: villa, tag: "À vendre" },
-  { id: "02", name: "Appartement S+3 standing", area: "Ariana Ville", price: "320 000 DT", beds: 3, baths: 2, sqft: "145", img: appart, tag: "Nouveau" },
-  { id: "03", name: "Duplex avec terrasse", area: "Menzah, Ariana", price: "520 000 DT", beds: 4, baths: 3, sqft: "210", img: duplex, tag: "Exclusivité" },
-  { id: "04", name: "Maison familiale", area: "Borj Louzir, Ariana", price: "1 200 DT/mois", beds: 4, baths: 2, sqft: "180", img: maison, tag: "À louer" },
+  { id: "01", name: "Villa contemporaine", area: "Cité La Gazelle", price: "850 000 DT", beds: 5, baths: 3, sqft: "420", img: villa, tag: "Vente" },
+  { id: "02", name: "Appartement S+3 standing", area: "Ariana Ville", price: "320 000 DT", beds: 3, baths: 2, sqft: "145", img: appart, tag: "Vente" },
+  { id: "03", name: "Duplex avec terrasse", area: "El Menzah", price: "520 000 DT", beds: 4, baths: 3, sqft: "210", img: duplex, tag: "Vente" },
+  { id: "04", name: "Maison familiale", area: "Riadh Andalous", price: "1 200 DT/mois", beds: 4, baths: 2, sqft: "180", img: maison, tag: "Location" },
+  { id: "05", name: "Penthouse vue dégagée", area: "Ennasr", price: "1 100 000 DT", beds: 4, baths: 3, sqft: "260", img: villa, tag: "Vente" },
+  { id: "06", name: "Studio meublé", area: "Petite Ariana", price: "650 DT/mois", beds: 1, baths: 1, sqft: "55", img: appart, tag: "Location" },
+  { id: "07", name: "Villa avec jardin", area: "El Ghazala", price: "780 000 DT", beds: 4, baths: 3, sqft: "350", img: maison, tag: "Vente" },
+  { id: "08", name: "S+2 lumineux", area: "Cité Essahafa", price: "900 DT/mois", beds: 2, baths: 1, sqft: "95", img: duplex, tag: "Location" },
 ];
 
 const services = [
