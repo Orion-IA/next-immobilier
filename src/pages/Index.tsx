@@ -151,10 +151,7 @@ const Index = () => {
             Votre prochaine adresse,<br/>
             <span className="text-brand inline-block animate-fade-in-right" style={{ animationDelay: "0.5s" }}>trouvée par Best Immo.</span>
           </h1>
-          <div className="mt-8 md:mt-10 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 animate-fade-in" style={{ animationDelay: "0.7s" }}>
-            <p className="max-w-md text-bone/85 leading-relaxed text-base md:text-lg">
-              Vente, location, estimation. Une équipe locale au service de vos projets immobiliers à Cité La Gazelle, Ariana et dans le grand Tunis.
-            </p>
+          <div className="mt-8 md:mt-10 animate-fade-in" style={{ animationDelay: "0.7s" }}>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               <a href="#biens" className="bg-brand text-bone px-6 md:px-7 py-4 text-xs md:text-sm font-medium uppercase tracking-[0.2em] hover:bg-bone hover:text-ink transition-all duration-500 inline-flex items-center justify-center gap-3 group">
                 Voir les biens <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -181,6 +178,15 @@ const Index = () => {
       {/* SEARCH — mobile in-flow */}
       <section className="md:hidden bg-ink py-8 px-6">
         <SearchBar variant="mobile" />
+      </section>
+
+      {/* INTRO TAGLINE — below search bar */}
+      <section className="bg-background pt-10 md:pt-16 pb-2 md:pb-4">
+        <div className="container-editorial">
+          <p className="max-w-3xl text-base md:text-xl text-muted-foreground leading-relaxed">
+            <span className="text-ink font-medium">Vente, location.</span> Une équipe locale au service de vos projets immobiliers à Cité La Gazelle, Ariana et dans le grand Tunis.
+          </p>
+        </div>
       </section>
 
       {/* INTRO STATS */}
