@@ -414,6 +414,8 @@ const Index = () => {
       <a href={PHONE_HREF} className="md:hidden fixed bottom-6 right-6 z-40 w-14 h-14 bg-brand text-bone rounded-full flex items-center justify-center shadow-[var(--shadow-brand)] animate-pulse-brand" aria-label="Appeler">
         <Phone className="w-6 h-6" />
       </a>
+
+      <PropertyDialog property={openProperty} onClose={() => setOpenProperty(null)} />
     </div>
   );
 };
