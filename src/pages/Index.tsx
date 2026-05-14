@@ -86,9 +86,6 @@ const Index = () => {
                 : <a key={l.href} href={l.href} className="link-underline">{l.label}</a>
             ))}
           </nav>
-          <a href={PHONE_HREF} className="hidden md:inline-flex items-center gap-2 bg-brand text-bone px-5 py-2.5 text-sm font-medium hover:bg-ink transition-all duration-500 hover:gap-3 hover:px-6 animate-pulse-brand">
-            <Phone className="w-4 h-4" /> Appeler
-          </a>
           <button onClick={() => setMenuOpen(true)} className="md:hidden p-2 -mr-2 text-ink" aria-label="Ouvrir le menu">
             <Menu className="w-6 h-6" />
           </button>
@@ -133,12 +130,12 @@ const Index = () => {
       </div>
 
       {/* HERO */}
-      <section className="relative min-h-[100svh] md:min-h-[88vh] w-full overflow-hidden flex flex-col">
+      <section className="relative min-h-[70svh] md:min-h-[88vh] w-full overflow-hidden flex flex-col">
         <img src={heroImg} alt="Villa de luxe en Tunisie" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover animate-ken-burns" style={{ transform: `translateY(${scrolled * 0.3}px) scale(1.05)` }} />
         <div className="absolute inset-0 bg-ink/60 md:bg-ink/55" />
         <div className="absolute inset-0" style={{ background: "var(--gradient-dark)" }} />
 
-        <div className="relative flex-1 container-editorial flex flex-col justify-start pb-12 md:pb-56 pt-28 md:pt-24 text-bone">
+        <div className="relative flex-1 container-editorial flex flex-col justify-start pb-4 md:pb-56 pt-24 md:pt-24 text-bone">
           <div className="flex items-center gap-4 mb-5 md:mb-6 animate-fade-in">
             <span className="h-px w-12 bg-brand" />
             <span className="eyebrow text-bone/80 text-[10px] md:text-[11px]">Agence immobilière · Ariana</span>
@@ -163,7 +160,7 @@ const Index = () => {
       </section>
 
       {/* SEARCH — mobile in-flow */}
-      <section className="md:hidden bg-ink py-8 px-6">
+      <section className="md:hidden bg-ink py-4 px-6">
         <SearchBar variant="mobile" />
       </section>
 
@@ -410,10 +407,6 @@ const Index = () => {
         </div>
       </footer>
 
-      {/* FLOATING MOBILE CALL BTN */}
-      <a href={PHONE_HREF} className="md:hidden fixed bottom-6 right-6 z-40 w-14 h-14 bg-brand text-bone rounded-full flex items-center justify-center shadow-[var(--shadow-brand)] animate-pulse-brand" aria-label="Appeler">
-        <Phone className="w-6 h-6" />
-      </a>
 
       <PropertyDialog property={openProperty} onClose={() => setOpenProperty(null)} />
     </div>
