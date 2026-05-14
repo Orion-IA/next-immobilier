@@ -138,7 +138,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-ink/60 md:bg-ink/55" />
         <div className="absolute inset-0" style={{ background: "var(--gradient-dark)" }} />
 
-        <div className="relative flex-1 container-editorial flex flex-col justify-end pb-12 md:pb-32 pt-28 md:pt-20 text-bone">
+        <div className="relative flex-1 container-editorial flex flex-col justify-start pb-12 md:pb-56 pt-28 md:pt-24 text-bone">
           <div className="flex items-center gap-4 mb-5 md:mb-6 animate-fade-in">
             <span className="h-px w-12 bg-brand" />
             <span className="eyebrow text-bone/80 text-[10px] md:text-[11px]">Agence immobilière · Ariana</span>
