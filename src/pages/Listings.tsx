@@ -1,6 +1,6 @@
 import logo from "@/assets/bestimmo-logo.png";
 import { Link, NavLink } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Phone, MapPin, Mail, Menu, X, Home, Bed, Wallet, Search, SlidersHorizontal } from "lucide-react";
 import { properties as ALL, ZONES, type Property } from "@/data/properties";
 import { PropertyCard } from "@/components/PropertyCard";
@@ -25,6 +25,16 @@ export default function Listings({ mode }: { mode: "Vente" | "Location" }) {
   const [open, setOpen] = useState<Property | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = "";
+    window.scrollTo(0, 0);
+  }, [mode]);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
   const filtered = useMemo(() => {
     return ALL.filter((p) => {

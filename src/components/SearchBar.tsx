@@ -1,5 +1,6 @@
 import { Search, Home, MapPin, Bed, Wallet, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ZONES = [
   "El Ghazala",
@@ -28,6 +29,8 @@ export const SearchBar = ({ variant = "desktop" }: { variant?: "desktop" | "mobi
   const [mode, setMode] = useState<Mode>("vente");
   const [focused, setFocused] = useState<number | null>(null);
   const [hovered, setHovered] = useState(false);
+  const navigate = useNavigate();
+  const handleSearch = () => navigate(mode === "vente" ? "/vente" : "/location");
 
   const fields = [
     { icon: Home, label: "Type de bien", el: (
@@ -127,7 +130,7 @@ export const SearchBar = ({ variant = "desktop" }: { variant?: "desktop" | "mobi
             </label>
           );
         })}
-        <button className={`relative overflow-hidden bg-brand text-bone ${isMobile ? "w-full py-4" : "px-8 py-5"} flex items-center justify-center gap-3 group transition-all duration-500 hover:bg-ink`}>
+        <button onClick={handleSearch} className={`relative overflow-hidden bg-brand text-bone ${isMobile ? "w-full py-4" : "px-8 py-5"} flex items-center justify-center gap-3 group transition-all duration-500 hover:bg-ink`}>
           <span className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-ink transition-transform duration-700 ease-out" />
           <span className="relative flex items-center gap-3 text-xs tracking-[0.25em] uppercase font-semibold">
             <Search className="w-4 h-4 transition-transform duration-500 group-hover:rotate-90" />
