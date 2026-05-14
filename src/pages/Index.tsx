@@ -130,7 +130,7 @@ const Index = () => {
       </div>
 
       {/* HERO */}
-      <section className="relative min-h-[70svh] md:min-h-[88vh] w-full overflow-hidden flex flex-col">
+      <section className="relative min-h-[55svh] md:min-h-[88vh] w-full overflow-hidden flex flex-col">
         <img src={heroImg} alt="Villa de luxe en Tunisie" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover animate-ken-burns" style={{ transform: `translateY(${scrolled * 0.3}px) scale(1.05)` }} />
         <div className="absolute inset-0 bg-ink/60 md:bg-ink/55" />
         <div className="absolute inset-0" style={{ background: "var(--gradient-dark)" }} />
