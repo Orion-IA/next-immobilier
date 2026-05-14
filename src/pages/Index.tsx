@@ -393,26 +393,28 @@ const Index = () => {
               Notre équipe vous répond personnellement en moins de 24 heures. Un projet d'achat, de vente, de location ou d'estimation&nbsp;? Contactez-nous.
             </p>
             <div className="mt-10 md:mt-12 space-y-5 md:space-y-6">
-              <a href={PHONE_HREF} className="flex items-start gap-4 group">
-                <div className="w-10 h-10 border border-bone/30 flex items-center justify-center group-hover:bg-brand group-hover:border-brand transition-all duration-500 group-hover:rotate-12 shrink-0"><Phone className="w-4 h-4" /></div>
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 border border-bone/30 flex items-center justify-center shrink-0"><Phone className="w-4 h-4" /></div>
                 <div>
                   <div className="eyebrow text-bone/50">Téléphone</div>
-                  <div className="font-display font-bold text-lg md:text-xl mt-1">{PHONE}</div>
+                  {PHONES.map((p) => (
+                    <a key={p.href} href={p.href} className="block font-display font-bold text-base md:text-lg mt-1 hover:text-brand transition-colors">{p.label}</a>
+                  ))}
                 </div>
-              </a>
+              </div>
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 border border-bone/30 flex items-center justify-center shrink-0"><MapPin className="w-4 h-4" /></div>
                 <div>
                   <div className="eyebrow text-bone/50">Adresse</div>
-                  <div className="font-display font-bold text-lg md:text-xl mt-1">202 Résidence El Boustène</div>
-                  <div className="text-sm text-bone/70">El Mourouj, Ben Arous, Tunisie</div>
+                  <div className="font-display font-bold text-lg md:text-xl mt-1">22 Avenue Habib Bourguiba</div>
+                  <div className="text-sm text-bone/70">Cité La Gazelle, Ariana, Tunisie</div>
                 </div>
               </div>
-              <a href={FB} target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 group">
-                <div className="w-10 h-10 border border-bone/30 flex items-center justify-center group-hover:bg-brand group-hover:border-brand transition-all duration-500 group-hover:rotate-12 shrink-0"><Facebook className="w-4 h-4" /></div>
+              <a href={EMAIL_HREF} className="flex items-start gap-4 group">
+                <div className="w-10 h-10 border border-bone/30 flex items-center justify-center group-hover:bg-brand group-hover:border-brand transition-all duration-500 group-hover:rotate-12 shrink-0"><Mail className="w-4 h-4" /></div>
                 <div>
-                  <div className="eyebrow text-bone/50">Suivez-nous</div>
-                  <div className="font-display font-bold text-lg md:text-xl mt-1">Page Facebook</div>
+                  <div className="eyebrow text-bone/50">Email</div>
+                  <div className="font-display font-bold text-lg md:text-xl mt-1">{EMAIL}</div>
                 </div>
               </a>
             </div>
@@ -447,7 +449,7 @@ const Index = () => {
         <div className="container-editorial grid sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 pb-12 md:pb-16 border-b border-bone/10">
           <div>
             <Logo light />
-            <p className="text-sm mt-6 leading-relaxed">Agence immobilière à El Mourouj, au service du grand Tunis depuis sa création.</p>
+            <p className="text-sm mt-6 leading-relaxed">Agence immobilière à Cité La Gazelle, Ariana, au service du grand Tunis.</p>
           </div>
           <div>
             <div className="eyebrow text-bone/40 mb-4">Navigation</div>
@@ -464,10 +466,12 @@ const Index = () => {
           <div>
             <div className="eyebrow text-bone/40 mb-4">Contact</div>
             <ul className="space-y-2 text-sm">
-              <li><a href={PHONE_HREF} className="hover:text-brand transition-colors">{PHONE}</a></li>
-              <li>202 Rés. El Boustène</li>
-              <li>El Mourouj, Ben Arous</li>
-              <li className="pt-2"><a href={FB} target="_blank" rel="noopener noreferrer" className="link-underline">Facebook</a></li>
+              {PHONES.map((p) => (
+                <li key={p.href}><a href={p.href} className="hover:text-brand transition-colors">{p.label}</a></li>
+              ))}
+              <li>22 Av. Habib Bourguiba</li>
+              <li>Cité La Gazelle, Ariana</li>
+              <li className="pt-2"><a href={EMAIL_HREF} className="link-underline">{EMAIL}</a></li>
             </ul>
           </div>
         </div>
