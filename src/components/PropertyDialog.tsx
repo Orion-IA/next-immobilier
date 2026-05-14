@@ -1,6 +1,6 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import type { Property } from "@/data/properties";
-import { Bed, Bath, Maximize, MapPin, Phone, Mail, X, Check } from "lucide-react";
+import { Bed, Bath, Maximize, MapPin, Mail, X, Check } from "lucide-react";
 import { useState } from "react";
 
 const PHONE_HREF = "tel:+21671876143";
