@@ -34,7 +34,6 @@ const services = [
   { icon: Home, title: "Vente", desc: "Villas, appartements, terrains. Une sélection rigoureuse de biens vérifiés." },
   { icon: KeyRound, title: "Location", desc: "Locations longue durée et meublées, dans tout le grand Tunis." },
   { icon: Building2, title: "Promotion", desc: "Accompagnement des promoteurs pour la commercialisation de leurs projets." },
-  { icon: TrendingUp, title: "Estimation", desc: "Estimation gratuite et confidentielle de votre bien sous 48h." },
 ];
 
 const Logo = ({ light = false }: { light?: boolean }) => (
@@ -161,7 +160,7 @@ const Index = () => {
                 Voir les biens <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
               <a href="#contact" className="border border-bone/40 text-bone px-6 md:px-7 py-4 text-xs md:text-sm font-medium uppercase tracking-[0.2em] hover:bg-bone hover:text-ink transition-colors duration-500 inline-flex items-center justify-center">
-                Estimation gratuite
+                Nous contacter
               </a>
             </div>
           </div>
@@ -174,7 +173,7 @@ const Index = () => {
         </div>
 
         {/* search — desktop only floating */}
-        <div className="hidden md:block absolute bottom-0 left-0 right-0 translate-y-1/2 container-editorial">
+        <div className="hidden md:block absolute bottom-0 left-0 right-0 translate-y-1/4 container-editorial">
           <div className="bg-background border border-border shadow-[var(--shadow-elegant)] grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] animate-scale-in" style={{ animationDelay: "0.9s" }}>
             <label className="px-5 md:px-6 py-4 md:py-5 border-b md:border-b-0 md:border-r border-border transition-colors hover:bg-smoke/50">
               <span className="eyebrow block mb-1 text-muted-foreground">Type de bien</span>
@@ -225,7 +224,7 @@ const Index = () => {
       </section>
 
       {/* INTRO STATS */}
-      <section id="agence" className="pt-20 md:pt-48 pb-20 md:pb-24 container-editorial">
+      <section id="agence" className="pt-20 md:pt-32 pb-20 md:pb-24 container-editorial">
         <div className="grid md:grid-cols-12 gap-10 md:gap-12">
           <Reveal variant="left" className="md:col-span-5">
             <div className="eyebrow flex items-center gap-3 text-brand"><span className="h-px w-8 bg-brand" /> L'agence</div>
@@ -240,7 +239,7 @@ const Index = () => {
             <div className="mt-10 md:mt-12 grid grid-cols-3 gap-4 md:gap-8 pt-10 md:pt-12 border-t border-border">
               {[
                 { k: "200+", v: "biens commercialisés" },
-                { k: "48 h", v: "pour estimer votre bien" },
+                { k: "10+", v: "années d'expérience" },
                 { k: "100 %", v: "mandats vérifiés" },
               ].map((s, i) => (
                 <Reveal key={s.k} variant="up" delay={300 + i * 120}>
@@ -260,7 +259,7 @@ const Index = () => {
             <div className="eyebrow text-brand mb-4">Nos services</div>
             <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl">Trois métiers, <span className="text-brand">une seule exigence.</span></h2>
           </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
             {services.map((s, i) => (
               <Reveal key={s.title} variant="up" delay={i * 100}>
                 <div className="bg-background p-8 md:p-10 group hover:bg-ink hover:text-bone transition-colors duration-500 h-full cursor-pointer">
@@ -434,8 +433,7 @@ const Index = () => {
                 <option>Je souhaite acheter</option>
                 <option>Je souhaite vendre</option>
                 <option>Je souhaite louer</option>
-                <option>Estimation gratuite</option>
-              </select>
+                              </select>
               <textarea rows={3} placeholder="Votre message" className="w-full bg-transparent border-b border-ink/30 px-0 py-3 outline-none focus:border-brand transition-colors placeholder:text-muted-foreground resize-none" />
               <button type="submit" className="w-full bg-brand text-bone py-4 text-sm uppercase tracking-[0.2em] font-medium hover:bg-ink transition-all duration-500 mt-4 group inline-flex items-center justify-center gap-3">
                 Envoyer ma demande <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -461,7 +459,7 @@ const Index = () => {
           <div>
             <div className="eyebrow text-bone/40 mb-4">Services</div>
             <ul className="space-y-2 text-sm">
-              <li>Vente</li><li>Location</li><li>Estimation</li><li>Promotion</li>
+              <li>Vente</li><li>Location</li><li>Promotion</li>
             </ul>
           </div>
           <div>
