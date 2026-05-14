@@ -1,13 +1,14 @@
 import logo from "@/assets/bestimmo-logo.png";
 import heroImg from "@/assets/hero-villa.jpg";
 import appart from "@/assets/property-appart.jpg";
-import villa from "@/assets/property-villa.jpg";
-import duplex from "@/assets/property-duplex.jpg";
-import maison from "@/assets/property-maison.jpg";
-import { ArrowUpRight, Phone, MapPin, Mail, Bed, Bath, Maximize, Home, Building2, KeyRound, Menu, X, ArrowRight } from "lucide-react";
+import { ArrowUpRight, Phone, MapPin, Mail, Home, Building2, KeyRound, Menu, X, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Reveal } from "@/components/Reveal";
 import { SearchBar } from "@/components/SearchBar";
+import { properties, type Property, ZONES } from "@/data/properties";
+import { PropertyCard } from "@/components/PropertyCard";
+import { PropertyDialog } from "@/components/PropertyDialog";
 
 const PHONES = [
   { label: "+216 71 876 143", href: "tel:+21671876143" },
@@ -20,17 +21,6 @@ const EMAIL = "contact@bestimmo.tn";
 const EMAIL_HREF = "mailto:contact@bestimmo.tn";
 const ADDRESS = "22 Avenue Habib Bourguiba, Cité La Gazelle, Ariana";
 
-const properties = [
-  { id: "01", name: "Villa contemporaine", area: "Cité La Gazelle", price: "850 000 DT", beds: 5, baths: 3, sqft: "420", img: villa, tag: "Vente" },
-  { id: "02", name: "Appartement S+3 standing", area: "Ariana Ville", price: "320 000 DT", beds: 3, baths: 2, sqft: "145", img: appart, tag: "Vente" },
-  { id: "03", name: "Duplex avec terrasse", area: "El Menzah", price: "520 000 DT", beds: 4, baths: 3, sqft: "210", img: duplex, tag: "Vente" },
-  { id: "04", name: "Maison familiale", area: "Riadh Andalous", price: "1 200 DT/mois", beds: 4, baths: 2, sqft: "180", img: maison, tag: "Location" },
-  { id: "05", name: "Penthouse vue dégagée", area: "Ennasr", price: "1 100 000 DT", beds: 4, baths: 3, sqft: "260", img: villa, tag: "Vente" },
-  { id: "06", name: "Studio meublé", area: "Petite Ariana", price: "650 DT/mois", beds: 1, baths: 1, sqft: "55", img: appart, tag: "Location" },
-  { id: "07", name: "Villa avec jardin", area: "El Ghazala", price: "780 000 DT", beds: 4, baths: 3, sqft: "350", img: maison, tag: "Vente" },
-  { id: "08", name: "S+2 lumineux", area: "Cité Essahafa", price: "900 DT/mois", beds: 2, baths: 1, sqft: "95", img: duplex, tag: "Location" },
-];
-
 const services = [
   { icon: Home, title: "Vente", desc: "Villas, appartements, terrains. Une sélection rigoureuse de biens vérifiés." },
   { icon: KeyRound, title: "Location", desc: "Locations longue durée et meublées, dans tout le grand Tunis." },
@@ -38,16 +28,17 @@ const services = [
 ];
 
 const Logo = ({ light = false }: { light?: boolean }) => (
-  <a href="#" className="flex items-center gap-3 group">
+  <Link to="/" className="flex items-center gap-3 group">
     <div className={`p-1.5 transition-all duration-500 group-hover:scale-105 ${light ? "bg-bone" : ""}`}>
       <img src={logo} alt="Best Immo — Agence immobilière" className="h-16 md:h-20 w-auto block" />
     </div>
-  </a>
+  </Link>
 );
 
 const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(0);
+  const [openProperty, setOpenProperty] = useState<Property | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY);
@@ -61,6 +52,8 @@ const Index = () => {
   }, [menuOpen]);
 
   const navLinks = [
+    { href: "/vente", label: "Vente", isRoute: true },
+    { href: "/location", label: "Location", isRoute: true },
     { href: "#biens", label: "Nos biens" },
     { href: "#services", label: "Services" },
     { href: "#agence", label: "L'agence" },
@@ -88,7 +81,9 @@ const Index = () => {
           <Logo />
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium">
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="link-underline">{l.label}</a>
+              l.isRoute
+                ? <Link key={l.href} to={l.href} className="link-underline">{l.label}</Link>
+                : <a key={l.href} href={l.href} className="link-underline">{l.label}</a>
             ))}
           </nav>
           <a href={PHONE_HREF} className="hidden md:inline-flex items-center gap-2 bg-brand text-bone px-5 py-2.5 text-sm font-medium hover:bg-ink transition-all duration-500 hover:gap-3 hover:px-6 animate-pulse-brand">
@@ -112,16 +107,17 @@ const Index = () => {
           </div>
           <nav className="flex-1 px-6 py-10 flex flex-col gap-1">
             {navLinks.map((l, i) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setMenuOpen(false)}
-                className="font-display font-bold text-3xl py-3 border-b border-border flex items-center justify-between group hover:text-brand transition-colors"
-                style={{ animation: menuOpen ? `fade-in-right 0.5s ${i * 80}ms both` : "none" }}
-              >
-                {l.label}
-                <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1" />
-              </a>
+              l.isRoute ? (
+                <Link key={l.href} to={l.href} onClick={() => setMenuOpen(false)} className="font-display font-bold text-3xl py-3 border-b border-border flex items-center justify-between group hover:text-brand transition-colors" style={{ animation: menuOpen ? `fade-in-right 0.5s ${i * 80}ms both` : "none" }}>
+                  {l.label}
+                  <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1" />
+                </Link>
+              ) : (
+                <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)} className="font-display font-bold text-3xl py-3 border-b border-border flex items-center justify-between group hover:text-brand transition-colors" style={{ animation: menuOpen ? `fade-in-right 0.5s ${i * 80}ms both` : "none" }}>
+                  {l.label}
+                  <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1" />
+                </a>
+              )
             ))}
           </nav>
           <div className="p-6 border-t border-border space-y-3">
@@ -151,16 +147,7 @@ const Index = () => {
             Votre prochaine adresse,<br/>
             <span className="text-brand inline-block animate-fade-in-right" style={{ animationDelay: "0.5s" }}>trouvée par Best Immo.</span>
           </h1>
-          <div className="mt-8 md:mt-10 animate-fade-in" style={{ animationDelay: "0.7s" }}>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-              <a href="#biens" className="bg-brand text-bone px-6 md:px-7 py-4 text-xs md:text-sm font-medium uppercase tracking-[0.2em] hover:bg-bone hover:text-ink transition-all duration-500 inline-flex items-center justify-center gap-3 group">
-                Voir les biens <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a href="#contact" className="border border-bone/40 text-bone px-6 md:px-7 py-4 text-xs md:text-sm font-medium uppercase tracking-[0.2em] hover:bg-bone hover:text-ink transition-colors duration-500 inline-flex items-center justify-center">
-                Nous contacter
-              </a>
-            </div>
-          </div>
+          {/* CTA buttons removed per request */}
         </div>
 
         {/* scroll indicator */}
@@ -249,47 +236,24 @@ const Index = () => {
             <div className="eyebrow text-brand mb-4">Nos biens — Sélection</div>
             <h2 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl">Biens à la une</h2>
           </div>
-          <a href="#" className="link-underline text-sm font-medium inline-flex items-center gap-2 self-start md:self-auto">Voir tout le catalogue <ArrowUpRight className="w-4 h-4" /></a>
+          <Link to="/vente" className="link-underline text-sm font-medium inline-flex items-center gap-2 self-start md:self-auto">Voir tout le catalogue <ArrowUpRight className="w-4 h-4" /></Link>
         </Reveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {properties.map((p, i) => (
+          {properties.slice(0, 8).map((p, i) => (
             <Reveal key={p.id} variant="up" delay={i * 80}>
-              <article className="group cursor-pointer h-full flex flex-col">
-                <div className="relative overflow-hidden bg-secondary aspect-[4/5]">
-                  <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" />
-                  <span className={`absolute top-3 left-3 text-[9px] uppercase tracking-[0.25em] px-2.5 py-1 font-semibold transition-transform duration-500 group-hover:scale-105 ${p.tag === "Location" ? "bg-ink text-bone" : "bg-brand text-bone"}`}>{p.tag}</span>
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-3 left-3 right-3 flex justify-between items-end translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <span className="text-bone text-[10px] uppercase tracking-[0.2em]">Voir le bien</span>
-                    <span className="w-8 h-8 bg-brand text-bone flex items-center justify-center"><ArrowUpRight className="w-3.5 h-3.5" /></span>
-                  </div>
-                </div>
-                <div className="pt-4 flex flex-col gap-2 flex-1">
-                  <div className="eyebrow text-muted-foreground text-[10px]">{p.area}</div>
-                  <h3 className="font-display font-bold text-base md:text-lg group-hover:text-brand transition-colors leading-tight">{p.name}</h3>
-                  <div className="text-xs text-muted-foreground flex flex-wrap gap-x-3 gap-y-1 mt-1">
-                    <span className="inline-flex items-center gap-1"><Bed className="w-3 h-3" /> {p.beds}</span>
-                    <span className="inline-flex items-center gap-1"><Bath className="w-3 h-3" /> {p.baths}</span>
-                    <span className="inline-flex items-center gap-1"><Maximize className="w-3 h-3" /> {p.sqft} m²</span>
-                  </div>
-                  <div className="mt-auto pt-3 flex justify-between items-end border-t border-border">
-                    <div className="font-display font-bold text-base md:text-lg text-brand whitespace-nowrap">{p.price}</div>
-                    <a href={PHONE_HREF} className="text-[10px] uppercase tracking-[0.2em] inline-flex items-center gap-1 link-underline font-medium">Visiter <ArrowUpRight className="w-3 h-3" /></a>
-                  </div>
-                </div>
-              </article>
+              <PropertyCard p={p} onOpen={setOpenProperty} />
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* MARQUEE */}
-      <section className="bg-ink text-bone py-16 md:py-20 overflow-hidden">
-        <div className="flex animate-marquee whitespace-nowrap">
-          {[...Array(2)].flatMap((_, k) => ["El Ghazala", "Ariana", "Borj Touil", "Chorfech Sidi Thabet", "Cité Chaker", "Cité Essahafa", "El Menzah", "Ennkhilet", "Jaafer", "Kalâat el-Andalous", "Mnihla", "Nour Jaafer", "Petite Ariana", "Riadh Andalous", "Douar Hicher", "Nahli", "Raoued", "Sidi Amor"].map((n, i) => (
-            <span key={`${k}-${i}`} className="font-display font-bold text-5xl md:text-[7vw] leading-none px-6 md:px-8">
-              {n} <span className="text-brand mx-3 md:mx-4">●</span>
+      {/* MARQUEE — slim & quicker */}
+      <section className="bg-ink text-bone py-5 md:py-6 overflow-hidden border-y border-bone/10">
+        <div className="flex whitespace-nowrap" style={{ animation: "marquee 22s linear infinite" }}>
+          {[...Array(3)].flatMap((_, k) => ZONES.map((n, i) => (
+            <span key={`${k}-${i}`} className="font-display font-medium text-sm md:text-base uppercase tracking-[0.25em] px-5 md:px-6 text-bone/85">
+              {n} <span className="text-brand mx-3">●</span>
             </span>
           )))}
         </div>
@@ -450,6 +414,8 @@ const Index = () => {
       <a href={PHONE_HREF} className="md:hidden fixed bottom-6 right-6 z-40 w-14 h-14 bg-brand text-bone rounded-full flex items-center justify-center shadow-[var(--shadow-brand)] animate-pulse-brand" aria-label="Appeler">
         <Phone className="w-6 h-6" />
       </a>
+
+      <PropertyDialog property={openProperty} onClose={() => setOpenProperty(null)} />
     </div>
   );
 };
