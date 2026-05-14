@@ -1,23 +1,29 @@
-import logo from "@/assets/next-logo.jpg";
+import logo from "@/assets/bestimmo-logo.png";
 import heroImg from "@/assets/hero-villa.jpg";
 import appart from "@/assets/property-appart.jpg";
 import villa from "@/assets/property-villa.jpg";
 import duplex from "@/assets/property-duplex.jpg";
 import maison from "@/assets/property-maison.jpg";
-import { ArrowUpRight, Search, Phone, MapPin, Mail, Facebook, Bed, Bath, Maximize, Home, Building2, KeyRound, TrendingUp, Menu, X, ArrowRight } from "lucide-react";
+import { ArrowUpRight, Search, Phone, MapPin, Mail, Bed, Bath, Maximize, Home, Building2, KeyRound, TrendingUp, Menu, X, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 
-const PHONE = "+216 22 409 004";
-const PHONE_HREF = "tel:+21622409004";
-const FB = "https://www.facebook.com/profile.php?id=61565400861372";
-const ADDRESS = "202 Résidence El Boustène, El Mourouj, Ben Arous";
+const PHONES = [
+  { label: "+216 71 876 143", href: "tel:+21671876143" },
+  { label: "+216 71 876 153", href: "tel:+21671876153" },
+  { label: "+216 29 103 308", href: "tel:+21629103308" },
+];
+const PHONE = PHONES[0].label;
+const PHONE_HREF = PHONES[0].href;
+const EMAIL = "contact@bestimmo.tn";
+const EMAIL_HREF = "mailto:contact@bestimmo.tn";
+const ADDRESS = "22 Avenue Habib Bourguiba, Cité La Gazelle, Ariana";
 
 const properties = [
-  { id: "01", name: "Villa contemporaine", area: "El Mourouj 6", price: "850 000 DT", beds: 5, baths: 3, sqft: "420", img: villa, tag: "À vendre" },
-  { id: "02", name: "Appartement S+3 standing", area: "El Mourouj 5", price: "320 000 DT", beds: 3, baths: 2, sqft: "145", img: appart, tag: "Nouveau" },
-  { id: "03", name: "Duplex avec terrasse", area: "Ben Arous", price: "520 000 DT", beds: 4, baths: 3, sqft: "210", img: duplex, tag: "Exclusivité" },
-  { id: "04", name: "Maison familiale", area: "El Mourouj 1", price: "1 200 DT/mois", beds: 4, baths: 2, sqft: "180", img: maison, tag: "À louer" },
+  { id: "01", name: "Villa contemporaine", area: "Cité La Gazelle, Ariana", price: "850 000 DT", beds: 5, baths: 3, sqft: "420", img: villa, tag: "À vendre" },
+  { id: "02", name: "Appartement S+3 standing", area: "Ariana Ville", price: "320 000 DT", beds: 3, baths: 2, sqft: "145", img: appart, tag: "Nouveau" },
+  { id: "03", name: "Duplex avec terrasse", area: "Menzah, Ariana", price: "520 000 DT", beds: 4, baths: 3, sqft: "210", img: duplex, tag: "Exclusivité" },
+  { id: "04", name: "Maison familiale", area: "Borj Louzir, Ariana", price: "1 200 DT/mois", beds: 4, baths: 2, sqft: "180", img: maison, tag: "À louer" },
 ];
 
 const services = [
@@ -29,13 +35,8 @@ const services = [
 
 const Logo = ({ light = false }: { light?: boolean }) => (
   <a href="#" className="flex items-center gap-3 group">
-    <div className="flex items-center gap-1">
-      <span className="block w-5 h-5 rounded-full bg-brand transition-transform duration-500 group-hover:scale-110" />
-      <span className="block w-5 h-5 bg-brand chevron-mark transition-transform duration-500 group-hover:translate-x-1" />
-    </div>
-    <div className="leading-none">
-      <div className={`font-display font-bold text-xl tracking-tight ${light ? "text-bone" : "text-ink"}`}>NEXT</div>
-      <div className={`text-[9px] uppercase tracking-[0.32em] mt-1 ${light ? "text-bone/60" : "text-muted-foreground"}`}>Immobilier</div>
+    <div className={`p-1.5 transition-all duration-500 group-hover:scale-105 ${light ? "bg-bone" : ""}`}>
+      <img src={logo} alt="Best Immo — Agence immobilière" className="h-10 md:h-11 w-auto block" />
     </div>
   </a>
 );
