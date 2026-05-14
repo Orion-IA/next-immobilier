@@ -36,7 +36,7 @@ const services = [
 const Logo = ({ light = false }: { light?: boolean }) => (
   <a href="#" className="flex items-center gap-3 group">
     <div className={`p-1.5 transition-all duration-500 group-hover:scale-105 ${light ? "bg-bone" : ""}`}>
-      <img src={logo} alt="Best Immo — Agence immobilière" className="h-10 md:h-11 w-auto block" />
+      <img src={logo} alt="Best Immo — Agence immobilière" className="h-16 md:h-20 w-auto block" />
     </div>
   </a>
 );
@@ -81,7 +81,7 @@ const Index = () => {
 
       {/* NAV */}
       <header className={`sticky top-0 z-50 backdrop-blur-md transition-all duration-500 ${scrolled > 40 ? "bg-background/95 border-b border-border shadow-sm" : "bg-background/80 border-b border-transparent"}`}>
-        <div className="container-editorial flex items-center justify-between h-16 md:h-20">
+        <div className="container-editorial flex items-center justify-between h-20 md:h-28">
           <Logo />
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium">
             {navLinks.map((l) => (
@@ -321,7 +321,7 @@ const Index = () => {
       {/* MARQUEE */}
       <section className="bg-ink text-bone py-16 md:py-20 overflow-hidden">
         <div className="flex animate-marquee whitespace-nowrap">
-          {[...Array(2)].flatMap((_, k) => ["Ariana", "La Gazelle", "Menzah", "Borj Louzir", "Raoued", "Soukra", "Ennasr", "Ghazela"].map((n, i) => (
+          {[...Array(2)].flatMap((_, k) => ["El Ghazala", "Ariana", "Borj Touil", "Chorfech Sidi Thabet", "Cité Chaker", "Cité Essahafa", "El Menzah", "Ennkhilet", "Jaafer", "Kalâat el-Andalous", "Mnihla", "Nour Jaafer", "Petite Ariana", "Riadh Andalous", "Douar Hicher", "Nahli", "Raoued", "Sidi Amor"].map((n, i) => (
             <span key={`${k}-${i}`} className="font-display font-bold text-5xl md:text-[7vw] leading-none px-6 md:px-8">
               {n} <span className="text-brand mx-3 md:mx-4">●</span>
             </span>
