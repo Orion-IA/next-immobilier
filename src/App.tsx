@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Listings from "./pages/Listings.tsx";
+import { WhatsAppWidget } from "./components/WhatsAppWidget.tsx";
 
 const queryClient = new QueryClient();
 
