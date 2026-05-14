@@ -142,7 +142,7 @@ const Index = () => {
         <div className="relative flex-1 container-editorial flex flex-col justify-end pb-12 md:pb-32 pt-28 md:pt-20 text-bone">
           <div className="flex items-center gap-4 mb-5 md:mb-6 animate-fade-in">
             <span className="h-px w-12 bg-brand" />
-            <span className="eyebrow text-bone/80 text-[10px] md:text-[11px]">Agence immobilière · El Mourouj</span>
+            <span className="eyebrow text-bone/80 text-[10px] md:text-[11px]">Agence immobilière · Ariana</span>
           </div>
           <h1 className="font-display font-bold text-[2.75rem] sm:text-6xl md:text-[7vw] leading-[0.95] max-w-5xl animate-fade-in" style={{ animationDelay: "0.15s" }}>
             Votre prochaine adresse,<br/>
@@ -150,7 +150,7 @@ const Index = () => {
           </h1>
           <div className="mt-8 md:mt-10 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 animate-fade-in" style={{ animationDelay: "0.7s" }}>
             <p className="max-w-md text-bone/85 leading-relaxed text-base md:text-lg">
-              Vente, location, estimation. Une équipe locale au service de vos projets immobiliers à El Mourouj, Ben Arous et le grand Tunis.
+              Vente, location, estimation. Une équipe locale au service de vos projets immobiliers à Cité La Gazelle, Ariana et dans le grand Tunis.
             </p>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               <a href="#biens" className="bg-brand text-bone px-6 md:px-7 py-4 text-xs md:text-sm font-medium uppercase tracking-[0.2em] hover:bg-bone hover:text-ink transition-all duration-500 inline-flex items-center justify-center gap-3 group">
@@ -180,7 +180,7 @@ const Index = () => {
             </label>
             <label className="px-5 md:px-6 py-4 md:py-5 border-b md:border-b-0 md:border-r border-border transition-colors hover:bg-smoke/50">
               <span className="eyebrow block mb-1 text-muted-foreground">Localisation</span>
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="El Mourouj, Ben Arous…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Ariana, La Gazelle, Menzah…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
             </label>
             <label className="px-5 md:px-6 py-4 md:py-5 border-b md:border-b-0 md:border-r border-border transition-colors hover:bg-smoke/50">
               <span className="eyebrow block mb-1 text-muted-foreground">Budget</span>
@@ -206,7 +206,7 @@ const Index = () => {
           </label>
           <label className="block px-5 py-4">
             <span className="eyebrow block mb-1 text-muted-foreground">Localisation</span>
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="El Mourouj, Ben Arous…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Ariana, La Gazelle, Menzah…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
           </label>
           <label className="block px-5 py-4">
             <span className="eyebrow block mb-1 text-muted-foreground">Budget</span>
@@ -231,7 +231,7 @@ const Index = () => {
           </Reveal>
           <Reveal variant="right" delay={150} className="md:col-span-7 md:pl-12 md:border-l border-border">
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              Implantée au cœur d'El Mourouj, <strong className="text-ink">Next Immobilier</strong> accompagne familles, investisseurs et promoteurs dans toutes leurs opérations immobilières. Notre engagement&nbsp;: la transparence, la réactivité, et une connaissance fine du marché local.
+              Implantée à Cité La Gazelle, Ariana, <strong className="text-ink">Best Immo</strong> accompagne familles, investisseurs et promoteurs dans toutes leurs opérations immobilières. Notre engagement&nbsp;: la transparence, la réactivité, et une connaissance fine du marché local.
             </p>
             <div className="mt-10 md:mt-12 grid grid-cols-3 gap-4 md:gap-8 pt-10 md:pt-12 border-t border-border">
               {[
@@ -321,7 +321,7 @@ const Index = () => {
       {/* MARQUEE */}
       <section className="bg-ink text-bone py-16 md:py-20 overflow-hidden">
         <div className="flex animate-marquee whitespace-nowrap">
-          {[...Array(2)].flatMap((_, k) => ["El Mourouj", "Ben Arous", "Mégrine", "Radès", "Hammam Lif", "Ezzahra", "Boumhel", "Mornag"].map((n, i) => (
+          {[...Array(2)].flatMap((_, k) => ["Ariana", "La Gazelle", "Menzah", "Borj Louzir", "Raoued", "Soukra", "Ennasr", "Ghazela"].map((n, i) => (
             <span key={`${k}-${i}`} className="font-display font-bold text-5xl md:text-[7vw] leading-none px-6 md:px-8">
               {n} <span className="text-brand mx-3 md:mx-4">●</span>
             </span>
@@ -365,13 +365,13 @@ const Index = () => {
           <Reveal variant="right" delay={200} className="md:col-span-7 md:pl-12">
             <span className="font-display font-bold text-7xl md:text-8xl text-brand leading-none">«</span>
             <p className="font-display font-medium text-xl sm:text-2xl md:text-3xl leading-snug -mt-4">
-              Une équipe à l'écoute, des biens vérifiés et un accompagnement du début à la fin. Nous avons trouvé notre maison à El Mourouj en moins de trois semaines.
+              Une équipe à l'écoute, des biens vérifiés et un accompagnement du début à la fin. Nous avons trouvé notre maison à Ariana en moins de trois semaines.
             </p>
             <div className="mt-8 md:mt-10 flex items-center gap-4">
               <div className="w-12 h-px bg-ink" />
               <div>
                 <div className="text-sm font-semibold">Famille Ben Slimane</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-[0.2em] mt-1">Acquéreurs · El Mourouj 6, 2025</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-[0.2em] mt-1">Acquéreurs · Cité La Gazelle, 2025</div>
               </div>
             </div>
           </Reveal>
@@ -476,8 +476,8 @@ const Index = () => {
           </div>
         </div>
         <div className="container-editorial pt-8 flex flex-col md:flex-row justify-between text-xs uppercase tracking-[0.2em] text-bone/40 gap-4">
-          <span>© 2026 Next Immobilier — Tous droits réservés</span>
-          <span>Tunisie · El Mourouj · Ben Arous</span>
+          <span>© 2026 Best Immo — Tous droits réservés</span>
+          <span>Tunisie · Ariana · Cité La Gazelle</span>
         </div>
       </footer>
 
