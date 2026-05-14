@@ -3,8 +3,6 @@ import type { Property } from "@/data/properties";
 import { Bed, Bath, Maximize, MapPin, Mail, X, Check } from "lucide-react";
 import { useState } from "react";
 
-const PHONE_HREF = "tel:+21671876143";
-const PHONE = "+216 71 876 143";
 const EMAIL_HREF = "mailto:contact@bestimmo.tn";
 
 export const PropertyDialog = ({ property, onClose }: { property: Property | null; onClose: () => void }) => {
