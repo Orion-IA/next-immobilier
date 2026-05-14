@@ -1,13 +1,14 @@
 import logo from "@/assets/bestimmo-logo.png";
 import heroImg from "@/assets/hero-villa.jpg";
 import appart from "@/assets/property-appart.jpg";
-import villa from "@/assets/property-villa.jpg";
-import duplex from "@/assets/property-duplex.jpg";
-import maison from "@/assets/property-maison.jpg";
-import { ArrowUpRight, Phone, MapPin, Mail, Bed, Bath, Maximize, Home, Building2, KeyRound, Menu, X, ArrowRight } from "lucide-react";
+import { ArrowUpRight, Phone, MapPin, Mail, Home, Building2, KeyRound, Menu, X, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Reveal } from "@/components/Reveal";
 import { SearchBar } from "@/components/SearchBar";
+import { properties, type Property, ZONES } from "@/data/properties";
+import { PropertyCard } from "@/components/PropertyCard";
+import { PropertyDialog } from "@/components/PropertyDialog";
 
 const PHONES = [
   { label: "+216 71 876 143", href: "tel:+21671876143" },
@@ -20,17 +21,6 @@ const EMAIL = "contact@bestimmo.tn";
 const EMAIL_HREF = "mailto:contact@bestimmo.tn";
 const ADDRESS = "22 Avenue Habib Bourguiba, Cité La Gazelle, Ariana";
 
-const properties = [
-  { id: "01", name: "Villa contemporaine", area: "Cité La Gazelle", price: "850 000 DT", beds: 5, baths: 3, sqft: "420", img: villa, tag: "Vente" },
-  { id: "02", name: "Appartement S+3 standing", area: "Ariana Ville", price: "320 000 DT", beds: 3, baths: 2, sqft: "145", img: appart, tag: "Vente" },
-  { id: "03", name: "Duplex avec terrasse", area: "El Menzah", price: "520 000 DT", beds: 4, baths: 3, sqft: "210", img: duplex, tag: "Vente" },
-  { id: "04", name: "Maison familiale", area: "Riadh Andalous", price: "1 200 DT/mois", beds: 4, baths: 2, sqft: "180", img: maison, tag: "Location" },
-  { id: "05", name: "Penthouse vue dégagée", area: "Ennasr", price: "1 100 000 DT", beds: 4, baths: 3, sqft: "260", img: villa, tag: "Vente" },
-  { id: "06", name: "Studio meublé", area: "Petite Ariana", price: "650 DT/mois", beds: 1, baths: 1, sqft: "55", img: appart, tag: "Location" },
-  { id: "07", name: "Villa avec jardin", area: "El Ghazala", price: "780 000 DT", beds: 4, baths: 3, sqft: "350", img: maison, tag: "Vente" },
-  { id: "08", name: "S+2 lumineux", area: "Cité Essahafa", price: "900 DT/mois", beds: 2, baths: 1, sqft: "95", img: duplex, tag: "Location" },
-];
-
 const services = [
   { icon: Home, title: "Vente", desc: "Villas, appartements, terrains. Une sélection rigoureuse de biens vérifiés." },
   { icon: KeyRound, title: "Location", desc: "Locations longue durée et meublées, dans tout le grand Tunis." },
@@ -38,16 +28,17 @@ const services = [
 ];
 
 const Logo = ({ light = false }: { light?: boolean }) => (
-  <a href="#" className="flex items-center gap-3 group">
+  <Link to="/" className="flex items-center gap-3 group">
     <div className={`p-1.5 transition-all duration-500 group-hover:scale-105 ${light ? "bg-bone" : ""}`}>
       <img src={logo} alt="Best Immo — Agence immobilière" className="h-16 md:h-20 w-auto block" />
     </div>
-  </a>
+  </Link>
 );
 
 const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(0);
+  const [openProperty, setOpenProperty] = useState<Property | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY);
@@ -61,6 +52,8 @@ const Index = () => {
   }, [menuOpen]);
 
   const navLinks = [
+    { href: "/vente", label: "Vente", isRoute: true },
+    { href: "/location", label: "Location", isRoute: true },
     { href: "#biens", label: "Nos biens" },
     { href: "#services", label: "Services" },
     { href: "#agence", label: "L'agence" },
