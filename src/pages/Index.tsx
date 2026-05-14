@@ -20,17 +20,20 @@ const EMAIL_HREF = "mailto:contact@bestimmo.tn";
 const ADDRESS = "22 Avenue Habib Bourguiba, Cité La Gazelle, Ariana";
 
 const properties = [
-  { id: "01", name: "Villa contemporaine", area: "Cité La Gazelle, Ariana", price: "850 000 DT", beds: 5, baths: 3, sqft: "420", img: villa, tag: "À vendre" },
-  { id: "02", name: "Appartement S+3 standing", area: "Ariana Ville", price: "320 000 DT", beds: 3, baths: 2, sqft: "145", img: appart, tag: "Nouveau" },
-  { id: "03", name: "Duplex avec terrasse", area: "Menzah, Ariana", price: "520 000 DT", beds: 4, baths: 3, sqft: "210", img: duplex, tag: "Exclusivité" },
-  { id: "04", name: "Maison familiale", area: "Borj Louzir, Ariana", price: "1 200 DT/mois", beds: 4, baths: 2, sqft: "180", img: maison, tag: "À louer" },
+  { id: "01", name: "Villa contemporaine", area: "Cité La Gazelle", price: "850 000 DT", beds: 5, baths: 3, sqft: "420", img: villa, tag: "Vente" },
+  { id: "02", name: "Appartement S+3 standing", area: "Ariana Ville", price: "320 000 DT", beds: 3, baths: 2, sqft: "145", img: appart, tag: "Vente" },
+  { id: "03", name: "Duplex avec terrasse", area: "El Menzah", price: "520 000 DT", beds: 4, baths: 3, sqft: "210", img: duplex, tag: "Vente" },
+  { id: "04", name: "Maison familiale", area: "Riadh Andalous", price: "1 200 DT/mois", beds: 4, baths: 2, sqft: "180", img: maison, tag: "Location" },
+  { id: "05", name: "Penthouse vue dégagée", area: "Ennasr", price: "1 100 000 DT", beds: 4, baths: 3, sqft: "260", img: villa, tag: "Vente" },
+  { id: "06", name: "Studio meublé", area: "Petite Ariana", price: "650 DT/mois", beds: 1, baths: 1, sqft: "55", img: appart, tag: "Location" },
+  { id: "07", name: "Villa avec jardin", area: "El Ghazala", price: "780 000 DT", beds: 4, baths: 3, sqft: "350", img: maison, tag: "Vente" },
+  { id: "08", name: "S+2 lumineux", area: "Cité Essahafa", price: "900 DT/mois", beds: 2, baths: 1, sqft: "95", img: duplex, tag: "Location" },
 ];
 
 const services = [
   { icon: Home, title: "Vente", desc: "Villas, appartements, terrains. Une sélection rigoureuse de biens vérifiés." },
   { icon: KeyRound, title: "Location", desc: "Locations longue durée et meublées, dans tout le grand Tunis." },
   { icon: Building2, title: "Promotion", desc: "Accompagnement des promoteurs pour la commercialisation de leurs projets." },
-  { icon: TrendingUp, title: "Estimation", desc: "Estimation gratuite et confidentielle de votre bien sous 48h." },
 ];
 
 const Logo = ({ light = false }: { light?: boolean }) => (
@@ -157,7 +160,7 @@ const Index = () => {
                 Voir les biens <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
               <a href="#contact" className="border border-bone/40 text-bone px-6 md:px-7 py-4 text-xs md:text-sm font-medium uppercase tracking-[0.2em] hover:bg-bone hover:text-ink transition-colors duration-500 inline-flex items-center justify-center">
-                Estimation gratuite
+                Nous contacter
               </a>
             </div>
           </div>
@@ -170,7 +173,7 @@ const Index = () => {
         </div>
 
         {/* search — desktop only floating */}
-        <div className="hidden md:block absolute bottom-0 left-0 right-0 translate-y-1/2 container-editorial">
+        <div className="hidden md:block absolute bottom-0 left-0 right-0 translate-y-1/4 container-editorial">
           <div className="bg-background border border-border shadow-[var(--shadow-elegant)] grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] animate-scale-in" style={{ animationDelay: "0.9s" }}>
             <label className="px-5 md:px-6 py-4 md:py-5 border-b md:border-b-0 md:border-r border-border transition-colors hover:bg-smoke/50">
               <span className="eyebrow block mb-1 text-muted-foreground">Type de bien</span>
@@ -221,7 +224,7 @@ const Index = () => {
       </section>
 
       {/* INTRO STATS */}
-      <section id="agence" className="pt-20 md:pt-48 pb-20 md:pb-24 container-editorial">
+      <section id="agence" className="pt-20 md:pt-32 pb-20 md:pb-24 container-editorial">
         <div className="grid md:grid-cols-12 gap-10 md:gap-12">
           <Reveal variant="left" className="md:col-span-5">
             <div className="eyebrow flex items-center gap-3 text-brand"><span className="h-px w-8 bg-brand" /> L'agence</div>
@@ -236,7 +239,7 @@ const Index = () => {
             <div className="mt-10 md:mt-12 grid grid-cols-3 gap-4 md:gap-8 pt-10 md:pt-12 border-t border-border">
               {[
                 { k: "200+", v: "biens commercialisés" },
-                { k: "48 h", v: "pour estimer votre bien" },
+                { k: "10+", v: "années d'expérience" },
                 { k: "100 %", v: "mandats vérifiés" },
               ].map((s, i) => (
                 <Reveal key={s.k} variant="up" delay={300 + i * 120}>
@@ -254,9 +257,9 @@ const Index = () => {
         <div className="container-editorial">
           <Reveal className="mb-12 md:mb-16">
             <div className="eyebrow text-brand mb-4">Nos services</div>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl">Quatre métiers, <span className="text-brand">une seule exigence.</span></h2>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl">Trois métiers, <span className="text-brand">une seule exigence.</span></h2>
           </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
             {services.map((s, i) => (
               <Reveal key={s.title} variant="up" delay={i * 100}>
                 <div className="bg-background p-8 md:p-10 group hover:bg-ink hover:text-bone transition-colors duration-500 h-full cursor-pointer">
@@ -283,33 +286,30 @@ const Index = () => {
           <a href="#" className="link-underline text-sm font-medium inline-flex items-center gap-2 self-start md:self-auto">Voir tout le catalogue <ArrowUpRight className="w-4 h-4" /></a>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-x-10 gap-y-14 md:gap-y-20">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {properties.map((p, i) => (
-            <Reveal key={p.id} variant="up" delay={i * 120} className={i % 2 === 1 ? "md:mt-24" : ""}>
-              <article className="group cursor-pointer">
+            <Reveal key={p.id} variant="up" delay={i * 80}>
+              <article className="group cursor-pointer h-full flex flex-col">
                 <div className="relative overflow-hidden bg-secondary aspect-[4/5]">
                   <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" />
-                  <span className="absolute top-4 md:top-5 left-4 md:left-5 bg-brand text-bone text-[10px] uppercase tracking-[0.25em] px-3 py-1.5 font-semibold transition-transform duration-500 group-hover:scale-105">{p.tag}</span>
-                  <span className="absolute top-4 md:top-5 right-4 md:right-5 font-display font-bold text-bone text-2xl drop-shadow-lg">N°{p.id}</span>
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-5 left-5 right-5 flex justify-between items-end translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <span className="text-bone text-xs uppercase tracking-[0.2em]">Voir le bien</span>
-                    <span className="w-10 h-10 bg-brand text-bone flex items-center justify-center"><ArrowUpRight className="w-4 h-4" /></span>
+                  <span className={`absolute top-3 left-3 text-[9px] uppercase tracking-[0.25em] px-2.5 py-1 font-semibold transition-transform duration-500 group-hover:scale-105 ${p.tag === "Location" ? "bg-ink text-bone" : "bg-brand text-bone"}`}>{p.tag}</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-3 left-3 right-3 flex justify-between items-end translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <span className="text-bone text-[10px] uppercase tracking-[0.2em]">Voir le bien</span>
+                    <span className="w-8 h-8 bg-brand text-bone flex items-center justify-center"><ArrowUpRight className="w-3.5 h-3.5" /></span>
                   </div>
                 </div>
-                <div className="pt-5 md:pt-6 flex justify-between items-start gap-6">
-                  <div className="flex-1">
-                    <div className="eyebrow text-muted-foreground">{p.area}</div>
-                    <h3 className="font-display font-bold text-xl md:text-2xl mt-2 group-hover:text-brand transition-colors">{p.name}</h3>
-                    <div className="text-sm text-muted-foreground mt-3 md:mt-4 flex flex-wrap gap-x-4 gap-y-2">
-                      <span className="inline-flex items-center gap-1.5"><Bed className="w-3.5 h-3.5" /> {p.beds} ch.</span>
-                      <span className="inline-flex items-center gap-1.5"><Bath className="w-3.5 h-3.5" /> {p.baths} sdb</span>
-                      <span className="inline-flex items-center gap-1.5"><Maximize className="w-3.5 h-3.5" /> {p.sqft} m²</span>
-                    </div>
+                <div className="pt-4 flex flex-col gap-2 flex-1">
+                  <div className="eyebrow text-muted-foreground text-[10px]">{p.area}</div>
+                  <h3 className="font-display font-bold text-base md:text-lg group-hover:text-brand transition-colors leading-tight">{p.name}</h3>
+                  <div className="text-xs text-muted-foreground flex flex-wrap gap-x-3 gap-y-1 mt-1">
+                    <span className="inline-flex items-center gap-1"><Bed className="w-3 h-3" /> {p.beds}</span>
+                    <span className="inline-flex items-center gap-1"><Bath className="w-3 h-3" /> {p.baths}</span>
+                    <span className="inline-flex items-center gap-1"><Maximize className="w-3 h-3" /> {p.sqft} m²</span>
                   </div>
-                  <div className="text-right">
-                    <div className="font-display font-bold text-lg md:text-2xl text-brand whitespace-nowrap">{p.price}</div>
-                    <a href={PHONE_HREF} className="text-xs uppercase tracking-[0.2em] mt-2 md:mt-3 inline-flex items-center gap-1 link-underline font-medium">Visiter <ArrowUpRight className="w-3 h-3" /></a>
+                  <div className="mt-auto pt-3 flex justify-between items-end border-t border-border">
+                    <div className="font-display font-bold text-base md:text-lg text-brand whitespace-nowrap">{p.price}</div>
+                    <a href={PHONE_HREF} className="text-[10px] uppercase tracking-[0.2em] inline-flex items-center gap-1 link-underline font-medium">Visiter <ArrowUpRight className="w-3 h-3" /></a>
                   </div>
                 </div>
               </article>
@@ -433,8 +433,7 @@ const Index = () => {
                 <option>Je souhaite acheter</option>
                 <option>Je souhaite vendre</option>
                 <option>Je souhaite louer</option>
-                <option>Estimation gratuite</option>
-              </select>
+                              </select>
               <textarea rows={3} placeholder="Votre message" className="w-full bg-transparent border-b border-ink/30 px-0 py-3 outline-none focus:border-brand transition-colors placeholder:text-muted-foreground resize-none" />
               <button type="submit" className="w-full bg-brand text-bone py-4 text-sm uppercase tracking-[0.2em] font-medium hover:bg-ink transition-all duration-500 mt-4 group inline-flex items-center justify-center gap-3">
                 Envoyer ma demande <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -460,7 +459,7 @@ const Index = () => {
           <div>
             <div className="eyebrow text-bone/40 mb-4">Services</div>
             <ul className="space-y-2 text-sm">
-              <li>Vente</li><li>Location</li><li>Estimation</li><li>Promotion</li>
+              <li>Vente</li><li>Location</li><li>Promotion</li>
             </ul>
           </div>
           <div>
