@@ -71,8 +71,10 @@ const Index = () => {
         <div className="container-editorial flex items-center justify-between h-9">
           <span className="flex items-center gap-2"><MapPin className="w-3 h-3 text-brand" /> {ADDRESS}</span>
           <div className="flex items-center gap-6">
-            <a href={PHONE_HREF} className="flex items-center gap-2 hover:text-brand transition-colors group"><Phone className="w-3 h-3 group-hover:animate-pulse" /> {PHONE}</a>
-            <a href={FB} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-brand transition-colors"><Facebook className="w-3 h-3" /> Facebook</a>
+            {PHONES.map((p) => (
+              <a key={p.href} href={p.href} className="flex items-center gap-2 hover:text-brand transition-colors group"><Phone className="w-3 h-3 group-hover:animate-pulse" /> {p.label}</a>
+            ))}
+            <a href={EMAIL_HREF} className="flex items-center gap-2 hover:text-brand transition-colors"><Mail className="w-3 h-3" /> {EMAIL}</a>
           </div>
         </div>
       </div>
@@ -123,8 +125,8 @@ const Index = () => {
             <a href={PHONE_HREF} className="flex items-center justify-center gap-2 bg-brand text-bone py-4 text-sm font-medium uppercase tracking-[0.2em]">
               <Phone className="w-4 h-4" /> {PHONE}
             </a>
-            <a href={FB} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border border-ink text-ink py-4 text-sm font-medium uppercase tracking-[0.2em]">
-              <Facebook className="w-4 h-4" /> Facebook
+            <a href={EMAIL_HREF} className="flex items-center justify-center gap-2 border border-ink text-ink py-4 text-sm font-medium uppercase tracking-[0.2em]">
+              <Mail className="w-4 h-4" /> {EMAIL}
             </a>
             <p className="text-xs text-muted-foreground text-center pt-2">{ADDRESS}</p>
           </div>
