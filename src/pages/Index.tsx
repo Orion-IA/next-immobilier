@@ -149,7 +149,7 @@ const Index = () => {
           </div>
           <h1 className="font-display font-bold text-[2.75rem] sm:text-6xl md:text-[7vw] leading-[0.95] max-w-5xl animate-fade-in" style={{ animationDelay: "0.15s" }}>
             Votre prochaine adresse,<br/>
-            <span className="text-brand inline-block animate-fade-in-right" style={{ animationDelay: "0.5s" }}>trouvée par Next.</span>
+            <span className="text-brand inline-block animate-fade-in-right" style={{ animationDelay: "0.5s" }}>trouvée par Best Immo.</span>
           </h1>
           <div className="mt-8 md:mt-10 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 animate-fade-in" style={{ animationDelay: "0.7s" }}>
             <p className="max-w-md text-bone/85 leading-relaxed text-base md:text-lg">
