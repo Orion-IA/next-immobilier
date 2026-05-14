@@ -4,7 +4,7 @@ import appart from "@/assets/property-appart.jpg";
 import villa from "@/assets/property-villa.jpg";
 import duplex from "@/assets/property-duplex.jpg";
 import maison from "@/assets/property-maison.jpg";
-import { ArrowUpRight, Search, Phone, MapPin, Mail, Bed, Bath, Maximize, Home, Building2, KeyRound, TrendingUp, Menu, X, ArrowRight } from "lucide-react";
+import { ArrowUpRight, Phone, MapPin, Mail, Bed, Bath, Maximize, Home, Building2, KeyRound, Menu, X, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { SearchBar } from "@/components/SearchBar";
@@ -46,7 +46,6 @@ const Logo = ({ light = false }: { light?: boolean }) => (
 );
 
 const Index = () => {
-  const [query, setQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(0);
 
