@@ -12,8 +12,8 @@
     --ink: 0 0% 6%;
     --bone: 0 0% 98%;
     --smoke: 0 0% 94%;
-    --brand: 0 78% 48%;
-    --brand-deep: 0 80% 38%;
+    --brand: 351 68% 38%;
+    --brand-deep: 351 72% 28%;
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 6%;
@@ -30,21 +30,21 @@
     --muted: 0 0% 94%;
     --muted-foreground: 0 0% 40%;
 
-    --accent: 0 78% 48%;
+    --accent: 351 68% 38%;
     --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 78% 48%;
+    --destructive: 351 68% 38%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 0 78% 48%;
+    --ring: 351 68% 38%;
 
     --radius: 0;
 
-    --gradient-brand: linear-gradient(135deg, hsl(0 80% 38%), hsl(0 78% 55%));
+    --gradient-brand: linear-gradient(135deg, hsl(351 72% 28%), hsl(351 65% 45%));
     --gradient-dark: linear-gradient(180deg, hsl(0 0% 6% / 0) 0%, hsl(0 0% 6% / 0.95) 100%);
-    --shadow-brand: 0 20px 60px -20px hsl(0 78% 48% / 0.4);
+    --shadow-brand: 0 20px 60px -20px hsl(351 68% 38% / 0.4);
     --shadow-elegant: 0 30px 80px -20px hsl(0 0% 6% / 0.25);
 
     --transition-elegant: cubic-bezier(0.65, 0, 0.35, 1);

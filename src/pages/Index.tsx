@@ -1,23 +1,29 @@
-import logo from "@/assets/next-logo.jpg";
+import logo from "@/assets/bestimmo-logo.png";
 import heroImg from "@/assets/hero-villa.jpg";
 import appart from "@/assets/property-appart.jpg";
 import villa from "@/assets/property-villa.jpg";
 import duplex from "@/assets/property-duplex.jpg";
 import maison from "@/assets/property-maison.jpg";
-import { ArrowUpRight, Search, Phone, MapPin, Mail, Facebook, Bed, Bath, Maximize, Home, Building2, KeyRound, TrendingUp, Menu, X, ArrowRight } from "lucide-react";
+import { ArrowUpRight, Search, Phone, MapPin, Mail, Bed, Bath, Maximize, Home, Building2, KeyRound, TrendingUp, Menu, X, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 
-const PHONE = "+216 22 409 004";
-const PHONE_HREF = "tel:+21622409004";
-const FB = "https://www.facebook.com/profile.php?id=61565400861372";
-const ADDRESS = "202 Résidence El Boustène, El Mourouj, Ben Arous";
+const PHONES = [
+  { label: "+216 71 876 143", href: "tel:+21671876143" },
+  { label: "+216 71 876 153", href: "tel:+21671876153" },
+  { label: "+216 29 103 308", href: "tel:+21629103308" },
+];
+const PHONE = PHONES[0].label;
+const PHONE_HREF = PHONES[0].href;
+const EMAIL = "contact@bestimmo.tn";
+const EMAIL_HREF = "mailto:contact@bestimmo.tn";
+const ADDRESS = "22 Avenue Habib Bourguiba, Cité La Gazelle, Ariana";
 
 const properties = [
-  { id: "01", name: "Villa contemporaine", area: "El Mourouj 6", price: "850 000 DT", beds: 5, baths: 3, sqft: "420", img: villa, tag: "À vendre" },
-  { id: "02", name: "Appartement S+3 standing", area: "El Mourouj 5", price: "320 000 DT", beds: 3, baths: 2, sqft: "145", img: appart, tag: "Nouveau" },
-  { id: "03", name: "Duplex avec terrasse", area: "Ben Arous", price: "520 000 DT", beds: 4, baths: 3, sqft: "210", img: duplex, tag: "Exclusivité" },
-  { id: "04", name: "Maison familiale", area: "El Mourouj 1", price: "1 200 DT/mois", beds: 4, baths: 2, sqft: "180", img: maison, tag: "À louer" },
+  { id: "01", name: "Villa contemporaine", area: "Cité La Gazelle, Ariana", price: "850 000 DT", beds: 5, baths: 3, sqft: "420", img: villa, tag: "À vendre" },
+  { id: "02", name: "Appartement S+3 standing", area: "Ariana Ville", price: "320 000 DT", beds: 3, baths: 2, sqft: "145", img: appart, tag: "Nouveau" },
+  { id: "03", name: "Duplex avec terrasse", area: "Menzah, Ariana", price: "520 000 DT", beds: 4, baths: 3, sqft: "210", img: duplex, tag: "Exclusivité" },
+  { id: "04", name: "Maison familiale", area: "Borj Louzir, Ariana", price: "1 200 DT/mois", beds: 4, baths: 2, sqft: "180", img: maison, tag: "À louer" },
 ];
 
 const services = [
@@ -29,13 +35,8 @@ const services = [
 
 const Logo = ({ light = false }: { light?: boolean }) => (
   <a href="#" className="flex items-center gap-3 group">
-    <div className="flex items-center gap-1">
-      <span className="block w-5 h-5 rounded-full bg-brand transition-transform duration-500 group-hover:scale-110" />
-      <span className="block w-5 h-5 bg-brand chevron-mark transition-transform duration-500 group-hover:translate-x-1" />
-    </div>
-    <div className="leading-none">
-      <div className={`font-display font-bold text-xl tracking-tight ${light ? "text-bone" : "text-ink"}`}>NEXT</div>
-      <div className={`text-[9px] uppercase tracking-[0.32em] mt-1 ${light ? "text-bone/60" : "text-muted-foreground"}`}>Immobilier</div>
+    <div className={`p-1.5 transition-all duration-500 group-hover:scale-105 ${light ? "bg-bone" : ""}`}>
+      <img src={logo} alt="Best Immo — Agence immobilière" className="h-10 md:h-11 w-auto block" />
     </div>
   </a>
 );
@@ -70,8 +71,10 @@ const Index = () => {
         <div className="container-editorial flex items-center justify-between h-9">
           <span className="flex items-center gap-2"><MapPin className="w-3 h-3 text-brand" /> {ADDRESS}</span>
           <div className="flex items-center gap-6">
-            <a href={PHONE_HREF} className="flex items-center gap-2 hover:text-brand transition-colors group"><Phone className="w-3 h-3 group-hover:animate-pulse" /> {PHONE}</a>
-            <a href={FB} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-brand transition-colors"><Facebook className="w-3 h-3" /> Facebook</a>
+            {PHONES.map((p) => (
+              <a key={p.href} href={p.href} className="flex items-center gap-2 hover:text-brand transition-colors group"><Phone className="w-3 h-3 group-hover:animate-pulse" /> {p.label}</a>
+            ))}
+            <a href={EMAIL_HREF} className="flex items-center gap-2 hover:text-brand transition-colors"><Mail className="w-3 h-3" /> {EMAIL}</a>
           </div>
         </div>
       </div>
@@ -122,8 +125,8 @@ const Index = () => {
             <a href={PHONE_HREF} className="flex items-center justify-center gap-2 bg-brand text-bone py-4 text-sm font-medium uppercase tracking-[0.2em]">
               <Phone className="w-4 h-4" /> {PHONE}
             </a>
-            <a href={FB} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border border-ink text-ink py-4 text-sm font-medium uppercase tracking-[0.2em]">
-              <Facebook className="w-4 h-4" /> Facebook
+            <a href={EMAIL_HREF} className="flex items-center justify-center gap-2 border border-ink text-ink py-4 text-sm font-medium uppercase tracking-[0.2em]">
+              <Mail className="w-4 h-4" /> {EMAIL}
             </a>
             <p className="text-xs text-muted-foreground text-center pt-2">{ADDRESS}</p>
           </div>
@@ -139,7 +142,7 @@ const Index = () => {
         <div className="relative flex-1 container-editorial flex flex-col justify-end pb-12 md:pb-32 pt-28 md:pt-20 text-bone">
           <div className="flex items-center gap-4 mb-5 md:mb-6 animate-fade-in">
             <span className="h-px w-12 bg-brand" />
-            <span className="eyebrow text-bone/80 text-[10px] md:text-[11px]">Agence immobilière · El Mourouj</span>
+            <span className="eyebrow text-bone/80 text-[10px] md:text-[11px]">Agence immobilière · Ariana</span>
           </div>
           <h1 className="font-display font-bold text-[2.75rem] sm:text-6xl md:text-[7vw] leading-[0.95] max-w-5xl animate-fade-in" style={{ animationDelay: "0.15s" }}>
             Votre prochaine adresse,<br/>
@@ -147,7 +150,7 @@ const Index = () => {
           </h1>
           <div className="mt-8 md:mt-10 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 animate-fade-in" style={{ animationDelay: "0.7s" }}>
             <p className="max-w-md text-bone/85 leading-relaxed text-base md:text-lg">
-              Vente, location, estimation. Une équipe locale au service de vos projets immobiliers à El Mourouj, Ben Arous et le grand Tunis.
+              Vente, location, estimation. Une équipe locale au service de vos projets immobiliers à Cité La Gazelle, Ariana et dans le grand Tunis.
             </p>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               <a href="#biens" className="bg-brand text-bone px-6 md:px-7 py-4 text-xs md:text-sm font-medium uppercase tracking-[0.2em] hover:bg-bone hover:text-ink transition-all duration-500 inline-flex items-center justify-center gap-3 group">
@@ -177,7 +180,7 @@ const Index = () => {
             </label>
             <label className="px-5 md:px-6 py-4 md:py-5 border-b md:border-b-0 md:border-r border-border transition-colors hover:bg-smoke/50">
               <span className="eyebrow block mb-1 text-muted-foreground">Localisation</span>
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="El Mourouj, Ben Arous…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Ariana, La Gazelle, Menzah…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
             </label>
             <label className="px-5 md:px-6 py-4 md:py-5 border-b md:border-b-0 md:border-r border-border transition-colors hover:bg-smoke/50">
               <span className="eyebrow block mb-1 text-muted-foreground">Budget</span>
@@ -203,7 +206,7 @@ const Index = () => {
           </label>
           <label className="block px-5 py-4">
             <span className="eyebrow block mb-1 text-muted-foreground">Localisation</span>
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="El Mourouj, Ben Arous…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Ariana, La Gazelle, Menzah…" className="w-full bg-transparent outline-none text-ink font-medium placeholder:text-muted-foreground" />
           </label>
           <label className="block px-5 py-4">
             <span className="eyebrow block mb-1 text-muted-foreground">Budget</span>
@@ -228,7 +231,7 @@ const Index = () => {
           </Reveal>
           <Reveal variant="right" delay={150} className="md:col-span-7 md:pl-12 md:border-l border-border">
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              Implantée au cœur d'El Mourouj, <strong className="text-ink">Next Immobilier</strong> accompagne familles, investisseurs et promoteurs dans toutes leurs opérations immobilières. Notre engagement&nbsp;: la transparence, la réactivité, et une connaissance fine du marché local.
+              Implantée à Cité La Gazelle, Ariana, <strong className="text-ink">Best Immo</strong> accompagne familles, investisseurs et promoteurs dans toutes leurs opérations immobilières. Notre engagement&nbsp;: la transparence, la réactivité, et une connaissance fine du marché local.
             </p>
             <div className="mt-10 md:mt-12 grid grid-cols-3 gap-4 md:gap-8 pt-10 md:pt-12 border-t border-border">
               {[
@@ -318,7 +321,7 @@ const Index = () => {
       {/* MARQUEE */}
       <section className="bg-ink text-bone py-16 md:py-20 overflow-hidden">
         <div className="flex animate-marquee whitespace-nowrap">
-          {[...Array(2)].flatMap((_, k) => ["El Mourouj", "Ben Arous", "Mégrine", "Radès", "Hammam Lif", "Ezzahra", "Boumhel", "Mornag"].map((n, i) => (
+          {[...Array(2)].flatMap((_, k) => ["Ariana", "La Gazelle", "Menzah", "Borj Louzir", "Raoued", "Soukra", "Ennasr", "Ghazela"].map((n, i) => (
             <span key={`${k}-${i}`} className="font-display font-bold text-5xl md:text-[7vw] leading-none px-6 md:px-8">
               {n} <span className="text-brand mx-3 md:mx-4">●</span>
             </span>
@@ -362,13 +365,13 @@ const Index = () => {
           <Reveal variant="right" delay={200} className="md:col-span-7 md:pl-12">
             <span className="font-display font-bold text-7xl md:text-8xl text-brand leading-none">«</span>
             <p className="font-display font-medium text-xl sm:text-2xl md:text-3xl leading-snug -mt-4">
-              Une équipe à l'écoute, des biens vérifiés et un accompagnement du début à la fin. Nous avons trouvé notre maison à El Mourouj en moins de trois semaines.
+              Une équipe à l'écoute, des biens vérifiés et un accompagnement du début à la fin. Nous avons trouvé notre maison à Ariana en moins de trois semaines.
             </p>
             <div className="mt-8 md:mt-10 flex items-center gap-4">
               <div className="w-12 h-px bg-ink" />
               <div>
                 <div className="text-sm font-semibold">Famille Ben Slimane</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-[0.2em] mt-1">Acquéreurs · El Mourouj 6, 2025</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-[0.2em] mt-1">Acquéreurs · Cité La Gazelle, 2025</div>
               </div>
             </div>
           </Reveal>
@@ -390,26 +393,28 @@ const Index = () => {
               Notre équipe vous répond personnellement en moins de 24 heures. Un projet d'achat, de vente, de location ou d'estimation&nbsp;? Contactez-nous.
             </p>
             <div className="mt-10 md:mt-12 space-y-5 md:space-y-6">
-              <a href={PHONE_HREF} className="flex items-start gap-4 group">
-                <div className="w-10 h-10 border border-bone/30 flex items-center justify-center group-hover:bg-brand group-hover:border-brand transition-all duration-500 group-hover:rotate-12 shrink-0"><Phone className="w-4 h-4" /></div>
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 border border-bone/30 flex items-center justify-center shrink-0"><Phone className="w-4 h-4" /></div>
                 <div>
                   <div className="eyebrow text-bone/50">Téléphone</div>
-                  <div className="font-display font-bold text-lg md:text-xl mt-1">{PHONE}</div>
+                  {PHONES.map((p) => (
+                    <a key={p.href} href={p.href} className="block font-display font-bold text-base md:text-lg mt-1 hover:text-brand transition-colors">{p.label}</a>
+                  ))}
                 </div>
-              </a>
+              </div>
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 border border-bone/30 flex items-center justify-center shrink-0"><MapPin className="w-4 h-4" /></div>
                 <div>
                   <div className="eyebrow text-bone/50">Adresse</div>
-                  <div className="font-display font-bold text-lg md:text-xl mt-1">202 Résidence El Boustène</div>
-                  <div className="text-sm text-bone/70">El Mourouj, Ben Arous, Tunisie</div>
+                  <div className="font-display font-bold text-lg md:text-xl mt-1">22 Avenue Habib Bourguiba</div>
+                  <div className="text-sm text-bone/70">Cité La Gazelle, Ariana, Tunisie</div>
                 </div>
               </div>
-              <a href={FB} target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 group">
-                <div className="w-10 h-10 border border-bone/30 flex items-center justify-center group-hover:bg-brand group-hover:border-brand transition-all duration-500 group-hover:rotate-12 shrink-0"><Facebook className="w-4 h-4" /></div>
+              <a href={EMAIL_HREF} className="flex items-start gap-4 group">
+                <div className="w-10 h-10 border border-bone/30 flex items-center justify-center group-hover:bg-brand group-hover:border-brand transition-all duration-500 group-hover:rotate-12 shrink-0"><Mail className="w-4 h-4" /></div>
                 <div>
-                  <div className="eyebrow text-bone/50">Suivez-nous</div>
-                  <div className="font-display font-bold text-lg md:text-xl mt-1">Page Facebook</div>
+                  <div className="eyebrow text-bone/50">Email</div>
+                  <div className="font-display font-bold text-lg md:text-xl mt-1">{EMAIL}</div>
                 </div>
               </a>
             </div>
@@ -444,7 +449,7 @@ const Index = () => {
         <div className="container-editorial grid sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 pb-12 md:pb-16 border-b border-bone/10">
           <div>
             <Logo light />
-            <p className="text-sm mt-6 leading-relaxed">Agence immobilière à El Mourouj, au service du grand Tunis depuis sa création.</p>
+            <p className="text-sm mt-6 leading-relaxed">Agence immobilière à Cité La Gazelle, Ariana, au service du grand Tunis.</p>
           </div>
           <div>
             <div className="eyebrow text-bone/40 mb-4">Navigation</div>
@@ -461,16 +466,18 @@ const Index = () => {
           <div>
             <div className="eyebrow text-bone/40 mb-4">Contact</div>
             <ul className="space-y-2 text-sm">
-              <li><a href={PHONE_HREF} className="hover:text-brand transition-colors">{PHONE}</a></li>
-              <li>202 Rés. El Boustène</li>
-              <li>El Mourouj, Ben Arous</li>
-              <li className="pt-2"><a href={FB} target="_blank" rel="noopener noreferrer" className="link-underline">Facebook</a></li>
+              {PHONES.map((p) => (
+                <li key={p.href}><a href={p.href} className="hover:text-brand transition-colors">{p.label}</a></li>
+              ))}
+              <li>22 Av. Habib Bourguiba</li>
+              <li>Cité La Gazelle, Ariana</li>
+              <li className="pt-2"><a href={EMAIL_HREF} className="link-underline">{EMAIL}</a></li>
             </ul>
           </div>
         </div>
         <div className="container-editorial pt-8 flex flex-col md:flex-row justify-between text-xs uppercase tracking-[0.2em] text-bone/40 gap-4">
-          <span>© 2026 Next Immobilier — Tous droits réservés</span>
-          <span>Tunisie · El Mourouj · Ben Arous</span>
+          <span>© 2026 Best Immo — Tous droits réservés</span>
+          <span>Tunisie · Ariana · Cité La Gazelle</span>
         </div>
       </footer>
 
