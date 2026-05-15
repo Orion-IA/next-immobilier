@@ -22,6 +22,8 @@ export interface Property {
   description: string;
   features: string[];
   reference: string;
+  lat: number;
+  lng: number;
 }
 
 export const ZONES = [
