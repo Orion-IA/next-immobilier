@@ -9,6 +9,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { properties, type Property, ZONES } from "@/data/properties";
 import { PropertyCard } from "@/components/PropertyCard";
 import { PropertyDialog } from "@/components/PropertyDialog";
+import { LocationMap } from "@/components/LocationMap";
 
 const PHONES = [
   { label: "+216 71 876 143", href: "tel:+21671876143" },
@@ -373,6 +374,12 @@ const Index = () => {
 
       {/* FOOTER */}
       <footer className="bg-ink text-bone/60 pt-16 md:pt-20 pb-10 border-t border-bone/10">
+        <div className="container-editorial pb-12 md:pb-16">
+          <div className="eyebrow text-brand mb-4 flex items-center gap-3"><span className="h-px w-8 bg-brand" /> Nous trouver</div>
+          <h2 className="font-display font-bold text-2xl md:text-4xl text-bone mb-2">L'agence Bestimmo</h2>
+          <p className="text-sm text-bone/60 mb-6">{ADDRESS}</p>
+          <LocationMap lat={36.89950} lng={10.18650} label="Bestimmo — Cité La Gazelle, Ariana" zoom={15} className="h-80 md:h-96 w-full border border-bone/10" />
+        </div>
         <div className="container-editorial grid sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 pb-12 md:pb-16 border-b border-bone/10">
           <div>
             <Logo light />
