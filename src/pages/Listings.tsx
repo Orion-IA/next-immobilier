@@ -146,7 +146,7 @@ export default function Listings({ mode }: { mode: "Vente" | "Location" }) {
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container-editorial flex items-center justify-between h-20 md:h-28">
           <Link to="/" className="flex items-center gap-3 group">
-            <img src={logo} alt="Best Immo" className="h-16 md:h-20 w-auto block transition-transform duration-500 group-hover:scale-105" />
+            <img src={logo} alt="Bestimmo" className="h-16 md:h-20 w-auto block transition-transform duration-500 group-hover:scale-105" />
           </Link>
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium">
             <Link to="/" className="link-underline">Accueil</Link>
@@ -167,7 +167,7 @@ export default function Listings({ mode }: { mode: "Vente" | "Location" }) {
         <div className="absolute inset-0 bg-ink/60 backdrop-blur-sm" onClick={() => setMenuOpen(false)} />
         <div className={`absolute right-0 top-0 bottom-0 w-[85%] max-w-sm bg-background flex flex-col transition-transform duration-500 ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
           <div className="flex items-center justify-between p-6 border-b border-border">
-            <img src={logo} alt="Best Immo" className="h-12 w-auto" />
+            <img src={logo} alt="Bestimmo" className="h-12 w-auto" />
             <button onClick={() => setMenuOpen(false)} className="p-2 -mr-2"><X className="w-6 h-6" /></button>
           </div>
           <nav className="flex-1 px-6 py-10 flex flex-col gap-1">
@@ -223,7 +223,7 @@ export default function Listings({ mode }: { mode: "Vente" | "Location" }) {
       {/* FOOTER MIN */}
       <footer className="bg-ink text-bone/60 py-10 mt-10">
         <div className="container-editorial text-xs uppercase tracking-[0.2em] text-bone/40 flex flex-col md:flex-row justify-between gap-3">
-          <span>© 2026 Best Immo — Tous droits réservés</span>
+          <span>© 2026 Bestimmo — Tous droits réservés</span>
           <span>{ADDRESS}</span>
         </div>
       </footer>

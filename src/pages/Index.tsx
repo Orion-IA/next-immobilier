@@ -30,7 +30,7 @@ const services = [
 const Logo = ({ light = false }: { light?: boolean }) => (
   <Link to="/" className="flex items-center gap-3 group">
     <div className={`p-1.5 transition-all duration-500 group-hover:scale-105 ${light ? "bg-bone" : ""}`}>
-      <img src={logo} alt="Best Immo — Agence immobilière" className="h-16 md:h-20 w-auto block" />
+      <img src={logo} alt="Bestimmo — Agence immobilière" className="h-16 md:h-20 w-auto block" />
     </div>
   </Link>
 );
@@ -143,7 +143,7 @@ const Index = () => {
           </div>
           <h1 className="font-display font-bold text-[2.75rem] sm:text-6xl md:text-[7vw] leading-[0.95] max-w-5xl animate-fade-in" style={{ animationDelay: "0.15s" }}>
             Votre prochaine adresse,<br/>
-            <span className="text-brand inline-block animate-fade-in-right" style={{ animationDelay: "0.5s" }}>trouvée par Best Immo.</span>
+            <span className="text-brand inline-block animate-fade-in-right" style={{ animationDelay: "0.5s" }}>trouvée par Bestimmo.</span>
           </h1>
           {/* CTA buttons removed per request */}
         </div>
@@ -185,7 +185,7 @@ const Index = () => {
           </Reveal>
           <Reveal variant="right" delay={150} className="md:col-span-7 md:pl-12 md:border-l border-border">
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              Implantée à Cité La Gazelle, Ariana, <strong className="text-ink">Best Immo</strong> accompagne familles, investisseurs et promoteurs dans toutes leurs opérations immobilières. Notre engagement&nbsp;: la transparence, la réactivité, et une connaissance fine du marché local.
+              Implantée à Cité La Gazelle, Ariana, <strong className="text-ink">Bestimmo</strong> accompagne familles, investisseurs et promoteurs dans toutes leurs opérations immobilières. Notre engagement&nbsp;: la transparence, la réactivité, et une connaissance fine du marché local.
             </p>
             <div className="mt-10 md:mt-12 grid grid-cols-3 gap-4 md:gap-8 pt-10 md:pt-12 border-t border-border">
               {[
@@ -403,7 +403,7 @@ const Index = () => {
           </div>
         </div>
         <div className="container-editorial pt-8 flex flex-col md:flex-row justify-between text-xs uppercase tracking-[0.2em] text-bone/40 gap-4">
-          <span>© 2026 Best Immo — Tous droits réservés</span>
+          <span>© 2026 Bestimmo — Tous droits réservés</span>
           <span>Tunisie · Ariana · Cité La Gazelle</span>
         </div>
       </footer>

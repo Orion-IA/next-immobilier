@@ -2,6 +2,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import type { Property } from "@/data/properties";
 import { Bed, Bath, Maximize, MapPin, Mail, X, Check } from "lucide-react";
 import { useState } from "react";
+import { LocationMap } from "@/components/LocationMap";
 
 const EMAIL_HREF = "mailto:contact@bestimmo.tn";
 
@@ -68,6 +69,11 @@ export const PropertyDialog = ({ property, onClose }: { property: Property | nul
                   <li key={f} className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-brand shrink-0" /> {f}</li>
                 ))}
               </ul>
+            </div>
+
+            <div className="mt-6">
+              <div className="eyebrow text-muted-foreground mb-3 flex items-center gap-2"><MapPin className="w-3 h-3 text-brand" /> Localisation</div>
+              <LocationMap lat={property.lat} lng={property.lng} label={`${property.name} — ${property.area}`} className="h-64 w-full border border-border" />
             </div>
 
             <div className="mt-auto pt-8">
