@@ -9,6 +9,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { properties, type Property, ZONES } from "@/data/properties";
 import { PropertyCard } from "@/components/PropertyCard";
 import { PropertyDialog } from "@/components/PropertyDialog";
+import { LocationMap } from "@/components/LocationMap";
 
 const PHONES = [
   { label: "+216 71 876 143", href: "tel:+21671876143" },
@@ -30,7 +31,7 @@ const services = [
 const Logo = ({ light = false }: { light?: boolean }) => (
   <Link to="/" className="flex items-center gap-3 group">
     <div className={`p-1.5 transition-all duration-500 group-hover:scale-105 ${light ? "bg-bone" : ""}`}>
-      <img src={logo} alt="Best Immo — Agence immobilière" className="h-16 md:h-20 w-auto block" />
+      <img src={logo} alt="Bestimmo — Agence immobilière" className="h-16 md:h-20 w-auto block" />
     </div>
   </Link>
 );
@@ -143,7 +144,7 @@ const Index = () => {
           </div>
           <h1 className="font-display font-bold text-[2.75rem] sm:text-6xl md:text-[7vw] leading-[0.95] max-w-5xl animate-fade-in" style={{ animationDelay: "0.15s" }}>
             Votre prochaine adresse,<br/>
-            <span className="text-brand inline-block animate-fade-in-right" style={{ animationDelay: "0.5s" }}>trouvée par Best Immo.</span>
+            <span className="text-brand inline-block animate-fade-in-right" style={{ animationDelay: "0.5s" }}>trouvée par Bestimmo.</span>
           </h1>
           {/* CTA buttons removed per request */}
         </div>
@@ -185,7 +186,7 @@ const Index = () => {
           </Reveal>
           <Reveal variant="right" delay={150} className="md:col-span-7 md:pl-12 md:border-l border-border">
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              Implantée à Cité La Gazelle, Ariana, <strong className="text-ink">Best Immo</strong> accompagne familles, investisseurs et promoteurs dans toutes leurs opérations immobilières. Notre engagement&nbsp;: la transparence, la réactivité, et une connaissance fine du marché local.
+              Implantée à Cité La Gazelle, Ariana, <strong className="text-ink">Bestimmo</strong> accompagne familles, investisseurs et promoteurs dans toutes leurs opérations immobilières. Notre engagement&nbsp;: la transparence, la réactivité, et une connaissance fine du marché local.
             </p>
             <div className="mt-10 md:mt-12 grid grid-cols-3 gap-4 md:gap-8 pt-10 md:pt-12 border-t border-border">
               {[
@@ -373,6 +374,12 @@ const Index = () => {
 
       {/* FOOTER */}
       <footer className="bg-ink text-bone/60 pt-16 md:pt-20 pb-10 border-t border-bone/10">
+        <div className="container-editorial pb-12 md:pb-16">
+          <div className="eyebrow text-brand mb-4 flex items-center gap-3"><span className="h-px w-8 bg-brand" /> Nous trouver</div>
+          <h2 className="font-display font-bold text-2xl md:text-4xl text-bone mb-2">L'agence Bestimmo</h2>
+          <p className="text-sm text-bone/60 mb-6">{ADDRESS}</p>
+          <LocationMap lat={36.89950} lng={10.18650} label="Bestimmo — Cité La Gazelle, Ariana" zoom={15} className="h-80 md:h-96 w-full border border-bone/10" />
+        </div>
         <div className="container-editorial grid sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 pb-12 md:pb-16 border-b border-bone/10">
           <div>
             <Logo light />
@@ -403,7 +410,7 @@ const Index = () => {
           </div>
         </div>
         <div className="container-editorial pt-8 flex flex-col md:flex-row justify-between text-xs uppercase tracking-[0.2em] text-bone/40 gap-4">
-          <span>© 2026 Best Immo — Tous droits réservés</span>
+          <span>© 2026 Bestimmo — Tous droits réservés</span>
           <span>Tunisie · Ariana · Cité La Gazelle</span>
         </div>
       </footer>
