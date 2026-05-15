@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Listings from "./pages/Listings.tsx";
+import PropertyPage from "./pages/Property.tsx";
 import { WhatsAppWidget } from "./components/WhatsAppWidget.tsx";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/vente" element={<Listings mode="Vente" />} />
           <Route path="/location" element={<Listings mode="Location" />} />
+          <Route path="/bien/:id" element={<PropertyPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

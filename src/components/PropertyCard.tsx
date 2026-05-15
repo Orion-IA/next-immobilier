@@ -1,8 +1,10 @@
 import { ArrowUpRight, Bed, Bath, Maximize } from "lucide-react";
+import { Link } from "react-router-dom";
 import type { Property } from "@/data/properties";
 
-export const PropertyCard = ({ p, onOpen }: { p: Property; onOpen: (p: Property) => void }) => (
-  <article onClick={() => onOpen(p)} className="group cursor-pointer h-full flex flex-col">
+export const PropertyCard = ({ p, onOpen }: { p: Property; onOpen?: (p: Property) => void }) => (
+  <Link to={`/bien/${p.id}`} className="group cursor-pointer h-full flex flex-col">
+    <article className="h-full flex flex-col">
     <div className="relative overflow-hidden bg-secondary aspect-[4/5]">
       <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" />
       <span className={`absolute top-3 left-3 text-[9px] uppercase tracking-[0.25em] px-2.5 py-1 font-semibold transition-transform duration-500 group-hover:scale-105 ${p.tag === "Location" ? "bg-ink text-bone" : "bg-brand text-bone"}`}>{p.tag}</span>
@@ -25,5 +27,6 @@ export const PropertyCard = ({ p, onOpen }: { p: Property; onOpen: (p: Property)
         <span className="text-[10px] uppercase tracking-[0.2em] inline-flex items-center gap-1 link-underline font-medium">Détails <ArrowUpRight className="w-3 h-3" /></span>
       </div>
     </div>
-  </article>
+    </article>
+  </Link>
 );
