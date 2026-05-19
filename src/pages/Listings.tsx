@@ -2,7 +2,8 @@ import logo from "@/assets/bestimmo-logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { Phone, MapPin, Mail, Menu, X, Home, Bed, Wallet, Search, SlidersHorizontal } from "lucide-react";
-import { properties as ALL, ZONES, type Property } from "@/data/properties";
+import { ZONES, type Property } from "@/data/properties";
+import { useAllProperties } from "@/lib/propertiesStore";
 import { PropertyCard } from "@/components/PropertyCard";
 import { PropertyDialog } from "@/components/PropertyDialog";
 
@@ -17,6 +18,7 @@ const TYPES = ["Tous types", "Villa", "Appartement", "Duplex", "Studio", "Maison
 const ROOMS = ["Indifférent", "S+1", "S+2", "S+3", "S+4", "S+5 et plus"];
 
 export default function Listings({ mode }: { mode: "Vente" | "Location" }) {
+  const ALL = useAllProperties();
   const [type, setType] = useState("Tous types");
   const [zone, setZone] = useState("Partout");
   const [rooms, setRooms] = useState("Indifférent");
