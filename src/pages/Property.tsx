@@ -41,7 +41,7 @@ export default function PropertyPage() {
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container-editorial flex items-center justify-between h-20 md:h-24">
           <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="Bestimmo" className="h-28 md:h-32 w-auto" />
+            <img src={logo} alt="Bestimmo" className="h-20 md:h-24 w-auto" />
           </Link>
           <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] font-semibold hover:text-brand transition-colors">
             <ArrowLeft className="w-4 h-4" /> Retour
