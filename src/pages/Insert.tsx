@@ -85,10 +85,12 @@ function AuthForm() {
       return;
     }
     setLoading(true);
+    const { email: em, password: pw } = parsed.data;
     const { error } = mode === "signin"
-      ? await supabase.auth.signInWithPassword(parsed.data)
+      ? await supabase.auth.signInWithPassword({ email: em, password: pw })
       : await supabase.auth.signUp({
-          ...parsed.data,
+          email: em,
+          password: pw,
           options: { emailRedirectTo: `${window.location.origin}/insert` },
         });
     setLoading(false);
