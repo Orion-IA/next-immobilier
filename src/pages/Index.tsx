@@ -12,9 +12,8 @@ import { PropertyDialog } from "@/components/PropertyDialog";
 import { LocationMap } from "@/components/LocationMap";
 
 const PHONES = [
-  { label: "+216 71 876 143", href: "tel:+21671876143" },
-  { label: "+216 71 876 153", href: "tel:+21671876153" },
   { label: "+216 29 103 308", href: "tel:+21629103308" },
+  { label: "+216 54 331 173", href: "tel:+21654331173" },
 ];
 const PHONE = PHONES[0].label;
 const PHONE_HREF = PHONES[0].href;
@@ -31,7 +30,7 @@ const services = [
 const Logo = ({ light = false }: { light?: boolean }) => (
   <Link to="/" className="flex items-center gap-3 group">
     <div className={`p-1.5 transition-all duration-500 group-hover:scale-105 ${light ? "bg-bone" : ""}`}>
-      <img src={logo} alt="Bestimmo — Agence immobilière" className="h-16 md:h-20 w-auto block" />
+      <img src={logo} alt="Bestimmo — Agence immobilière" className="h-32 md:h-40 w-auto block" />
     </div>
   </Link>
 );
@@ -140,7 +139,7 @@ const Index = () => {
         <div className="relative flex-1 container-editorial flex flex-col justify-start pb-4 md:pb-56 pt-24 md:pt-24 text-bone">
           <div className="flex items-center gap-4 mb-5 md:mb-6 animate-fade-in">
             <span className="h-px w-12 bg-brand" />
-            <span className="eyebrow text-bone/80 text-[10px] md:text-[11px]">Agence immobilière · Ariana</span>
+            <span className="eyebrow text-bone/80 text-[10px] md:text-[11px]">Agence immobilière</span>
           </div>
           <h1 className="font-display font-bold text-[2.75rem] sm:text-6xl md:text-[7vw] leading-[0.95] max-w-5xl animate-fade-in" style={{ animationDelay: "0.15s" }}>
             Votre prochaine adresse,<br/>
