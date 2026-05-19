@@ -2,6 +2,16 @@ import appart from "@/assets/property-appart.jpg";
 import villa from "@/assets/property-villa.jpg";
 import duplex from "@/assets/property-duplex.jpg";
 import maison from "@/assets/property-maison.jpg";
+import ghazelaSalon from "@/assets/bien-ghazela/01-salon.jpeg";
+import ghazelaCuisine from "@/assets/bien-ghazela/02-cuisine.jpeg";
+import ghazelaCuisine2 from "@/assets/bien-ghazela/03-cuisine2.jpeg";
+import ghazelaCoinRepas from "@/assets/bien-ghazela/04-coin-repas.jpeg";
+import ghazelaChambre1 from "@/assets/bien-ghazela/05-chambre1.jpeg";
+import ghazelaChambre2 from "@/assets/bien-ghazela/06-chambre2.jpeg";
+import ghazelaSdb from "@/assets/bien-ghazela/07-sdb.jpeg";
+import ghazelaStudio from "@/assets/bien-ghazela/08-studio.jpeg";
+import ghazelaTerrasse from "@/assets/bien-ghazela/09-terrasse.jpeg";
+import ghazelaTerrasse2 from "@/assets/bien-ghazela/10-terrasse2.jpeg";
 
 export type PropertyTag = "Vente" | "Location";
 export type PropertyType = "Villa" | "Appartement" | "Duplex" | "Studio" | "Maison" | "Penthouse" | "Terrain";
@@ -36,6 +46,7 @@ export const ZONES = [
 const baseFeatures = ["Climatisation", "Cuisine équipée", "Parking privé", "Balcon", "Sécurité 24/7"];
 
 export const properties: Property[] = [
+  { id: "3437", name: "Étage de villa — Cité Ghazela", area: "Cité El Ghazala, Ariana", price: "420 000 DT", priceValue: 420000, beds: 3, baths: 2, sqft: 160, img: ghazelaSalon, gallery: [ghazelaSalon, ghazelaCuisine, ghazelaCuisine2, ghazelaCoinRepas, ghazelaChambre1, ghazelaChambre2, ghazelaSdb, ghazelaStudio, ghazelaTerrasse, ghazelaTerrasse2], tag: "Vente", type: "Villa", description: "L'agence Bestimmo propose à la vente un étage de villa à Cité Ghazela, proche de toutes les commodités. Composé d'un hall d'entrée, salon — salle à manger, 2 grandes chambres à coucher, cuisine équipée, salle de bain et salle d'eau. À l'étage, un studio avec une deuxième cuisine, une douche et une grande terrasse. Chauffage central et climatisation.", features: ["Hall d'entrée", "Salon / salle à manger", "2 grandes chambres", "Cuisine équipée", "Salle de bain", "Salle d'eau", "Studio à l'étage", "2ème cuisine", "Grande terrasse", "Chauffage central", "Climatisation", "Titre bleu"], reference: "BIM-V-3437", lat: 36.89995, lng: 10.18865 },
   { id: "01", name: "Villa contemporaine", area: "Cité La Gazelle", price: "850 000 DT", priceValue: 850000, beds: 5, baths: 3, sqft: 420, img: villa, gallery: [villa, maison, duplex], tag: "Vente", type: "Villa", description: "Villa moderne de prestige avec piscine privée, jardin paysager et finitions haut de gamme. Idéale pour une famille recherchant calme et confort.", features: [...baseFeatures, "Piscine", "Jardin 200 m²"], reference: "BIM-V-001" , lat: 36.89995, lng: 10.18865 },
   { id: "02", name: "Appartement S+3 standing", area: "Ariana Ville", price: "320 000 DT", priceValue: 320000, beds: 3, baths: 2, sqft: 145, img: appart, gallery: [appart, villa], tag: "Vente", type: "Appartement", description: "Appartement S+3 lumineux dans une résidence sécurisée. Salon double exposition, cuisine américaine et trois chambres avec rangements.", features: [...baseFeatures, "Ascenseur"], reference: "BIM-V-002" , lat: 36.86450, lng: 10.19775 },
   { id: "03", name: "Duplex avec terrasse", area: "El Menzah", price: "520 000 DT", priceValue: 520000, beds: 4, baths: 3, sqft: 210, img: duplex, gallery: [duplex, appart], tag: "Vente", type: "Duplex", description: "Duplex spacieux avec grande terrasse panoramique de 60 m². Quatre chambres, double salon et cuisine équipée.", features: [...baseFeatures, "Terrasse 60 m²", "Vue dégagée"], reference: "BIM-V-003" , lat: 36.83875, lng: 10.17700 },
