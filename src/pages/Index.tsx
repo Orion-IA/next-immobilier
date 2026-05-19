@@ -28,9 +28,9 @@ const services = [
   { icon: Building2, title: "Promotion", desc: "Accompagnement des promoteurs pour la commercialisation de leurs projets." },
 ];
 
-const Logo = ({ light = false }: { light?: boolean }) => (
+const Logo = (_: { light?: boolean }) => (
   <Link to="/" className="flex items-center gap-3 group">
-    <div className={`p-1.5 transition-all duration-500 group-hover:scale-105 ${light ? "bg-bone" : ""}`}>
+    <div className="p-1.5 transition-all duration-500 group-hover:scale-105">
       <img src={logo} alt="Bestimmo — Agence immobilière" className="h-24 md:h-28 w-auto block" />
     </div>
   </Link>
