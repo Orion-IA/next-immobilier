@@ -4,11 +4,11 @@ import { ArrowLeft, Bath, Bed, Check, Mail, MapPin, Maximize, Phone } from "luci
 import logo from "@/assets/bestimmo-logo.png";
 import { properties } from "@/data/properties";
 import { LocationMap } from "@/components/LocationMap";
+import { MortgageCalculator } from "@/components/MortgageCalculator";
 
 const PHONES = [
-  { label: "+216 71 876 143", href: "tel:+21671876143" },
-  { label: "+216 71 876 153", href: "tel:+21671876153" },
   { label: "+216 29 103 308", href: "tel:+21629103308" },
+  { label: "+216 54 331 173", href: "tel:+21654331173" },
 ];
 const EMAIL = "contact@bestimmo.tn";
 const ADDRESS = "22 Avenue Habib Bourguiba, Cité La Gazelle, Ariana";
@@ -41,7 +41,7 @@ export default function PropertyPage() {
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container-editorial flex items-center justify-between h-20 md:h-24">
           <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="Bestimmo" className="h-14 md:h-16 w-auto" />
+            <img src={logo} alt="Bestimmo" className="h-28 md:h-32 w-auto" />
           </Link>
           <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] font-semibold hover:text-brand transition-colors">
             <ArrowLeft className="w-4 h-4" /> Retour
@@ -119,6 +119,12 @@ export default function PropertyPage() {
           <div className="eyebrow text-brand mb-4 flex items-center gap-3"><span className="h-px w-8 bg-brand" /> Localisation</div>
           <h2 className="font-display font-bold text-2xl md:text-3xl mb-6">{property.area}</h2>
           <LocationMap lat={property.lat} lng={property.lng} label={`${property.name} — ${property.area}`} className="h-80 md:h-[480px] w-full border border-border" />
+        </div>
+
+        {/* MORTGAGE */}
+        <div className="mt-12 md:mt-16">
+          <div className="eyebrow text-brand mb-4 flex items-center gap-3"><span className="h-px w-8 bg-brand" /> Financement</div>
+          <MortgageCalculator defaultPrice={property.priceValue} />
         </div>
       </section>
 
