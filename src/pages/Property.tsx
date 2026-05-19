@@ -107,7 +107,7 @@ export default function PropertyPage() {
       )}
 
       <section className="container-editorial py-8 md:py-12">
-        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-12">
+        <div className="grid md:grid-cols-[1.4fr_1fr] gap-8 md:gap-10 lg:gap-12">
           {/* GALLERY */}
           <div>
             <div className="relative bg-ink overflow-hidden aspect-[4/3]">
