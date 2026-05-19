@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Bath, Bed, Check, Mail, MapPin, Maximize, Phone } from "lucide-react";
+import { ArrowLeft, Bath, Bed, Check, Mail, MapPin, Maximize, Phone, Trash2 } from "lucide-react";
+import { toast } from "@/components/ui/sonner";
 import logo from "@/assets/bestimmo-logo.png";
 import { properties as STATIC, type Property } from "@/data/properties";
 import { supabase } from "@/integrations/supabase/client";
@@ -22,6 +23,14 @@ export default function PropertyPage() {
   const [dbProperty, setDbProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(!staticMatch);
   const [active, setActive] = useState(0);
+  const [session, setSession] = useState<any>(null);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
+    supabase.auth.getSession().then(({ data }) => setSession(data.session));
+    return () => sub.subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = "";
@@ -58,6 +67,18 @@ export default function PropertyPage() {
   }
 
   const gallery = property.gallery && property.gallery.length > 0 ? property.gallery : [property.img];
+  const isDbProperty = !staticMatch;
+
+  const handleDelete = async () => {
+    if (!id) return;
+    if (!confirm("Supprimer définitivement ce bien ?")) return;
+    setDeleting(true);
+    const { error } = await supabase.from("properties").delete().eq("id", id);
+    setDeleting(false);
+    if (error) { toast.error(error.message); return; }
+    toast.success("Bien supprimé.");
+    navigate("/biens");
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -72,6 +93,18 @@ export default function PropertyPage() {
           </button>
         </div>
       </header>
+
+      {session && isDbProperty && (
+        <div className="container-editorial pt-4">
+          <button
+            onClick={handleDelete}
+            disabled={deleting}
+            className="inline-flex items-center gap-2 border border-destructive text-destructive py-2 px-4 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-destructive hover:text-bone transition-colors disabled:opacity-50"
+          >
+            <Trash2 className="w-4 h-4" /> {deleting ? "Suppression…" : "Supprimer ce bien"}
+          </button>
+        </div>
+      )}
 
       <section className="container-editorial py-8 md:py-12">
         <div className="grid lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-12">
