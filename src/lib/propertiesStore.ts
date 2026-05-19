@@ -1,42 +1,73 @@
-import { properties as STATIC_PROPERTIES, type Property } from "@/data/properties";
 import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { properties as STATIC_PROPERTIES, type Property } from "@/data/properties";
 
-const STORAGE_KEY = "bestimmo:custom-properties";
+export type DbPropertyRow = {
+  id: string;
+  created_by: string | null;
+  name: string;
+  area: string;
+  price: string;
+  price_value: number;
+  beds: number;
+  baths: number;
+  sqft: number;
+  img: string;
+  gallery: string[];
+  tag: string;
+  type: string;
+  description: string;
+  features: string[];
+  reference: string;
+  lat: number;
+  lng: number;
+};
 
-export const loadCustom = (): Property[] => {
-  if (typeof window === "undefined") return [];
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as Property[]) : [];
-  } catch {
+export const rowToProperty = (r: DbPropertyRow): Property => ({
+  id: r.id,
+  name: r.name,
+  area: r.area,
+  price: r.price,
+  priceValue: Number(r.price_value),
+  beds: r.beds,
+  baths: r.baths,
+  sqft: r.sqft,
+  img: r.img,
+  gallery: r.gallery && r.gallery.length > 0 ? r.gallery : [r.img],
+  tag: r.tag as Property["tag"],
+  type: r.type as Property["type"],
+  description: r.description,
+  features: r.features,
+  reference: r.reference,
+  lat: r.lat,
+  lng: r.lng,
+});
+
+export const fetchDbProperties = async (): Promise<Property[]> => {
+  const { data, error } = await supabase
+    .from("properties")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (error) {
+    console.error("Erreur chargement biens:", error);
     return [];
   }
-};
-
-export const saveCustom = (list: Property[]) => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-  window.dispatchEvent(new Event("bestimmo:properties-changed"));
-};
-
-export const addProperty = (p: Property) => {
-  const list = loadCustom();
-  saveCustom([p, ...list]);
-};
-
-export const removeProperty = (id: string) => {
-  saveCustom(loadCustom().filter((p) => p.id !== id));
+  return (data as DbPropertyRow[]).map(rowToProperty);
 };
 
 export const useAllProperties = (): Property[] => {
-  const [custom, setCustom] = useState<Property[]>(() => loadCustom());
+  const [db, setDb] = useState<Property[]>([]);
   useEffect(() => {
-    const handler = () => setCustom(loadCustom());
-    window.addEventListener("bestimmo:properties-changed", handler);
-    window.addEventListener("storage", handler);
+    fetchDbProperties().then(setDb);
+    const channel = supabase
+      .channel("properties-changes")
+      .on("postgres_changes", { event: "*", schema: "public", table: "properties" }, () => {
+        fetchDbProperties().then(setDb);
+      })
+      .subscribe();
     return () => {
-      window.removeEventListener("bestimmo:properties-changed", handler);
-      window.removeEventListener("storage", handler);
+      supabase.removeChannel(channel);
     };
   }, []);
-  return [...custom, ...STATIC_PROPERTIES];
+  return [...db, ...STATIC_PROPERTIES];
 };

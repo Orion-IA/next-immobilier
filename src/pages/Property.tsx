@@ -1,9 +1,10 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Bath, Bed, Check, Mail, MapPin, Maximize, Phone } from "lucide-react";
 import logo from "@/assets/bestimmo-logo.png";
-import { properties as STATIC } from "@/data/properties";
-import { loadCustom } from "@/lib/propertiesStore";
+import { properties as STATIC, type Property } from "@/data/properties";
+import { supabase } from "@/integrations/supabase/client";
+import { rowToProperty, type DbPropertyRow } from "@/lib/propertiesStore";
 import { LocationMap } from "@/components/LocationMap";
 import { MortgageCalculator } from "@/components/MortgageCalculator";
 
@@ -17,13 +18,35 @@ const ADDRESS = "22 Avenue Habib Bourguiba, Cité La Gazelle, Ariana";
 export default function PropertyPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const property = [...loadCustom(), ...STATIC].find((p) => p.id === id);
+  const staticMatch = useMemo(() => STATIC.find((p) => p.id === id), [id]);
+  const [dbProperty, setDbProperty] = useState<Property | null>(null);
+  const [loading, setLoading] = useState(!staticMatch);
   const [active, setActive] = useState(0);
 
   useEffect(() => {
     document.body.style.overflow = "";
     window.scrollTo(0, 0);
   }, [id]);
+
+  useEffect(() => {
+    if (staticMatch || !id) return;
+    setLoading(true);
+    supabase
+      .from("properties")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle()
+      .then(({ data }) => {
+        setDbProperty(data ? rowToProperty(data as DbPropertyRow) : null);
+        setLoading(false);
+      });
+  }, [id, staticMatch]);
+
+  const property = staticMatch ?? dbProperty;
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center text-muted-foreground text-sm">Chargement…</div>;
+  }
 
   if (!property) {
     return (
