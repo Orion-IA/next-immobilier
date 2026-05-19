@@ -7,9 +7,8 @@ import { PropertyCard } from "@/components/PropertyCard";
 import { PropertyDialog } from "@/components/PropertyDialog";
 
 const PHONES = [
-  { label: "+216 71 876 143", href: "tel:+21671876143" },
-  { label: "+216 71 876 153", href: "tel:+21671876153" },
   { label: "+216 29 103 308", href: "tel:+21629103308" },
+  { label: "+216 54 331 173", href: "tel:+21654331173" },
 ];
 const EMAIL = "contact@bestimmo.tn";
 const ADDRESS = "22 Avenue Habib Bourguiba, Cité La Gazelle, Ariana";
@@ -146,7 +145,7 @@ export default function Listings({ mode }: { mode: "Vente" | "Location" }) {
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container-editorial flex items-center justify-between h-20 md:h-28">
           <Link to="/" className="flex items-center gap-3 group">
-            <img src={logo} alt="Bestimmo" className="h-16 md:h-20 w-auto block transition-transform duration-500 group-hover:scale-105" />
+            <img src={logo} alt="Bestimmo" className="h-32 md:h-40 w-auto block transition-transform duration-500 group-hover:scale-105" />
           </Link>
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium">
             <Link to="/" className="link-underline">Accueil</Link>
