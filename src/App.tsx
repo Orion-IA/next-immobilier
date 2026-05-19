@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Listings from "./pages/Listings.tsx";
 import PropertyPage from "./pages/Property.tsx";
+import InsertPage from "./pages/Insert.tsx";
 import { WhatsAppWidget } from "./components/WhatsAppWidget.tsx";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/vente" element={<Listings mode="Vente" />} />
           <Route path="/location" element={<Listings mode="Location" />} />
           <Route path="/bien/:id" element={<PropertyPage />} />
+          <Route path="/insert" element={<InsertPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

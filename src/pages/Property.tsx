@@ -2,7 +2,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ArrowLeft, Bath, Bed, Check, Mail, MapPin, Maximize, Phone } from "lucide-react";
 import logo from "@/assets/bestimmo-logo.png";
-import { properties } from "@/data/properties";
+import { properties as STATIC } from "@/data/properties";
+import { loadCustom } from "@/lib/propertiesStore";
 import { LocationMap } from "@/components/LocationMap";
 import { MortgageCalculator } from "@/components/MortgageCalculator";
 
@@ -16,7 +17,7 @@ const ADDRESS = "22 Avenue Habib Bourguiba, Cité La Gazelle, Ariana";
 export default function PropertyPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const property = properties.find((p) => p.id === id);
+  const property = [...loadCustom(), ...STATIC].find((p) => p.id === id);
   const [active, setActive] = useState(0);
 
   useEffect(() => {

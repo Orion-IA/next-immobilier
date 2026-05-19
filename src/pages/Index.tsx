@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Reveal } from "@/components/Reveal";
 import { SearchBar } from "@/components/SearchBar";
-import { properties, type Property, ZONES } from "@/data/properties";
+import { type Property, ZONES } from "@/data/properties";
+import { useAllProperties } from "@/lib/propertiesStore";
 import { PropertyCard } from "@/components/PropertyCard";
 import { PropertyDialog } from "@/components/PropertyDialog";
 import { LocationMap } from "@/components/LocationMap";
@@ -36,6 +37,7 @@ const Logo = ({ light = false }: { light?: boolean }) => (
 );
 
 const Index = () => {
+  const properties = useAllProperties();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(0);
   const [openProperty, setOpenProperty] = useState<Property | null>(null);
