@@ -37,6 +37,7 @@ const Logo = ({ light = false }: { light?: boolean }) => (
 );
 
 const Index = () => {
+  const properties = useAllProperties();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(0);
   const [openProperty, setOpenProperty] = useState<Property | null>(null);
