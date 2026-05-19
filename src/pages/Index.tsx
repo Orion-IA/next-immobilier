@@ -30,8 +30,8 @@ const services = [
 
 const Logo = ({ light = false }: { light?: boolean }) => (
   <Link to="/" className="flex items-center gap-3 group">
-    <div className={`p-1.5 transition-all duration-500 group-hover:scale-105 ${light ? "bg-bone" : ""}`}>
-      <img src={logo} alt="Bestimmo — Agence immobilière" className="h-24 md:h-28 w-auto block" />
+    <div className="p-1.5 transition-all duration-500 group-hover:scale-105">
+      <img src={logo} alt="Bestimmo — Agence immobilière" className={`h-24 md:h-28 w-auto block ${light ? "brightness-0 invert" : ""}`} />
     </div>
   </Link>
 );
