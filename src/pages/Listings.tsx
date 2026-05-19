@@ -145,7 +145,7 @@ export default function Listings({ mode }: { mode: "Vente" | "Location" }) {
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container-editorial flex items-center justify-between h-20 md:h-28">
           <Link to="/" className="flex items-center gap-3 group">
-            <img src={logo} alt="Bestimmo" className="h-32 md:h-40 w-auto block transition-transform duration-500 group-hover:scale-105" />
+            <img src={logo} alt="Bestimmo" className="h-24 md:h-28 w-auto block transition-transform duration-500 group-hover:scale-105" />
           </Link>
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium">
             <Link to="/" className="link-underline">Accueil</Link>
