@@ -84,11 +84,11 @@ export default function PropertyPage() {
     <div className="min-h-screen bg-background text-foreground">
       {/* HEADER */}
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border">
-        <div className="container-editorial flex items-center justify-between h-20 md:h-24">
+        <div className="container-editorial flex items-center justify-between h-16 md:h-24">
           <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="Bestimmo" className="h-20 md:h-24 w-auto" />
+            <img src={logo} alt="Bestimmo" className="h-14 md:h-24 w-auto" />
           </Link>
-          <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] font-semibold hover:text-brand transition-colors">
+          <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.25em] font-semibold hover:text-brand transition-colors">
             <ArrowLeft className="w-4 h-4" /> Retour
           </button>
         </div>
@@ -106,19 +106,19 @@ export default function PropertyPage() {
         </div>
       )}
 
-      <section className="container-editorial py-8 md:py-12">
+      <section className="container-editorial py-5 md:py-12">
         <div className="grid md:grid-cols-[1.4fr_1fr] gap-8 md:gap-10 lg:gap-12">
           {/* GALLERY */}
           <div>
-            <div className="relative bg-ink overflow-hidden aspect-[4/3]">
+            <div className="relative bg-ink overflow-hidden aspect-[4/3] -mx-4 sm:mx-0">
               <img key={active} src={gallery[active]} alt={property.name} className="w-full h-full object-cover animate-fade-in" />
-              <span className={`absolute top-4 left-4 text-[10px] uppercase tracking-[0.25em] px-3 py-1.5 font-semibold ${property.tag === "Location" ? "bg-bone text-ink" : "bg-brand text-bone"}`}>{property.tag}</span>
-              <span className="absolute bottom-4 right-4 bg-ink/80 text-bone text-[10px] uppercase tracking-[0.25em] px-3 py-1.5 font-mono">{property.reference}</span>
+              <span className={`absolute top-3 left-3 md:top-4 md:left-4 text-[10px] uppercase tracking-[0.25em] px-2.5 py-1 md:px-3 md:py-1.5 font-semibold ${property.tag === "Location" ? "bg-bone text-ink" : "bg-brand text-bone"}`}>{property.tag}</span>
+              <span className="absolute bottom-3 right-3 md:bottom-4 md:right-4 bg-ink/80 text-bone text-[9px] md:text-[10px] uppercase tracking-[0.25em] px-2.5 py-1 md:px-3 md:py-1.5 font-mono">{property.reference}</span>
             </div>
             {gallery.length > 1 && (
-              <div className="flex gap-2 mt-3">
+              <div className="flex gap-2 mt-3 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x">
                 {gallery.map((g, i) => (
-                  <button key={i} onClick={() => setActive(i)} className={`w-20 h-20 overflow-hidden border-2 transition-all duration-300 ${active === i ? "border-brand" : "border-transparent opacity-60 hover:opacity-100"}`}>
+                  <button key={i} onClick={() => setActive(i)} className={`shrink-0 snap-start w-16 h-16 md:w-20 md:h-20 overflow-hidden border-2 transition-all duration-300 ${active === i ? "border-brand" : "border-transparent opacity-60 hover:opacity-100"}`}>
                     <img src={g} alt="" className="w-full h-full object-cover" />
                   </button>
                 ))}
@@ -129,10 +129,10 @@ export default function PropertyPage() {
           {/* DETAILS */}
           <div className="flex flex-col">
             <div className="eyebrow text-brand mb-3 flex items-center gap-2"><MapPin className="w-3 h-3" /> {property.area}</div>
-            <h1 className="font-display font-bold text-3xl md:text-5xl leading-tight">{property.name}</h1>
-            <div className="font-display font-bold text-2xl md:text-3xl text-brand mt-4">{property.price}</div>
+            <h1 className="font-display font-bold text-2xl sm:text-3xl md:text-5xl leading-tight break-words">{property.name}</h1>
+            <div className="font-display font-bold text-xl sm:text-2xl md:text-3xl text-brand mt-3 md:mt-4">{property.price}</div>
 
-            <div className="grid grid-cols-3 gap-4 mt-8 py-6 border-y border-border">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-6 md:mt-8 py-5 md:py-6 border-y border-border">
               {[
                 { icon: Bed, label: "Chambres", value: property.beds || "—" },
                 { icon: Bath, label: "Salles d'eau", value: property.baths || "—" },
@@ -140,8 +140,8 @@ export default function PropertyPage() {
               ].map((s) => (
                 <div key={s.label} className="text-center">
                   <s.icon className="w-5 h-5 text-brand mx-auto mb-2" strokeWidth={1.5} />
-                  <div className="font-display font-bold text-lg">{s.value}</div>
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">{s.label}</div>
+                  <div className="font-display font-bold text-base sm:text-lg">{s.value}</div>
+                  <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-muted-foreground mt-1">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -153,14 +153,14 @@ export default function PropertyPage() {
 
             <div className="mt-6">
               <div className="eyebrow text-muted-foreground mb-3">Caractéristiques</div>
-              <ul className="grid grid-cols-2 gap-2 text-sm">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                 {property.features.map((f) => (
                   <li key={f} className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-brand shrink-0" /> {f}</li>
                 ))}
               </ul>
             </div>
 
-            <div className="mt-8 grid sm:grid-cols-2 gap-3">
+            <div className="mt-8 grid grid-cols-2 gap-3">
               <a href={`mailto:${EMAIL}`} className="border border-ink text-ink py-4 px-4 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-ink hover:text-bone transition-colors duration-500 inline-flex items-center justify-center gap-2">
                 <Mail className="w-4 h-4" /> Écrire
               </a>
