@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Bath, Bed, Check, ChevronLeft, ChevronRight, Mail, MapPin, Maximize, Phone, Trash2 } from "lucide-react";
+import { ArrowLeft, Bath, Bed, Check, ChevronLeft, ChevronRight, Expand, Mail, MapPin, Maximize, Phone, Trash2, X } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
 import logo from "@/assets/bestimmo-logo.png";
 import { properties as STATIC, type Property } from "@/data/properties";
@@ -25,6 +25,7 @@ export default function PropertyPage() {
   const [active, setActive] = useState(0);
   const [session, setSession] = useState<any>(null);
   const [deleting, setDeleting] = useState(false);
+  const [lightbox, setLightbox] = useState(false);
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
@@ -36,6 +37,23 @@ export default function PropertyPage() {
     document.body.style.overflow = "";
     window.scrollTo(0, 0);
   }, [id]);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(false);
+      if (e.key === "ArrowLeft") setActive((a) => (a - 1 + gallery.length) % gallery.length);
+      if (e.key === "ArrowRight") setActive((a) => (a + 1) % gallery.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lightbox]);
 
   useEffect(() => {
     if (staticMatch || !id) return;
