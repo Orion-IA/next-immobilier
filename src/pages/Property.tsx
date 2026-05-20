@@ -247,6 +247,49 @@ export default function PropertyPage() {
           <span>{ADDRESS}</span>
         </div>
       </footer>
+
+      {/* LIGHTBOX */}
+      {lightbox && (
+        <div className="fixed inset-0 z-[100] bg-ink/95 backdrop-blur-md flex flex-col animate-fade-in" onClick={() => setLightbox(false)}>
+          <div className="flex items-center justify-between px-5 md:px-8 py-4 text-bone/70 text-[10px] md:text-xs uppercase tracking-[0.3em] font-mono">
+            <span>{property.reference}</span>
+            <span>{String(active + 1).padStart(2, "0")} <span className="text-bone/40 mx-1">—</span> {String(gallery.length).padStart(2, "0")}</span>
+            <button onClick={(e) => { e.stopPropagation(); setLightbox(false); }} aria-label="Fermer" className="w-10 h-10 flex items-center justify-center hover:text-brand transition-colors">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          <div className="relative flex-1 flex items-center justify-center px-4 md:px-20 pb-8" onClick={(e) => e.stopPropagation()}>
+            <img key={active} src={gallery[active]} alt={property.name} className="max-w-full max-h-full object-contain animate-fade-in" />
+            {gallery.length > 1 && (
+              <>
+                <button
+                  onClick={() => setActive((a) => (a - 1 + gallery.length) % gallery.length)}
+                  aria-label="Photo précédente"
+                  className="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 bg-bone/10 hover:bg-brand text-bone flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
+                >
+                  <ChevronLeft className="w-6 h-6 md:w-7 md:h-7" strokeWidth={1.5} />
+                </button>
+                <button
+                  onClick={() => setActive((a) => (a + 1) % gallery.length)}
+                  aria-label="Photo suivante"
+                  className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 bg-bone/10 hover:bg-brand text-bone flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
+                >
+                  <ChevronRight className="w-6 h-6 md:w-7 md:h-7" strokeWidth={1.5} />
+                </button>
+              </>
+            )}
+          </div>
+          {gallery.length > 1 && (
+            <div className="flex gap-2 justify-center pb-6 px-4 overflow-x-auto" onClick={(e) => e.stopPropagation()}>
+              {gallery.map((g, i) => (
+                <button key={i} onClick={() => setActive(i)} className={`shrink-0 w-14 h-14 md:w-16 md:h-16 overflow-hidden transition-all duration-300 ring-1 ${active === i ? "ring-2 ring-brand opacity-100" : "ring-bone/20 opacity-50 hover:opacity-100"}`}>
+                  <img src={g} alt="" className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
