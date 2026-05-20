@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Bath, Bed, Check, ChevronLeft, ChevronRight, Mail, MapPin, Maximize, Phone, Trash2 } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowLeft, Bath, Bed, Check, ChevronLeft, ChevronRight, Expand, Mail, MapPin, Maximize, Phone, Trash2, X } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
 import logo from "@/assets/bestimmo-logo.png";
 import { properties as STATIC, type Property } from "@/data/properties";
@@ -25,6 +25,8 @@ export default function PropertyPage() {
   const [active, setActive] = useState(0);
   const [session, setSession] = useState<any>(null);
   const [deleting, setDeleting] = useState(false);
+  const [lightbox, setLightbox] = useState(false);
+  const galleryLenRef = useRef(1);
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
@@ -36,6 +38,23 @@ export default function PropertyPage() {
     document.body.style.overflow = "";
     window.scrollTo(0, 0);
   }, [id]);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(false);
+      const n = galleryLenRef.current;
+      if (e.key === "ArrowLeft") setActive((a) => (a - 1 + n) % n);
+      if (e.key === "ArrowRight") setActive((a) => (a + 1) % n);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [lightbox]);
 
   useEffect(() => {
     if (staticMatch || !id) return;
@@ -67,6 +86,7 @@ export default function PropertyPage() {
   }
 
   const gallery = property.gallery && property.gallery.length > 0 ? property.gallery : [property.img];
+  galleryLenRef.current = gallery.length;
   const isDbProperty = !staticMatch;
 
   const handleDelete = async () => {
@@ -110,36 +130,51 @@ export default function PropertyPage() {
         <div className="grid md:grid-cols-[1.4fr_1fr] gap-8 md:gap-10 lg:gap-12">
           {/* GALLERY */}
           <div>
-            <div className="relative bg-ink overflow-hidden aspect-[4/3] -mx-4 sm:mx-0">
-              <img key={active} src={gallery[active]} alt={property.name} className="w-full h-full object-cover animate-fade-in" />
-              <span className={`absolute top-3 left-3 md:top-4 md:left-4 text-[10px] uppercase tracking-[0.25em] px-2.5 py-1 md:px-3 md:py-1.5 font-semibold ${property.tag === "Location" ? "bg-bone text-ink" : "bg-brand text-bone"}`}>{property.tag}</span>
-              <span className="absolute bottom-3 right-3 md:bottom-4 md:right-4 bg-ink/80 text-bone text-[9px] md:text-[10px] uppercase tracking-[0.25em] px-2.5 py-1 md:px-3 md:py-1.5 font-mono">{property.reference}</span>
+            <div className="group relative bg-ink overflow-hidden aspect-[4/3] -mx-4 sm:mx-0 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.4)] ring-1 ring-ink/5">
+              <button
+                type="button"
+                onClick={() => setLightbox(true)}
+                aria-label="Agrandir la photo"
+                className="absolute inset-0 w-full h-full cursor-zoom-in"
+              >
+                <img key={active} src={gallery[active]} alt={property.name} className="w-full h-full object-cover animate-fade-in transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]" />
+                <span className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent opacity-60" />
+              </button>
+              <span className={`pointer-events-none absolute top-3 left-3 md:top-4 md:left-4 text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 font-semibold backdrop-blur-sm ${property.tag === "Location" ? "bg-bone/90 text-ink" : "bg-brand/95 text-bone"}`}>{property.tag}</span>
+              <span className="pointer-events-none absolute top-3 right-3 md:top-4 md:right-4 bg-ink/70 backdrop-blur-sm text-bone text-[9px] md:text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 font-mono">{property.reference}</span>
+              <div
+                onClick={() => setLightbox(true)}
+                className="pointer-events-auto absolute bottom-3 right-3 md:bottom-4 md:right-4 w-9 h-9 md:w-10 md:h-10 bg-bone/90 hover:bg-brand hover:text-bone text-ink flex items-center justify-center transition-all duration-300 cursor-zoom-in opacity-0 group-hover:opacity-100"
+                aria-hidden
+              >
+                <Expand className="w-4 h-4" />
+              </div>
               {gallery.length > 1 && (
                 <>
                   <button
-                    onClick={() => setActive((a) => (a - 1 + gallery.length) % gallery.length)}
+                    onClick={(e) => { e.stopPropagation(); setActive((a) => (a - 1 + gallery.length) % gallery.length); }}
                     aria-label="Photo précédente"
-                    className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-bone/90 hover:bg-brand hover:text-bone text-ink flex items-center justify-center transition-all duration-300"
+                    className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 bg-bone/90 hover:bg-brand hover:text-bone text-ink flex items-center justify-center transition-all duration-300 backdrop-blur-sm shadow-lg"
                   >
-                    <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+                    <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
                   </button>
                   <button
-                    onClick={() => setActive((a) => (a + 1) % gallery.length)}
+                    onClick={(e) => { e.stopPropagation(); setActive((a) => (a + 1) % gallery.length); }}
                     aria-label="Photo suivante"
-                    className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-bone/90 hover:bg-brand hover:text-bone text-ink flex items-center justify-center transition-all duration-300"
+                    className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 bg-bone/90 hover:bg-brand hover:text-bone text-ink flex items-center justify-center transition-all duration-300 backdrop-blur-sm shadow-lg"
                   >
-                    <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+                    <ChevronRight className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
                   </button>
-                  <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 bg-ink/80 text-bone text-[9px] md:text-[10px] font-mono px-2.5 py-1 md:px-3 md:py-1.5">
-                    {active + 1} / {gallery.length}
+                  <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 bg-ink/70 backdrop-blur-sm text-bone text-[10px] tracking-[0.3em] font-mono px-3 py-1.5">
+                    {String(active + 1).padStart(2, "0")} <span className="text-bone/50 mx-1">—</span> {String(gallery.length).padStart(2, "0")}
                   </div>
                 </>
               )}
             </div>
             {gallery.length > 1 && (
-              <div className="flex gap-2 mt-3 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x">
+              <div className="flex gap-2 md:gap-3 mt-3 md:mt-4 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x">
                 {gallery.map((g, i) => (
-                  <button key={i} onClick={() => setActive(i)} className={`shrink-0 snap-start w-16 h-16 md:w-20 md:h-20 overflow-hidden border-2 transition-all duration-300 ${active === i ? "border-brand" : "border-transparent opacity-60 hover:opacity-100"}`}>
+                  <button key={i} onClick={() => setActive(i)} className={`shrink-0 snap-start w-16 h-16 md:w-[88px] md:h-[88px] overflow-hidden transition-all duration-300 ring-1 ${active === i ? "ring-2 ring-brand opacity-100" : "ring-ink/10 opacity-50 hover:opacity-100"}`}>
                     <img src={g} alt="" className="w-full h-full object-cover" />
                   </button>
                 ))}
@@ -212,6 +247,49 @@ export default function PropertyPage() {
           <span>{ADDRESS}</span>
         </div>
       </footer>
+
+      {/* LIGHTBOX */}
+      {lightbox && (
+        <div className="fixed inset-0 z-[100] bg-ink/95 backdrop-blur-md flex flex-col animate-fade-in" onClick={() => setLightbox(false)}>
+          <div className="flex items-center justify-between px-5 md:px-8 py-4 text-bone/70 text-[10px] md:text-xs uppercase tracking-[0.3em] font-mono">
+            <span>{property.reference}</span>
+            <span>{String(active + 1).padStart(2, "0")} <span className="text-bone/40 mx-1">—</span> {String(gallery.length).padStart(2, "0")}</span>
+            <button onClick={(e) => { e.stopPropagation(); setLightbox(false); }} aria-label="Fermer" className="w-10 h-10 flex items-center justify-center hover:text-brand transition-colors">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          <div className="relative flex-1 flex items-center justify-center px-4 md:px-20 pb-8" onClick={(e) => e.stopPropagation()}>
+            <img key={active} src={gallery[active]} alt={property.name} className="max-w-full max-h-full object-contain animate-fade-in" />
+            {gallery.length > 1 && (
+              <>
+                <button
+                  onClick={() => setActive((a) => (a - 1 + gallery.length) % gallery.length)}
+                  aria-label="Photo précédente"
+                  className="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 bg-bone/10 hover:bg-brand text-bone flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
+                >
+                  <ChevronLeft className="w-6 h-6 md:w-7 md:h-7" strokeWidth={1.5} />
+                </button>
+                <button
+                  onClick={() => setActive((a) => (a + 1) % gallery.length)}
+                  aria-label="Photo suivante"
+                  className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 bg-bone/10 hover:bg-brand text-bone flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
+                >
+                  <ChevronRight className="w-6 h-6 md:w-7 md:h-7" strokeWidth={1.5} />
+                </button>
+              </>
+            )}
+          </div>
+          {gallery.length > 1 && (
+            <div className="flex gap-2 justify-center pb-6 px-4 overflow-x-auto" onClick={(e) => e.stopPropagation()}>
+              {gallery.map((g, i) => (
+                <button key={i} onClick={() => setActive(i)} className={`shrink-0 w-14 h-14 md:w-16 md:h-16 overflow-hidden transition-all duration-300 ring-1 ${active === i ? "ring-2 ring-brand opacity-100" : "ring-bone/20 opacity-50 hover:opacity-100"}`}>
+                  <img src={g} alt="" className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
