@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Bath, Bed, Check, Mail, MapPin, Maximize, Phone, Trash2 } from "lucide-react";
+import { ArrowLeft, Bath, Bed, Check, ChevronLeft, ChevronRight, Mail, MapPin, Maximize, Phone, Trash2 } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
 import logo from "@/assets/bestimmo-logo.png";
 import { properties as STATIC, type Property } from "@/data/properties";
@@ -114,6 +114,27 @@ export default function PropertyPage() {
               <img key={active} src={gallery[active]} alt={property.name} className="w-full h-full object-cover animate-fade-in" />
               <span className={`absolute top-3 left-3 md:top-4 md:left-4 text-[10px] uppercase tracking-[0.25em] px-2.5 py-1 md:px-3 md:py-1.5 font-semibold ${property.tag === "Location" ? "bg-bone text-ink" : "bg-brand text-bone"}`}>{property.tag}</span>
               <span className="absolute bottom-3 right-3 md:bottom-4 md:right-4 bg-ink/80 text-bone text-[9px] md:text-[10px] uppercase tracking-[0.25em] px-2.5 py-1 md:px-3 md:py-1.5 font-mono">{property.reference}</span>
+              {gallery.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setActive((a) => (a - 1 + gallery.length) % gallery.length)}
+                    aria-label="Photo précédente"
+                    className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-bone/90 hover:bg-brand hover:text-bone text-ink flex items-center justify-center transition-all duration-300"
+                  >
+                    <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+                  </button>
+                  <button
+                    onClick={() => setActive((a) => (a + 1) % gallery.length)}
+                    aria-label="Photo suivante"
+                    className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-bone/90 hover:bg-brand hover:text-bone text-ink flex items-center justify-center transition-all duration-300"
+                  >
+                    <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+                  </button>
+                  <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 bg-ink/80 text-bone text-[9px] md:text-[10px] font-mono px-2.5 py-1 md:px-3 md:py-1.5">
+                    {active + 1} / {gallery.length}
+                  </div>
+                </>
+              )}
             </div>
             {gallery.length > 1 && (
               <div className="flex gap-2 mt-3 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x">
