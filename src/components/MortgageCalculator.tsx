@@ -11,8 +11,8 @@ const fmt = (n: number) =>
 export const MortgageCalculator = ({ defaultPrice }: Props) => {
   const [price, setPrice] = useState(defaultPrice);
   const [downPct, setDownPct] = useState(20);
-  const [rate, setRate] = useState(8.5);
-  const [years, setYears] = useState(15);
+  const [rate, setRate] = useState(6);
+  const [years, setYears] = useState(20);
 
   const { monthly, loan, totalInterest, totalPaid } = useMemo(() => {
     const down = (price * downPct) / 100;
