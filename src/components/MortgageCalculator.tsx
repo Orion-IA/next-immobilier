@@ -34,7 +34,7 @@ export const MortgageCalculator = ({ defaultPrice }: Props) => {
       <div className="grid sm:grid-cols-2 gap-5">
         <Field label="Prix du bien (DT)" value={price} onChange={setPrice} min={0} step={1000} />
         <Field label={`Apport (${downPct}%)`} value={downPct} onChange={(v) => setDownPct(Math.min(100, Math.max(0, v)))} min={0} max={100} step={1} />
-        <Field label="Taux annuel (%)" value={rate} onChange={setRate} min={0} max={20} step={0.1} />
+        <Field label="Taux d'intérêt (%)" value={rate} onChange={setRate} min={0} max={20} step={0.1} />
         <Field label="Durée (années)" value={years} onChange={(v) => setYears(Math.max(1, Math.min(30, v)))} min={1} max={30} step={1} />
       </div>
 
