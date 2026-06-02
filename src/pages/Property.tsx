@@ -127,10 +127,10 @@ export default function PropertyPage() {
       )}
 
       <section className="container-editorial py-5 md:py-12">
-        <div className="grid md:grid-cols-[1.4fr_1fr] gap-8 md:gap-10 lg:gap-12">
+        <div className="flex flex-col gap-8 md:gap-12 max-w-5xl mx-auto">
           {/* GALLERY */}
           <div>
-            <div className="group relative bg-ink overflow-hidden aspect-[4/3] -mx-4 sm:mx-0 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.4)] ring-1 ring-ink/5">
+            <div className="group relative bg-ink overflow-hidden aspect-[4/3] w-full shadow-[0_30px_80px_-30px_rgba(0,0,0,0.4)] ring-1 ring-ink/5">
               <button
                 type="button"
                 onClick={() => setLightbox(true)}
@@ -172,7 +172,7 @@ export default function PropertyPage() {
               )}
             </div>
             {gallery.length > 1 && (
-              <div className="flex gap-2 md:gap-3 mt-3 md:mt-4 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x">
+              <div className="flex gap-2 md:gap-3 mt-3 md:mt-4 overflow-x-auto pb-1 snap-x">
                 {gallery.map((g, i) => (
                   <button key={i} onClick={() => setActive(i)} className={`shrink-0 snap-start w-16 h-16 md:w-[88px] md:h-[88px] overflow-hidden transition-all duration-300 ring-1 ${active === i ? "ring-2 ring-brand opacity-100" : "ring-ink/10 opacity-50 hover:opacity-100"}`}>
                     <img src={g} alt="" className="w-full h-full object-cover" />
