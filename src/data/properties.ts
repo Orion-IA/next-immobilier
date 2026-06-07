@@ -32,6 +32,7 @@ export interface Property {
   lat: number;
   lng: number;
   status?: PropertyStatus;
+  videoUrl?: string;
 }
 
 export const ZONES = [

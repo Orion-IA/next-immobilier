@@ -22,6 +22,7 @@ export type DbPropertyRow = {
   lat: number;
   lng: number;
   status?: string;
+  video_url?: string | null;
 };
 
 export const rowToProperty = (r: DbPropertyRow): Property => ({
@@ -43,6 +44,7 @@ export const rowToProperty = (r: DbPropertyRow): Property => ({
   lat: r.lat,
   lng: r.lng,
   status: (r.status as any) ?? "active",
+  videoUrl: r.video_url ?? undefined,
 });
 
 export const fetchDbProperties = async (): Promise<Property[]> => {
