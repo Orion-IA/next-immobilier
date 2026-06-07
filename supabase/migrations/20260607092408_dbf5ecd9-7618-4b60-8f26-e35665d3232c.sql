@@ -1,0 +1,2 @@
+ALTER TABLE public.properties DROP CONSTRAINT IF EXISTS properties_tag_check;
+ALTER TABLE public.properties ADD CONSTRAINT properties_tag_check CHECK (tag = ANY (ARRAY['Vente'::text, 'Location'::text, 'Neuf'::text]));
