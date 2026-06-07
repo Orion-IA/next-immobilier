@@ -9,6 +9,32 @@ import { rowToProperty, type DbPropertyRow } from "@/lib/propertiesStore";
 import { LocationMap } from "@/components/LocationMap";
 import { MortgageCalculator } from "@/components/MortgageCalculator";
 
+function getVideoEmbed(url: string): { kind: "iframe" | "video"; src: string } | null {
+  if (!url) return null;
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace("www.", "");
+    if (host === "youtube.com" || host === "m.youtube.com") {
+      const v = u.searchParams.get("v");
+      if (v) return { kind: "iframe", src: `https://www.youtube.com/embed/${v}` };
+    }
+    if (host === "youtu.be") {
+      const id = u.pathname.slice(1);
+      if (id) return { kind: "iframe", src: `https://www.youtube.com/embed/${id}` };
+    }
+    if (host === "vimeo.com") {
+      const id = u.pathname.split("/").filter(Boolean)[0];
+      if (id) return { kind: "iframe", src: `https://player.vimeo.com/video/${id}` };
+    }
+    if (/\.(mp4|webm|ogg|mov)$/i.test(u.pathname)) {
+      return { kind: "video", src: url };
+    }
+    return { kind: "iframe", src: url };
+  } catch {
+    return null;
+  }
+}
+
 const PHONES = [
   { label: "+216 29 103 308", href: "tel:+21629103308" },
   { label: "+216 54 331 173", href: "tel:+21654331173" },
