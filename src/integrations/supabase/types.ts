@@ -37,6 +37,7 @@ export type Database = {
           tag: string
           type: string
           updated_at: string
+          video_url: string | null
         }
         Insert: {
           area: string
@@ -60,6 +61,7 @@ export type Database = {
           tag: string
           type: string
           updated_at?: string
+          video_url?: string | null
         }
         Update: {
           area?: string
@@ -83,6 +85,7 @@ export type Database = {
           tag?: string
           type?: string
           updated_at?: string
+          video_url?: string | null
         }
         Relationships: []
       }
