@@ -196,7 +196,7 @@ function PropertyForm({ userId }: { userId: string }) {
           features: features.split(",").map((f) => f.trim()).filter(Boolean),
           img: urls[0],
           gallery: urls,
-          reference: `BIM-${tag === "Vente" ? "V" : "L"}-${Date.now().toString().slice(-5)}`,
+          reference: `BIM-${tag === "Vente" ? "V" : tag === "Location" ? "L" : "N"}-${Date.now().toString().slice(-5)}`,
         })
         .select("id")
         .single();
