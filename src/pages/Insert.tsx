@@ -234,7 +234,7 @@ function PropertyForm({ userId }: { userId: string }) {
           </Field>
           <Field label="Type d'annonce">
             <select className={input} value={tag} onChange={(e) => setTag(e.target.value as PropertyTag)}>
-              <option>Vente</option><option>Location</option>
+              <option>Vente</option><option>Location</option><option>Neuf</option>
             </select>
           </Field>
           <Field label="Type de bien">
