@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowLeft, Bath, Bed, Check, ChevronLeft, ChevronRight, Expand, Mail, MapPin, Maximize, Phone, Trash2, X } from "lucide-react";
+import { ArrowLeft, Bath, Bed, Check, ChevronLeft, ChevronRight, Expand, Mail, MapPin, Maximize, Phone, Play, Trash2, X } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
 import logo from "@/assets/bestimmo-logo.png";
 import { properties as STATIC, type Property } from "@/data/properties";
