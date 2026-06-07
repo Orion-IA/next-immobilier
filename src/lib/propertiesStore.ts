@@ -21,6 +21,7 @@ export type DbPropertyRow = {
   reference: string;
   lat: number;
   lng: number;
+  status?: string;
 };
 
 export const rowToProperty = (r: DbPropertyRow): Property => ({
@@ -41,6 +42,7 @@ export const rowToProperty = (r: DbPropertyRow): Property => ({
   reference: r.reference,
   lat: r.lat,
   lng: r.lng,
+  status: (r.status as any) ?? "active",
 });
 
 export const fetchDbProperties = async (): Promise<Property[]> => {
