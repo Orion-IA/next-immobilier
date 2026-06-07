@@ -247,7 +247,7 @@ function PropertyForm({ userId }: { userId: string }) {
               {ZONES.map((z) => <option key={z}>{z}</option>)}
             </select>
           </Field>
-          <Field label={tag === "Vente" ? "Prix (DT)" : "Loyer (DT / mois)"} required>
+          <Field label={tag === "Location" ? "Loyer (DT / mois)" : "Prix (DT)"} required>
             <input type="number" className={input} value={priceValue || ""} onChange={(e) => setPriceValue(parseFloat(e.target.value) || 0)} />
           </Field>
           <Field label="Surface (m²)">
