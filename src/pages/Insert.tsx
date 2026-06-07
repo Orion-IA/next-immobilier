@@ -280,6 +280,10 @@ function PropertyForm({ userId }: { userId: string }) {
           <input className={input} value={features} onChange={(e) => setFeatures(e.target.value)} maxLength={2000} placeholder="Climatisation, Parking, Jardin, ..." />
         </Field>
 
+        <Field label="Lien vidéo (YouTube, Vimeo ou mp4) — optionnel">
+          <input type="url" className={input} value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} maxLength={500} placeholder="https://www.youtube.com/watch?v=..." />
+        </Field>
+
         <Field label="Photos (max 8 Mo / image)" required>
           <label className="border-2 border-dashed border-border hover:border-brand transition-colors p-6 flex flex-col items-center justify-center gap-2 cursor-pointer bg-bone/30">
             <Upload className="w-5 h-5 text-brand" />
