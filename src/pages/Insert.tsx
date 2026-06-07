@@ -19,7 +19,7 @@ const authSchema = z.object({
 const propertySchema = z.object({
   name: z.string().trim().min(2, "Titre requis").max(120),
   area: z.string().min(1).max(120),
-  tag: z.enum(["Vente", "Location"]),
+  tag: z.enum(["Vente", "Location", "Neuf"]),
   type: z.string().min(1).max(40),
   priceValue: z.number().positive("Prix requis"),
   beds: z.number().int().min(0).max(50),
