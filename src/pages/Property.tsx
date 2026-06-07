@@ -160,70 +160,76 @@ export default function PropertyPage() {
           {/* GALLERY */}
           <div>
             <div className="group relative bg-ink overflow-hidden aspect-[4/3] w-full shadow-[0_30px_80px_-30px_rgba(0,0,0,0.4)] ring-1 ring-ink/5">
-              <button
-                type="button"
-                onClick={() => setLightbox(true)}
-                aria-label="Agrandir la photo"
-                className="absolute inset-0 w-full h-full cursor-zoom-in"
-              >
-                <img key={active} src={gallery[active]} alt={property.name} className="w-full h-full object-contain animate-fade-in" />
-              </button>
+              {slides[active].type === 'image' ? (
+                <button
+                  type="button"
+                  onClick={() => setLightbox(true)}
+                  aria-label="Agrandir la photo"
+                  className="absolute inset-0 w-full h-full cursor-zoom-in"
+                >
+                  <img key={active} src={slides[active].src} alt={property.name} className="w-full h-full object-contain animate-fade-in" />
+                </button>
+              ) : (
+                <div className="absolute inset-0 w-full h-full bg-ink">
+                  {(() => {
+                    const v = getVideoEmbed(slides[active].src);
+                    if (!v) return null;
+                    return v.kind === "iframe" ? (
+                      <iframe src={v.src} title="Vidéo du bien" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full h-full" />
+                    ) : (
+                      <video src={v.src} controls className="w-full h-full object-contain" />
+                    );
+                  })()}
+                </div>
+              )}
               <span className={`pointer-events-none absolute top-3 left-3 md:top-4 md:left-4 text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 font-semibold backdrop-blur-sm ${property.tag === "Location" ? "bg-bone/90 text-ink" : "bg-brand/95 text-bone"}`}>{property.tag}</span>
               <span className="pointer-events-none absolute top-3 right-3 md:top-4 md:right-4 bg-ink/70 backdrop-blur-sm text-bone text-[9px] md:text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 font-mono">{property.reference}</span>
-              <div
-                onClick={() => setLightbox(true)}
-                className="pointer-events-auto absolute bottom-3 right-3 md:bottom-4 md:right-4 w-9 h-9 md:w-10 md:h-10 bg-bone/90 hover:bg-brand hover:text-bone text-ink flex items-center justify-center transition-all duration-300 cursor-zoom-in opacity-0 group-hover:opacity-100"
-                aria-hidden
-              >
-                <Expand className="w-4 h-4" />
-              </div>
-              {gallery.length > 1 && (
+              {slides[active].type === 'image' && (
+                <div
+                  onClick={() => setLightbox(true)}
+                  className="pointer-events-auto absolute bottom-3 right-3 md:bottom-4 md:right-4 w-9 h-9 md:w-10 md:h-10 bg-bone/90 hover:bg-brand hover:text-bone text-ink flex items-center justify-center transition-all duration-300 cursor-zoom-in opacity-0 group-hover:opacity-100"
+                  aria-hidden
+                >
+                  <Expand className="w-4 h-4" />
+                </div>
+              )}
+              {slides.length > 1 && (
                 <>
                   <button
-                    onClick={(e) => { e.stopPropagation(); setActive((a) => (a - 1 + gallery.length) % gallery.length); }}
+                    onClick={(e) => { e.stopPropagation(); setActive((a) => (a - 1 + slides.length) % slides.length); }}
                     aria-label="Photo précédente"
                     className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 bg-bone/90 hover:bg-brand hover:text-bone text-ink flex items-center justify-center transition-all duration-300 backdrop-blur-sm shadow-lg"
                   >
                     <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
                   </button>
                   <button
-                    onClick={(e) => { e.stopPropagation(); setActive((a) => (a + 1) % gallery.length); }}
+                    onClick={(e) => { e.stopPropagation(); setActive((a) => (a + 1) % slides.length); }}
                     aria-label="Photo suivante"
                     className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 bg-bone/90 hover:bg-brand hover:text-bone text-ink flex items-center justify-center transition-all duration-300 backdrop-blur-sm shadow-lg"
                   >
                     <ChevronRight className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
                   </button>
                   <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 bg-ink/70 backdrop-blur-sm text-bone text-[10px] tracking-[0.3em] font-mono px-3 py-1.5">
-                    {String(active + 1).padStart(2, "0")} <span className="text-bone/50 mx-1">—</span> {String(gallery.length).padStart(2, "0")}
+                    {String(active + 1).padStart(2, "0")} <span className="text-bone/50 mx-1">—</span> {String(slides.length).padStart(2, "0")}
                   </div>
                 </>
               )}
             </div>
-            {gallery.length > 1 && (
+            {slides.length > 1 && (
               <div className="flex gap-2 md:gap-3 mt-3 md:mt-4 overflow-x-auto pb-1 snap-x">
-                {gallery.map((g, i) => (
+                {slides.map((slide, i) => (
                   <button key={i} onClick={() => setActive(i)} className={`shrink-0 snap-start w-16 h-16 md:w-[88px] md:h-[88px] overflow-hidden transition-all duration-300 ring-1 ${active === i ? "ring-2 ring-brand opacity-100" : "ring-ink/10 opacity-50 hover:opacity-100"}`}>
-                    <img src={g} alt="" className="w-full h-full object-cover" />
+                    {slide.type === 'video' ? (
+                      <div className="w-full h-full bg-ink flex items-center justify-center">
+                        <Play className="w-5 h-5 text-brand" fill="currentColor" />
+                      </div>
+                    ) : (
+                      <img src={slide.src} alt="" className="w-full h-full object-cover" />
+                    )}
                   </button>
                 ))}
               </div>
             )}
-            {property.videoUrl && (() => {
-              const v = getVideoEmbed(property.videoUrl);
-              if (!v) return null;
-              return (
-                <div className="mt-6 md:mt-8">
-                  <div className="eyebrow text-brand mb-3 flex items-center gap-3"><span className="h-px w-8 bg-brand" /> Vidéo</div>
-                  <div className="aspect-video w-full bg-ink overflow-hidden shadow-[0_30px_80px_-30px_rgba(0,0,0,0.4)] ring-1 ring-ink/5">
-                    {v.kind === "iframe" ? (
-                      <iframe src={v.src} title="Vidéo du bien" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full h-full" />
-                    ) : (
-                      <video src={v.src} controls className="w-full h-full object-contain" />
-                    )}
-                  </div>
-                </div>
-              );
-            })()}
           </div>
 
           {/* DETAILS */}
