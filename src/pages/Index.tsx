@@ -1,7 +1,7 @@
 import logo from "@/assets/bestimmo-logo.png";
 import heroImg from "@/assets/hero-villa.jpg";
 import appart from "@/assets/property-appart.jpg";
-import { ArrowUpRight, Phone, MapPin, Mail, Home, Building2, KeyRound, Menu, X, ArrowRight } from "lucide-react";
+import { ArrowUpRight, Phone, MapPin, Mail, Home, Building2, KeyRound, Menu, X, ArrowRight, Facebook, Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Reveal } from "@/components/Reveal";
@@ -21,6 +21,13 @@ const PHONE_HREF = PHONES[0].href;
 const EMAIL = "contact@bestimmo.tn";
 const EMAIL_HREF = "mailto:contact@bestimmo.tn";
 const ADDRESS = "22 Avenue Habib Bourguiba, Cité La Gazelle, Ariana";
+
+const SOCIALS = [
+  { label: "Facebook", href: "https://www.facebook.com/bestimmo.tn", Icon: Facebook },
+  { label: "Instagram", href: "https://www.instagram.com/bestimmo.tn", Icon: Instagram },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/bestimmo", Icon: Linkedin },
+  { label: "WhatsApp", href: "https://wa.me/21629103308", Icon: MessageCircle },
+];
 
 const services = [
   { icon: Home, title: "Vente", desc: "Villas, appartements, terrains. Une sélection rigoureuse de biens vérifiés." },
@@ -435,6 +442,20 @@ const Index = () => {
         </div>
         <div className="container-editorial pt-8 flex flex-col md:flex-row justify-between text-xs uppercase tracking-[0.2em] text-bone/40 gap-4">
           <span>© 2026 Bestimmo — Tous droits réservés</span>
+          <div className="flex items-center gap-3">
+            {SOCIALS.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="w-9 h-9 border border-bone/20 flex items-center justify-center hover:bg-brand hover:border-brand hover:text-bone transition-all duration-300"
+              >
+                <Icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
           <span>Tunisie · Ariana · Cité La Gazelle</span>
         </div>
       </footer>
