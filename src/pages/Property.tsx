@@ -137,8 +137,7 @@ export default function PropertyPage() {
                 aria-label="Agrandir la photo"
                 className="absolute inset-0 w-full h-full cursor-zoom-in"
               >
-                <img key={active} src={gallery[active]} alt={property.name} className="w-full h-full object-cover animate-fade-in transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]" />
-                <span className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent opacity-60" />
+                <img key={active} src={gallery[active]} alt={property.name} className="w-full h-full object-contain animate-fade-in" />
               </button>
               <span className={`pointer-events-none absolute top-3 left-3 md:top-4 md:left-4 text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 font-semibold backdrop-blur-sm ${property.tag === "Location" ? "bg-bone/90 text-ink" : "bg-brand/95 text-bone"}`}>{property.tag}</span>
               <span className="pointer-events-none absolute top-3 right-3 md:top-4 md:right-4 bg-ink/70 backdrop-blur-sm text-bone text-[9px] md:text-[10px] uppercase tracking-[0.3em] px-3 py-1.5 font-mono">{property.reference}</span>

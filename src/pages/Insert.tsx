@@ -19,7 +19,7 @@ const authSchema = z.object({
 const propertySchema = z.object({
   name: z.string().trim().min(2, "Titre requis").max(120),
   area: z.string().min(1).max(120),
-  tag: z.enum(["Vente", "Location"]),
+  tag: z.enum(["Vente", "Location", "Neuf"]),
   type: z.string().min(1).max(40),
   priceValue: z.number().positive("Prix requis"),
   beds: z.number().int().min(0).max(50),
@@ -196,7 +196,7 @@ function PropertyForm({ userId }: { userId: string }) {
           features: features.split(",").map((f) => f.trim()).filter(Boolean),
           img: urls[0],
           gallery: urls,
-          reference: `BIM-${tag === "Vente" ? "V" : "L"}-${Date.now().toString().slice(-5)}`,
+          reference: `BIM-${tag === "Vente" ? "V" : tag === "Location" ? "L" : "N"}-${Date.now().toString().slice(-5)}`,
         })
         .select("id")
         .single();
@@ -234,7 +234,7 @@ function PropertyForm({ userId }: { userId: string }) {
           </Field>
           <Field label="Type d'annonce">
             <select className={input} value={tag} onChange={(e) => setTag(e.target.value as PropertyTag)}>
-              <option>Vente</option><option>Location</option>
+              <option>Vente</option><option>Location</option><option>Neuf</option>
             </select>
           </Field>
           <Field label="Type de bien">
@@ -247,7 +247,7 @@ function PropertyForm({ userId }: { userId: string }) {
               {ZONES.map((z) => <option key={z}>{z}</option>)}
             </select>
           </Field>
-          <Field label={tag === "Vente" ? "Prix (DT)" : "Loyer (DT / mois)"} required>
+          <Field label={tag === "Location" ? "Loyer (DT / mois)" : "Prix (DT)"} required>
             <input type="number" className={input} value={priceValue || ""} onChange={(e) => setPriceValue(parseFloat(e.target.value) || 0)} />
           </Field>
           <Field label="Surface (m²)">

@@ -9,7 +9,7 @@ import ghazelaStudio from "@/assets/bien-ghazela/08-studio.jpeg";
 import ghazelaTerrasse from "@/assets/bien-ghazela/09-terrasse.jpeg";
 import ghazelaTerrasse2 from "@/assets/bien-ghazela/10-terrasse2.jpeg";
 
-export type PropertyTag = "Vente" | "Location";
+export type PropertyTag = "Vente" | "Location" | "Neuf";
 export type PropertyType = "Villa" | "Appartement" | "Duplex" | "Studio" | "Maison" | "Penthouse" | "Terrain";
 
 export interface Property {

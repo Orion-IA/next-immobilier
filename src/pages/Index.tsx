@@ -240,13 +240,36 @@ const Index = () => {
         </Reveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {properties.slice(0, 8).map((p, i) => (
+          {properties.filter((p) => p.tag !== "Neuf").slice(0, 8).map((p, i) => (
             <Reveal key={p.id} variant="up" delay={i * 80}>
               <PropertyCard p={p} onOpen={setOpenProperty} />
             </Reveal>
           ))}
         </div>
       </section>
+
+      {/* PROJETS NEUF */}
+      {properties.some((p) => p.tag === "Neuf") && (
+        <section id="neuf" className="py-24 md:py-32 bg-smoke">
+          <div className="container-editorial">
+            <Reveal className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-6">
+              <div>
+                <div className="eyebrow text-brand mb-4">Programmes — Première main</div>
+                <h2 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl">Projets neuf</h2>
+              </div>
+              <Link to="/vente" className="link-underline text-sm font-medium inline-flex items-center gap-2 self-start md:self-auto">Tous les projets <ArrowUpRight className="w-4 h-4" /></Link>
+            </Reveal>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {properties.filter((p) => p.tag === "Neuf").slice(0, 8).map((p, i) => (
+                <Reveal key={p.id} variant="up" delay={i * 80}>
+                  <PropertyCard p={p} onOpen={setOpenProperty} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* MARQUEE — slim & quicker */}
       <section className="bg-ink text-bone py-5 md:py-6 overflow-hidden border-y border-bone/10">
