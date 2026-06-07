@@ -10,6 +10,7 @@ import ghazelaTerrasse from "@/assets/bien-ghazela/09-terrasse.jpeg";
 import ghazelaTerrasse2 from "@/assets/bien-ghazela/10-terrasse2.jpeg";
 
 export type PropertyTag = "Vente" | "Location" | "Neuf";
+export type PropertyStatus = "active" | "vendu" | "loue";
 export type PropertyType = "Villa" | "Appartement" | "Duplex" | "Studio" | "Maison" | "Penthouse" | "Terrain";
 
 export interface Property {
@@ -30,6 +31,7 @@ export interface Property {
   reference: string;
   lat: number;
   lng: number;
+  status?: PropertyStatus;
 }
 
 export const ZONES = [

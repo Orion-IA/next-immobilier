@@ -33,6 +33,7 @@ export type Database = {
           price_value: number
           reference: string
           sqft: number
+          status: string
           tag: string
           type: string
           updated_at: string
@@ -55,6 +56,7 @@ export type Database = {
           price_value?: number
           reference?: string
           sqft?: number
+          status?: string
           tag: string
           type: string
           updated_at?: string
@@ -77,6 +79,7 @@ export type Database = {
           price_value?: number
           reference?: string
           sqft?: number
+          status?: string
           tag?: string
           type?: string
           updated_at?: string

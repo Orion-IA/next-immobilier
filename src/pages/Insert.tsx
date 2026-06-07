@@ -221,6 +221,13 @@ function PropertyForm({ userId }: { userId: string }) {
     else { setMine(mine.filter((p) => p.id !== id)); toast.success("Supprimé."); }
   };
 
+  const setStatus = async (p: Property, status: "active" | "vendu" | "loue") => {
+    const { error } = await supabase.from("properties").update({ status } as any).eq("id", p.id);
+    if (error) { toast.error(error.message); return; }
+    setMine(mine.map((x) => x.id === p.id ? { ...x, status } : x));
+    toast.success(status === "active" ? "Réactivé" : status === "vendu" ? "Marqué vendu" : "Marqué loué");
+  };
+
   return (
     <section className="container-editorial py-10 md:py-16 max-w-4xl">
       <div className="eyebrow text-brand mb-3 flex items-center gap-3"><span className="h-px w-8 bg-brand" /> Espace agence</div>
@@ -304,9 +311,20 @@ function PropertyForm({ userId }: { userId: string }) {
               <li key={p.id} className="flex items-center gap-4 py-3">
                 <img src={p.img} alt="" className="w-14 h-14 object-cover" />
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold truncate">{p.name}</div>
+                  <div className="font-semibold truncate flex items-center gap-2">
+                    {p.name}
+                    {p.status === "vendu" && <span className="text-[9px] uppercase tracking-[0.2em] bg-destructive text-bone px-2 py-0.5">Vendu</span>}
+                    {p.status === "loue" && <span className="text-[9px] uppercase tracking-[0.2em] bg-destructive text-bone px-2 py-0.5">Loué</span>}
+                  </div>
                   <div className="text-xs text-muted-foreground">{p.area} · {p.price}</div>
                 </div>
+                {p.status && p.status !== "active" ? (
+                  <button onClick={() => setStatus(p, "active")} className="text-[10px] uppercase tracking-[0.2em] border border-border px-2 py-1 hover:border-brand hover:text-brand">Réactiver</button>
+                ) : p.tag === "Location" ? (
+                  <button onClick={() => setStatus(p, "loue")} className="text-[10px] uppercase tracking-[0.2em] border border-border px-2 py-1 hover:border-brand hover:text-brand">Marquer loué</button>
+                ) : (
+                  <button onClick={() => setStatus(p, "vendu")} className="text-[10px] uppercase tracking-[0.2em] border border-border px-2 py-1 hover:border-brand hover:text-brand">Marquer vendu</button>
+                )}
                 <Link to={`/bien/${p.id}`} className="text-xs uppercase tracking-[0.2em] link-underline">Voir</Link>
                 <button onClick={() => deleteItem(p.id)} className="text-destructive p-2" aria-label="Supprimer">
                   <Trash2 className="w-4 h-4" />

@@ -6,8 +6,21 @@ export const PropertyCard = ({ p, onOpen }: { p: Property; onOpen?: (p: Property
   <Link to={`/bien/${p.id}`} className="group cursor-pointer h-full flex flex-col">
     <article className="h-full flex flex-col">
     <div className="relative overflow-hidden bg-secondary aspect-[4/5]">
-      <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" />
+      <img src={p.img} alt={p.name} loading="lazy" className={`w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110 ${p.status && p.status !== "active" ? "grayscale" : ""}`} />
       <span className={`absolute top-3 left-3 text-[9px] uppercase tracking-[0.25em] px-2.5 py-1 font-semibold transition-transform duration-500 group-hover:scale-105 ${p.tag === "Location" ? "bg-ink text-bone" : p.tag === "Neuf" ? "bg-bone text-ink border border-ink" : "bg-brand text-bone"}`}>{p.tag}</span>
+      {p.status === "vendu" && (
+        <span className="absolute top-3 right-3 text-[9px] uppercase tracking-[0.25em] px-2.5 py-1 font-bold bg-destructive text-bone shadow-lg">Vendu</span>
+      )}
+      {p.status === "loue" && (
+        <span className="absolute top-3 right-3 text-[9px] uppercase tracking-[0.25em] px-2.5 py-1 font-bold bg-destructive text-bone shadow-lg">Loué</span>
+      )}
+      {(p.status === "vendu" || p.status === "loue") && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="font-display font-bold text-3xl md:text-4xl uppercase tracking-[0.3em] text-bone bg-ink/70 px-6 py-2 -rotate-12 border-2 border-bone/80">
+            {p.status === "vendu" ? "Vendu" : "Loué"}
+          </span>
+        </div>
+      )}
       <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       <div className="absolute bottom-3 left-3 right-3 flex justify-between items-end translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
         <span className="text-bone text-[10px] uppercase tracking-[0.2em]">Voir le bien</span>
