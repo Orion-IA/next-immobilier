@@ -112,7 +112,10 @@ export default function PropertyPage() {
   }
 
   const gallery = property.gallery && property.gallery.length > 0 ? property.gallery : [property.img];
-  galleryLenRef.current = gallery.length;
+  const slides = property.videoUrl
+    ? [{ type: 'video' as const, src: property.videoUrl }, ...gallery.map(src => ({ type: 'image' as const, src }))]
+    : gallery.map(src => ({ type: 'image' as const, src }));
+  galleryLenRef.current = slides.length;
   const isDbProperty = !staticMatch;
 
   const handleDelete = async () => {
