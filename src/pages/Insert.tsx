@@ -137,6 +137,7 @@ function PropertyForm({ userId }: { userId: string }) {
   const [lng, setLng] = useState(10.1647);
   const [description, setDescription] = useState("");
   const [features, setFeatures] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
@@ -196,8 +197,9 @@ function PropertyForm({ userId }: { userId: string }) {
           features: features.split(",").map((f) => f.trim()).filter(Boolean),
           img: urls[0],
           gallery: urls,
+          video_url: videoUrl.trim() || null,
           reference: `BIM-${tag === "Vente" ? "V" : tag === "Location" ? "L" : "N"}-${Date.now().toString().slice(-5)}`,
-        })
+        } as any)
         .select("id")
         .single();
       if (error) throw error;
